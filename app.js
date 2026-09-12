@@ -58,7 +58,7 @@ const readiness = [['Required flows mapped', 84], ['Source provenance complete',
 const reviewItems = ['Verify battery-cell source version', 'Map controller flow to taxonomy', 'Confirm regional electricity mix', 'Review battery recovery assumption'];
 
 let selectedProductId = new URLSearchParams(window.location.search).get('product') || 'ebike';
-let scoreExpanded = false;
+let scoreExpanded = true;
 let comparisonTab = 'summary';
 let researchTab = 'flows';
 let selectedNode = 'Battery pack assembly';
