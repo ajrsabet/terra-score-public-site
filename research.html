@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TerraScore | Research Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="research" class="research-body">
+    <main class="research-app">
+      <header class="research-header">
+        <div class="research-brand"><span class="research-icon">R</span><div><div><strong>TerraScore Research</strong><span class="chip small">LCA workbench mockup</span></div><p>Commuter e-bike lifecycle study</p></div></div>
+        <div class="research-actions"><a class="button outlined" href="search.html">Consumer view</a><button class="button outlined">Import model</button><button class="button outlined">Report</button><button class="button contained">Run analysis</button></div>
+      </header>
+      <section class="research-paper">
+        <aside class="research-sidebar"><div class="panel-title"><h2>Study explorer</h2><button class="icon-button">+</button></div><div id="study-tree"></div><hr><p class="caption">Model source</p><p class="model-source">TerraScore study graph</p></aside>
+        <section class="research-main"><div class="process-header"><p class="overline">Selected process</p><h1 id="selected-process">Battery pack assembly</h1><p>Functional unit: one commuter e-bike used for 1,000 km of urban travel.</p></div><div id="research-tabs" class="tabs"></div><div id="research-panel" class="research-panel"></div></section>
+        <aside class="research-readiness"><h2>Study readiness</h2><div id="readiness-list"></div><hr><h3>Review queue</h3><div id="review-list"></div><hr><p class="handoff">Public product handoff</p><button class="button outlined full">Preview public score</button></aside>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

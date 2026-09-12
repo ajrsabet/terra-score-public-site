@@ -3,193 +3,75 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="TerraScore is an evidence-linked sustainability data project for research, reporting, and public trust.">
-    <title>TerraScore | Evidence-linked sustainability data</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="description" content="TerraScore project overview, purpose, and direct personal project contribution links.">
+    <title>TerraScore | About</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
-    <header class="site-header" data-shell>
-      <a class="brand" href="#top" aria-label="TerraScore home">
-        <span class="brand-mark">TS</span>
-        <span>TerraScore</span>
-      </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-        <a href="#purpose">Purpose</a>
-        <a href="#demos">Demos</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#support">Support</a>
+  <body data-page="about">
+    <header class="navbar">
+      <a class="brand" href="index.html"><span class="brand-mark">TS</span><span>TerraScore</span></a>
+      <button class="mobile-menu" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
+        <a href="index.html" data-nav="about">About</a>
+        <a href="search.html" data-nav="search">Search</a>
+        <a href="product.html" data-nav="product">Product Page</a>
+        <a href="comparison.html" data-nav="comparison">Comparison</a>
+        <a href="research.html" data-nav="research">Research</a>
       </nav>
     </header>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="shell hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Open sustainability evidence infrastructure</p>
-            <h1 id="hero-title">TerraScore</h1>
-            <p class="hero-lede">A living, reviewable map of product impacts, lifecycle evidence, and explainable sustainability scores.</p>
-            <div class="hero-actions">
-              <a class="button primary" href="#demos">View Feature Demos</a>
-              <a class="button secondary" href="#support">Contribute to the Project</a>
-            </div>
-          </div>
-          <div class="hero-panel" aria-label="Current platform signals">
-            <div class="signal-card large">
-              <span class="signal-label">MVP Focus</span>
-              <strong>Evidence, review, and score explainability</strong>
-            </div>
-            <div class="signal-row">
-              <div class="signal-card">
-                <span class="signal-value">12</span>
-                <span>Impact categories</span>
-              </div>
-              <div class="signal-card">
-                <span class="signal-value">0-100</span>
-                <span>Explainable score</span>
-              </div>
-            </div>
-            <div class="diagram-card">
-              <div class="node root">Product</div>
-              <div class="node-line"></div>
-              <div class="node-grid">
-                <span>Materials</span>
-                <span>Processes</span>
-                <span>Evidence</span>
-                <span>Impacts</span>
-              </div>
-            </div>
-          </div>
+    <main class="app-shell">
+      <section class="hero-panel home-hero">
+        <div class="hero-copy">
+          <div class="chip-row"><span class="chip hero-chip">Working public-interest platform</span><span class="chip hero-chip">Institutional pilot phase</span></div>
+          <h1>Evidence-linked sustainability data for research, reporting, and public trust.</h1>
+          <p class="lead">This platform is being built as global public-interest infrastructure for collecting, reviewing, and explaining sustainability evidence across product lifecycles.</p>
+          <div class="button-row"><a class="button contained gold" href="search.html">Try the Product Search</a><a class="button outlined light" href="#support">Support the Mission</a></div>
+        </div>
+        <aside class="why-card">
+          <p class="overline">Why this matters now</p>
+          <p>Sustainability claims are fragmented across vendors, studies, certifications, and inconsistent reporting systems.</p>
+          <p>The platform connects measurements, sources, lifecycle stages, and explainable scoring into a reviewable system instead of a black-box rating.</p>
+          <p>Early institutional adoption helps build the dataset required for later public trust and consumer usefulness.</p>
+        </aside>
+      </section>
+
+      <section class="section-block pale">
+        <div class="section-heading centered">
+          <h2>Who this is for first</h2>
+          <p>The first users should be the ones who strengthen data quality, test the evidence model, and improve the credibility of the mission.</p>
+        </div>
+        <div class="mui-grid three">
+          <article class="paper-card"><h3>Research Institutions</h3><p>Use structured lifecycle evidence, linked sources, and explainable scoring to support comparative studies, internal tools, and shared sustainability datasets.</p></article>
+          <article class="paper-card"><h3>ESG and Reporting Teams</h3><p>Build auditable evidence trails for sustainability claims and reporting workflows without depending on opaque scoring systems.</p></article>
+          <article class="paper-card"><h3>Public-Interest Partners</h3><p>Collaborate on open data infrastructure, governance, and verification systems that improve sustainability transparency globally.</p></article>
         </div>
       </section>
 
-      <section id="purpose" class="section purpose-section">
-        <div class="shell two-column">
-          <div>
-            <p class="eyebrow">Project overview</p>
-            <h2>Transparent sustainability data for people who need evidence, not black boxes.</h2>
-          </div>
-          <div class="prose">
-            <p>TerraScore is being built as public-interest infrastructure for collecting and reviewing sustainability evidence across products, organizations, materials, processes, and impacts.</p>
-            <p>The early audience is research institutions, nonprofits, mission-aligned pilot partners, and reporting teams that need structured lifecycle data with provenance. Consumer comparison remains a long-term goal after the data layer is dense enough to support public trust.</p>
-          </div>
+      <section class="section-block split-section">
+        <div><h2>What already exists in the MVP</h2><p>Development has moved beyond a placeholder info page. The current product includes core contribution, review, and scoring infrastructure that can support early pilots and data collaboration.</p><p>The live site should communicate that clearly: this is not yet a consumer comparison destination, but it is already an operating system for evidence-driven sustainability data.</p></div>
+        <div class="mui-grid two">
+          <article class="paper-card compact"><h3>Evidence Collection</h3><p>Capture measurements, methods, lifecycle stages, and supporting sources in structured product-linked records.</p></article>
+          <article class="paper-card compact"><h3>Review Workflow</h3><p>Moderation and revision history preserve provenance so published data remains reviewable and auditable.</p></article>
+          <article class="paper-card compact"><h3>Explainable Scores</h3><p>Model-versioned scores include confidence, completeness, category views, and improvement opportunities.</p></article>
+          <article class="paper-card compact"><h3>Open Data Foundation</h3><p>The platform is being built as durable public-interest infrastructure rather than a black-box ratings site.</p></article>
         </div>
       </section>
 
-      <section class="section capability-band" aria-labelledby="capability-title">
-        <div class="shell">
-          <div class="section-heading">
-            <p class="eyebrow">What exists today</p>
-            <h2 id="capability-title">Feature areas from the active MVP</h2>
-          </div>
-          <div id="capability-grid" class="card-grid"></div>
+      <section id="support" class="support-band">
+        <div>
+          <h2>Support the mission while the platform matures</h2>
+          <p>Support now helps fund evidence tooling, data partnerships, moderation workflows, and the operational work required to turn a credible pilot system into a durable global platform.</p>
+          <p class="disclosure"><strong>Disclosure:</strong> TerraScore does not currently have 501(c)(3) status. Contributions through these links are direct personal project contributions, not charitable donations, and should not be treated as tax deductible.</p>
         </div>
-      </section>
-
-      <section id="demos" class="section demos-section" aria-labelledby="demos-title">
-        <div class="shell">
-          <div class="section-heading wide">
-            <p class="eyebrow">Feature demos</p>
-            <h2 id="demos-title">Mockups copied from the app direction and made static for GitHub Pages.</h2>
-            <p>These demos use seeded example data to show the interaction model without requiring the production frontend or backend.</p>
-          </div>
-
-          <article class="demo-frame product-demo" aria-labelledby="product-demo-title">
-            <div class="demo-header">
-              <div>
-                <p class="eyebrow">Public product view</p>
-                <h3 id="product-demo-title">Product comparison and score explainability</h3>
-              </div>
-              <label class="select-label">Product
-                <select id="product-select"></select>
-              </label>
-            </div>
-            <div id="product-profile" class="product-profile"></div>
-            <div class="tab-list" role="tablist" aria-label="Product demo views">
-              <button class="tab active" type="button" data-product-tab="metrics">Metrics</button>
-              <button class="tab" type="button" data-product-tab="lifecycle">Lifecycle</button>
-              <button class="tab" type="button" data-product-tab="evidence">Evidence</button>
-            </div>
-            <div id="product-demo-panel" class="demo-panel"></div>
-          </article>
-
-          <article class="demo-frame research-demo" aria-labelledby="research-demo-title">
-            <div class="demo-header">
-              <div>
-                <p class="eyebrow">Research workbench</p>
-                <h3 id="research-demo-title">LCA study import and review workflow</h3>
-              </div>
-              <span class="status-pill">Static mockup</span>
-            </div>
-            <div class="research-layout">
-              <aside class="study-list" aria-label="Study explorer">
-                <h4>Study explorer</h4>
-                <div id="study-tree"></div>
-              </aside>
-              <div class="study-main">
-                <div class="study-title">
-                  <span>Selected process</span>
-                  <strong id="selected-process">Battery pack assembly</strong>
-                  <p>Functional unit: one commuter e-bike used for 1,000 km of urban travel.</p>
-                </div>
-                <div class="tab-list compact" role="tablist" aria-label="Research demo views">
-                  <button class="tab active" type="button" data-research-tab="flows">Inputs / Outputs</button>
-                  <button class="tab" type="button" data-research-tab="quality">Data Quality</button>
-                  <button class="tab" type="button" data-research-tab="analysis">Impact Analysis</button>
-                </div>
-                <div id="research-demo-panel" class="demo-panel"></div>
-              </div>
-              <aside class="readiness-panel">
-                <h4>Study readiness</h4>
-                <div id="readiness-list"></div>
-              </aside>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="roadmap" class="section roadmap-section" aria-labelledby="roadmap-title">
-        <div class="shell">
-          <div class="section-heading">
-            <p class="eyebrow">Sequencing</p>
-            <h2 id="roadmap-title">Build trust in stages.</h2>
-          </div>
-          <div id="roadmap-grid" class="roadmap-grid"></div>
-        </div>
-      </section>
-
-      <section id="support" class="section support-section" aria-labelledby="support-title">
-        <div class="shell support-grid">
-          <div>
-            <p class="eyebrow">Project support</p>
-            <h2 id="support-title">Help fund the next development stretch.</h2>
-            <p>Contributions help cover development time, data research, prototype hosting, tooling, and early partner work while TerraScore moves toward a more formal public-interest structure.</p>
-            <div class="notice" role="note">
-              <strong>Important disclosure:</strong> TerraScore does not currently have 501(c)(3) status. These links are for direct personal project contributions, not charitable donations, and contributions should not be treated as tax deductible.
-            </div>
-          </div>
-          <div class="support-card">
-            <h3>Contribute directly</h3>
-            <p>Replace the placeholder URLs in `app.js` with your PayPal and Venmo links before publishing.</p>
-            <div class="support-actions">
-              <a id="paypal-link" class="button primary full" href="#" rel="noopener">PayPal</a>
-              <a id="venmo-link" class="button secondary full" href="#" rel="noopener">Venmo</a>
-            </div>
-          </div>
+        <div class="support-actions-card">
+          <a id="paypal-link" class="button contained full" href="#">PayPal</a>
+          <a id="venmo-link" class="button outlined full" href="#">Venmo</a>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="shell footer-grid">
-        <span>TerraScore</span>
-        <span>Evidence-linked sustainability data for research, reporting, and public trust.</span>
-      </div>
-    </footer>
-
+    <footer class="footer">TerraScore | Evidence-linked sustainability data for research, reporting, and public trust.</footer>
     <script src="app.js"></script>
   </body>
 </html>
