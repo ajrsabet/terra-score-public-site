@@ -1,21 +1,97 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TerraScore | Research Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="research" class="research-body">
+    <header class="navbar">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">TS</span><span>TerraScore</span></a
+      >
+      <button
+        class="mobile-menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        Menu
+      </button>
+      <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
+        <a href="index.html" data-nav="about">About</a>
+        <a href="index.html#support" data-nav="support">Support</a>
+        <div class="nav-group">
+          <button
+            class="nav-dropdown-trigger"
+            type="button"
+            data-nav="demo"
+            aria-expanded="false"
+            aria-controls="platform-demo-menu"
+          >
+            Platform Demo
+          </button>
+          <div id="platform-demo-menu" class="nav-dropdown">
+            <a href="product.html" data-nav="product">Product Page</a>
+            <a href="comparison.html" data-nav="comparison">Product Comparison</a>
+            <a href="research.html" data-nav="research">Research</a>
+          </div>
+        </div>
+      </nav>
+    </header>
     <main class="research-app">
       <header class="research-header">
-        <div class="research-brand"><span class="research-icon">R</span><div><div><strong>TerraScore Research</strong><span class="chip small">LCA workbench mockup</span></div><p>Commuter e-bike lifecycle study</p></div></div>
-        <div class="research-actions"><a class="button outlined" href="search.html">Consumer view</a><button class="button outlined">Import model</button><button class="button outlined">Report</button><button class="button contained">Run analysis</button></div>
+        <div class="research-brand">
+          <span class="research-icon">R</span>
+          <div>
+            <div>
+              <strong>TerraScore Research</strong
+              ><span class="chip small">LCA workbench mockup</span>
+            </div>
+            <p>Commuter e-bike lifecycle study</p>
+          </div>
+        </div>
+        <div class="research-actions">
+          <a class="button outlined" href="product.html">Consumer view</a
+          ><button class="button outlined">Import model</button
+          ><button class="button outlined">Report</button
+          ><button class="button contained">Run analysis</button>
+        </div>
       </header>
       <section class="research-paper">
-        <aside class="research-sidebar"><div class="panel-title"><h2>Study explorer</h2><button class="icon-button">+</button></div><div id="study-tree"></div><hr><p class="caption">Model source</p><p class="model-source">TerraScore study graph</p></aside>
-        <section class="research-main"><div class="process-header"><p class="overline">Selected process</p><h1 id="selected-process">Battery pack assembly</h1><p>Functional unit: one commuter e-bike used for 1,000 km of urban travel.</p></div><div id="research-tabs" class="tabs"></div><div id="research-panel" class="research-panel"></div></section>
-        <aside class="research-readiness"><h2>Study readiness</h2><div id="readiness-list"></div><hr><h3>Review queue</h3><div id="review-list"></div><hr><p class="handoff">Public product handoff</p><button class="button outlined full">Preview public score</button></aside>
+        <aside class="research-sidebar">
+          <div class="panel-title">
+            <h2>Study explorer</h2>
+            <button class="icon-button">+</button>
+          </div>
+          <div id="study-tree"></div>
+          <hr />
+          <p class="caption">Model source</p>
+          <p class="model-source">TerraScore study graph</p>
+        </aside>
+        <section class="research-main">
+          <div class="process-header">
+            <p class="overline">Selected process</p>
+            <h1 id="selected-process">Battery pack assembly</h1>
+            <p>
+              Functional unit: one commuter e-bike used for 1,000 km of urban
+              travel.
+            </p>
+          </div>
+          <div id="research-tabs" class="tabs"></div>
+          <div id="research-panel" class="research-panel"></div>
+        </section>
+        <aside class="research-readiness">
+          <h2>Study readiness</h2>
+          <div id="readiness-list"></div>
+          <hr />
+          <h3>Review queue</h3>
+          <div id="review-list"></div>
+          <hr />
+          <p class="handoff">Public product handoff</p>
+          <button class="button outlined full">Preview public score</button>
+        </aside>
       </section>
     </main>
     <script src="app.js"></script>

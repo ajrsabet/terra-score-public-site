@@ -1,77 +1,254 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="TerraScore project overview, purpose, and direct personal project contribution links.">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="TerraScore project overview, purpose, and direct personal project contribution links."
+    />
     <title>TerraScore | About</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="about">
     <header class="navbar">
-      <a class="brand" href="index.html"><span class="brand-mark">TS</span><span>TerraScore</span></a>
-      <button class="mobile-menu" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">TS</span><span>TerraScore</span></a
+      >
+      <button
+        class="mobile-menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        Menu
+      </button>
       <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
         <a href="index.html" data-nav="about">About</a>
-        <a href="search.html" data-nav="search">Search</a>
-        <a href="product.html" data-nav="product">Product Page</a>
-        <a href="comparison.html" data-nav="comparison">Comparison</a>
-        <a href="research.html" data-nav="research">Research</a>
+        <a href="index.html#support" data-nav="support">Support</a>
+        <div class="nav-group">
+          <button
+            class="nav-dropdown-trigger"
+            type="button"
+            data-nav="demo"
+            aria-expanded="false"
+            aria-controls="platform-demo-menu"
+          >
+            Platform Demo
+          </button>
+          <div id="platform-demo-menu" class="nav-dropdown">
+            <a href="product.html" data-nav="product">Product Page</a>
+            <a href="comparison.html" data-nav="comparison">Product Comparison</a>
+            <a href="research.html" data-nav="research">Research</a>
+          </div>
+        </div>
       </nav>
     </header>
 
     <main class="app-shell">
       <section class="hero-panel home-hero">
         <div class="hero-copy">
-          <div class="chip-row"><span class="chip hero-chip">Working public-interest platform</span><span class="chip hero-chip">Institutional pilot phase</span></div>
-          <h1>Evidence-linked sustainability data for research, reporting, and public trust.</h1>
-          <p class="lead">This platform is being built as global public-interest infrastructure for collecting, reviewing, and explaining sustainability evidence across product lifecycles.</p>
-          <div class="button-row"><a class="button contained gold" href="search.html">Try the Product Search</a><a class="button outlined light" href="#support">Support the Mission</a></div>
+          <div class="chip-row">
+            <span class="chip hero-chip">Working public-interest platform</span
+            ><span class="chip hero-chip">Institutional pilot phase</span>
+          </div>
+          <h1>
+            Evidence-linked sustainability data for research, reporting, and
+            public trust.
+          </h1>
+          <p class="lead">
+            This platform is being built as global public-interest
+            infrastructure for collecting, reviewing, and explaining
+            sustainability evidence across product lifecycles.
+          </p>
+          <div class="button-row">
+            <a class="button contained gold" href="product.html"
+              >View Product Page</a
+            ><a class="button outlined light" href="#support"
+              >Support the Mission</a
+            >
+          </div>
         </div>
         <aside class="why-card">
           <p class="overline">Why this matters now</p>
-          <p>Sustainability claims are fragmented across vendors, studies, certifications, and inconsistent reporting systems.</p>
-          <p>The platform connects measurements, sources, lifecycle stages, and explainable scoring into a reviewable system instead of a black-box rating.</p>
-          <p>Early institutional adoption helps build the dataset required for later public trust and consumer usefulness.</p>
+          <p>
+            Sustainability claims are fragmented across vendors, studies,
+            certifications, and inconsistent reporting systems.
+          </p>
+          <p>
+            The platform connects measurements, sources, lifecycle stages, and
+            explainable scoring into a reviewable system instead of a black-box
+            rating.
+          </p>
+          <p>
+            Early institutional adoption helps build the dataset required for
+            later public trust and consumer usefulness.
+          </p>
+          <img
+            class="hero-visual"
+            src="Terrascore fundraising image 16-9.png"
+            alt="TerraScore environmental impact overview"
+          />
         </aside>
       </section>
 
       <section class="section-block pale">
         <div class="section-heading centered">
           <h2>Who this is for first</h2>
-          <p>The first users should be the ones who strengthen data quality, test the evidence model, and improve the credibility of the mission.</p>
+          <p>
+            The first users should be the ones who strengthen data quality, test
+            the evidence model, and improve the credibility of the mission.
+          </p>
         </div>
         <div class="mui-grid three">
-          <article class="paper-card"><h3>Research Institutions</h3><p>Use structured lifecycle evidence, linked sources, and explainable scoring to support comparative studies, internal tools, and shared sustainability datasets.</p></article>
-          <article class="paper-card"><h3>ESG and Reporting Teams</h3><p>Build auditable evidence trails for sustainability claims and reporting workflows without depending on opaque scoring systems.</p></article>
-          <article class="paper-card"><h3>Public-Interest Partners</h3><p>Collaborate on open data infrastructure, governance, and verification systems that improve sustainability transparency globally.</p></article>
+          <article class="paper-card">
+            <h3>Research Institutions</h3>
+            <p>
+              Use structured lifecycle evidence, linked sources, and explainable
+              scoring to support comparative studies, internal tools, and shared
+              sustainability datasets.
+            </p>
+          </article>
+          <article class="paper-card">
+            <h3>ESG and Reporting Teams</h3>
+            <p>
+              Build auditable evidence trails for sustainability claims and
+              reporting workflows without depending on opaque scoring systems.
+            </p>
+          </article>
+          <article class="paper-card">
+            <h3>Public-Interest Partners</h3>
+            <p>
+              Collaborate on open data infrastructure, governance, and
+              verification systems that improve sustainability transparency
+              globally.
+            </p>
+          </article>
         </div>
       </section>
 
       <section class="section-block split-section">
-        <div><h2>What already exists in the MVP</h2><p>Development has moved beyond a placeholder info page. The current product includes core contribution, review, and scoring infrastructure that can support early pilots and data collaboration.</p><p>The live site should communicate that clearly: this is not yet a consumer comparison destination, but it is already an operating system for evidence-driven sustainability data.</p></div>
+        <div>
+          <h2>What already exists in the MVP</h2>
+          <p>
+            Development has moved beyond a placeholder info page. The current
+            product includes core contribution, review, and scoring
+            infrastructure that can support early pilots and data collaboration.
+          </p>
+          <p>
+            The live site should communicate that clearly: this is not yet a
+            consumer comparison destination, but it is already an operating
+            system for evidence-driven sustainability data.
+          </p>
+        </div>
         <div class="mui-grid two">
-          <article class="paper-card compact"><h3>Evidence Collection</h3><p>Capture measurements, methods, lifecycle stages, and supporting sources in structured product-linked records.</p></article>
-          <article class="paper-card compact"><h3>Review Workflow</h3><p>Moderation and revision history preserve provenance so published data remains reviewable and auditable.</p></article>
-          <article class="paper-card compact"><h3>Explainable Scores</h3><p>Model-versioned scores include confidence, completeness, category views, and improvement opportunities.</p></article>
-          <article class="paper-card compact"><h3>Open Data Foundation</h3><p>The platform is being built as durable public-interest infrastructure rather than a black-box ratings site.</p></article>
+          <article class="paper-card compact">
+            <h3>Evidence Collection</h3>
+            <p>
+              Capture measurements, methods, lifecycle stages, and supporting
+              sources in structured product-linked records.
+            </p>
+          </article>
+          <article class="paper-card compact">
+            <h3>Review Workflow</h3>
+            <p>
+              Moderation and revision history preserve provenance so published
+              data remains reviewable and auditable.
+            </p>
+          </article>
+          <article class="paper-card compact">
+            <h3>Explainable Scores</h3>
+            <p>
+              Model-versioned scores include confidence, completeness, category
+              views, and improvement opportunities.
+            </p>
+          </article>
+          <article class="paper-card compact">
+            <h3>Open Data Foundation</h3>
+            <p>
+              The platform is being built as durable public-interest
+              infrastructure rather than a black-box ratings site.
+            </p>
+          </article>
         </div>
       </section>
 
       <section id="support" class="support-band">
         <div>
           <h2>Support the mission while the platform matures</h2>
-          <p>Support now helps fund evidence tooling, data partnerships, moderation workflows, and the operational work required to turn a credible pilot system into a durable global platform.</p>
-          <p class="disclosure"><strong>Disclosure:</strong> TerraScore does not currently have 501(c)(3) status. Contributions through these links are direct personal project contributions, not charitable donations, and should not be treated as tax deductible.</p>
+          <p>
+            Support now helps fund evidence tooling, data partnerships,
+            moderation workflows, and the operational work required to turn a
+            credible pilot system into a durable global platform.
+          </p>
+          <div class="gfm-embed" data-url="https://www.gofundme.com/f/help-build-the-future-of-environmental-impact-research/widget/medium?attribution_id=sl%3Aa9a9b38c-a22a-42bc-9dc0-5612a9fe35e0"></div>
+          <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+          <div class="support-milestones">
+            <h3>Milestone funding goals</h3>
+            <div class="milestone-list">
+              <article class="milestone-card">
+                <div class="milestone-meta">
+                  <span class="milestone-stage">Stage 1</span>
+                  <span class="milestone-goal">$20K</span>
+                </div>
+                <h4>Build the Foundation</h4>
+                <p>Strengthen the MVP, cover essential technology, domain/IP, and fiscal sponsorship setup.</p>
+              </article>
+              <article class="milestone-card">
+                <div class="milestone-meta">
+                  <span class="milestone-stage">Stage 2</span>
+                  <span class="milestone-goal">$100K</span>
+                </div>
+                <h4>Build Partnerships</h4>
+                <p>Add fundraising capacity, connect with research institutions, demonstrate TerraScore, and develop pilot partnerships.</p>
+              </article>
+              <article class="milestone-card">
+                <div class="milestone-meta">
+                  <span class="milestone-stage">Stage 3</span>
+                  <span class="milestone-goal">$250K</span>
+                </div>
+                <h4>Launch the Research Pilot</h4>
+                <p>Bring on senior programming support, develop the beta platform, integrate initial research/data sources, and begin working with external users.</p>
+              </article>
+              <article class="milestone-card">
+                <div class="milestone-meta">
+                  <span class="milestone-stage">Stage 4</span>
+                  <span class="milestone-goal">$400–450K</span>
+                </div>
+                <h4>Expand the Platform</h4>
+                <p>Continue development, expand research/data capabilities, support partners, and establish a sustainable first-year operating foundation.</p>
+              </article>
+            </div>
+          </div>
+          <p>
+            We will track how funds are used and report our progress toward each
+            development milestone. As the organization grows, we intend to make
+            our operations and environmental impacts increasingly transparent as
+            well.
+          </p>
+          <p>
+            Our goal is not simply to raise money and build a large organization.
+            Our goal is to turn funding into useful environmental information as
+            quickly, responsibly, and transparently as possible.
+          </p>
+          <p class="disclosure">
+            <strong>Disclosure:</strong> TerraScore does not currently have
+            501(c)(3) status. Contributions through these links are direct
+            personal project contributions, not charitable donations, and should
+            not be treated as tax deductible.
+          </p>
         </div>
         <div class="support-actions-card">
-          <a id="paypal-link" class="button contained full" href="#">PayPal</a>
-          <a id="venmo-link" class="button outlined full" href="#">Venmo</a>
+          <span class="chip small">Primary funding link</span>
+          <a class="button contained gold full" href="https://gofund.me/32fd09c5f" target="_blank" rel="noreferrer">Support via GoFundMe</a>
         </div>
       </section>
     </main>
 
-    <footer class="footer">TerraScore | Evidence-linked sustainability data for research, reporting, and public trust.</footer>
+    <footer class="footer">
+      TerraScore | Evidence-linked sustainability data for research, reporting,
+      and public trust.
+    </footer>
     <script src="app.js"></script>
   </body>
 </html>

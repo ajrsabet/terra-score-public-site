@@ -1,23 +1,58 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TerraScore | Product Comparison</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="comparison">
     <header class="navbar">
-      <a class="brand" href="index.html"><span class="brand-mark">TS</span><span>TerraScore</span></a>
-      <button class="mobile-menu" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">TS</span><span>TerraScore</span></a
+      >
+      <button
+        class="mobile-menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        Menu
+      </button>
       <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
-        <a href="index.html" data-nav="about">About</a><a href="search.html" data-nav="search">Search</a><a href="product.html" data-nav="product">Product Page</a><a href="comparison.html" data-nav="comparison">Comparison</a><a href="research.html" data-nav="research">Research</a>
+        <a href="index.html" data-nav="about">About</a>
+        <a href="index.html#support" data-nav="support">Support</a>
+        <div class="nav-group">
+          <button
+            class="nav-dropdown-trigger"
+            type="button"
+            data-nav="demo"
+            aria-expanded="false"
+            aria-controls="platform-demo-menu"
+          >
+            Platform Demo
+          </button>
+          <div id="platform-demo-menu" class="nav-dropdown">
+            <a href="product.html" data-nav="product">Product Page</a>
+            <a href="comparison.html" data-nav="comparison">Product Comparison</a>
+            <a href="research.html" data-nav="research">Research</a>
+          </div>
+        </div>
       </nav>
     </header>
     <main class="app-shell comparison-shell">
-      <div class="comparison-title"><h1>Side-by-side comparison</h1><p>Compare up to four bicycle-family products in strict columns, with deeper lifecycle evidence available below.</p></div>
+      <div class="comparison-title">
+        <h1>Product Comparison</h1>
+        <p>
+          Compare up to four bicycle-family products in strict columns, with
+          deeper lifecycle evidence available below.
+        </p>
+      </div>
       <section id="comparison-view" class="comparison-card"></section>
     </main>
+    <div id="comparison-sticky-scroll" class="sticky-x-scroll" aria-hidden="true">
+      <div class="sticky-x-scroll-spacer"></div>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
