@@ -18,209 +18,385 @@ const metricCategories = [
   "Governance and Accountability",
 ];
 
+const categoryLabels = { cars: "Cars", coffee: "Coffee" };
+const categoryDefaults = {
+  cars: ["ev-sedan", "hybrid-sedan", "gas-sedan", "diesel-truck"],
+  coffee: ["coffee-pods", "coffee-instant", "coffee-drip", "coffee-fairtrade"],
+};
+
 const products = [
   {
-    id: "ebike",
-    icon: "EB",
-    name: "Seeded commuter e-bike",
-    shortName: "E-bike",
+    id: "ev-sedan",
+    category: "cars",
+    icon: "EV",
+    name: "Battery electric sedan",
+    shortName: "Electric sedan",
     subtitle:
-      "Medium-complex urban mobility product with battery, motor, frame, electronics, and service lifecycle.",
+      "Mid-size battery electric sedan compared directly against similarly sized hybrid, gasoline, and diesel vehicles.",
     color: "#0f766e",
-    terraScore: 71,
-    retailCost: "$1,799 MSRP",
-    trueCost: "$2,140-$2,760",
-    totalFootprint: "42 kg CO2e / 1,000 km",
-    confidence: 78,
+    terraScore: 74,
+    retailCost: "$42,000 MSRP",
+    trueCost: "$44,500-$52,000",
+    totalFootprint: "3.8 t CO2e / yr (10k mi, grid mix)",
+    confidence: 68,
     highlights: [
-      "Battery and electronics dominate upfront footprint.",
-      "Low use-phase impact depends on regional electricity mix.",
-      "Repairability and battery recovery strongly affect lifetime score.",
+      "Battery production is the single largest upfront footprint driver.",
+      "Grid electricity mix strongly shapes use-phase emissions.",
+      "Battery recycling and second-life use materially change lifetime impact.",
     ],
-    metrics: [68, 74, 62, 71, 66, 54, 59, 76, 82, 80, 70, 73],
+    metrics: [70, 78, 64, 68, 60, 52, 58, 80, 74, 72, 64, 70],
   },
   {
-    id: "bike",
-    icon: "BK",
-    name: "Conventional commuter bicycle",
-    shortName: "Conventional bike",
+    id: "hybrid-sedan",
+    category: "cars",
+    icon: "HY",
+    name: "Hybrid sedan",
+    shortName: "Hybrid sedan",
     subtitle:
-      "Comparable urban mobility product with simpler assemblies and no direct operating energy demand.",
+      "Mid-size hybrid sedan combining a smaller battery with a gasoline engine to reduce fuel use.",
     color: "#3b5b2a",
-    terraScore: 88,
-    retailCost: "$699 MSRP",
-    trueCost: "$760-$980",
-    totalFootprint: "14 kg CO2e / 1,000 km",
-    confidence: 70,
+    terraScore: 70,
+    retailCost: "$31,500 MSRP",
+    trueCost: "$33,000-$38,000",
+    totalFootprint: "5.1 t CO2e / yr (10k mi)",
+    confidence: 74,
     highlights: [
-      "Frame materials and manufacturing carry most of the burden.",
-      "Use phase has no direct energy input.",
-      "Durability, maintenance, and reuse can make the lifecycle very favorable.",
+      "Smaller battery reduces upfront material burden versus a full EV.",
+      "Fuel use is lower than a conventional engine but still direct tailpipe emissions.",
+      "Well-understood technology keeps evidence confidence relatively high.",
     ],
-    metrics: [90, 88, 84, 86, 83, 76, 79, 91, 86, 84, 82, 88],
+    metrics: [64, 70, 66, 70, 64, 58, 60, 76, 72, 70, 66, 68],
   },
   {
-    id: "cargo-ebike",
-    icon: "CE",
-    name: "Cargo e-bike",
-    shortName: "Cargo e-bike",
+    id: "gas-sedan",
+    category: "cars",
+    icon: "GS",
+    name: "Conventional gasoline sedan",
+    shortName: "Gas sedan",
     subtitle:
-      "Heavier electric bicycle designed for errands, family trips, deliveries, and car-trip replacement.",
+      "Mid-size conventional gasoline sedan representing the common baseline vehicle in this size class.",
     color: "#8a5a12",
-    terraScore: 76,
-    retailCost: "$3,499 MSRP",
-    trueCost: "$3,980-$4,850",
-    totalFootprint: "56 kg CO2e / 1,000 km",
-    confidence: 64,
+    terraScore: 58,
+    retailCost: "$27,800 MSRP",
+    trueCost: "$30,500-$36,000",
+    totalFootprint: "6.9 t CO2e / yr (10k mi)",
+    confidence: 80,
     highlights: [
-      "Larger battery and reinforced frame increase upfront impact.",
-      "High value when replacing short car trips.",
-      "Cargo use assumptions need careful functional-unit handling.",
+      "Lowest production-phase footprint among these four vehicles.",
+      "Use-phase tailpipe emissions dominate the lifetime footprint.",
+      "Long, well-documented industry history supports higher evidence confidence.",
     ],
-    metrics: [72, 73, 60, 70, 64, 48, 55, 75, 81, 82, 74, 73],
+    metrics: [46, 48, 58, 60, 58, 54, 50, 62, 60, 58, 56, 54],
   },
   {
-    id: "lightweight-bike",
-    icon: "LB",
-    name: "Lightweight commuter bicycle",
-    shortName: "Lightweight bike",
+    id: "diesel-truck",
+    category: "cars",
+    icon: "DT",
+    name: "Full-size diesel pickup truck",
+    shortName: "Diesel truck",
     subtitle:
-      "Lower-mass bicycle variant with fewer materials and a high repair/reuse potential.",
-    color: "#2563eb",
-    terraScore: 91,
-    retailCost: "$1,199 MSRP",
-    trueCost: "$1,280-$1,620",
-    totalFootprint: "11 kg CO2e / 1,000 km",
-    confidence: 58,
+      "Full-size diesel pickup truck included to contrast a common heavy-duty use case against sedans.",
+    color: "#7c2d12",
+    terraScore: 41,
+    retailCost: "$58,000 MSRP",
+    trueCost: "$62,000-$71,000",
+    totalFootprint: "11.4 t CO2e / yr (10k mi)",
+    confidence: 62,
     highlights: [
-      "Lower material mass improves most lifecycle categories.",
-      "Higher retail price can reflect lighter components.",
-      "Evidence confidence is lower until product-specific parts are modeled.",
+      "Vehicle size and engine output drive the highest production footprint in this set.",
+      "Heavy fuel use and lower efficiency dominate the use-phase footprint.",
+      "Payload and towing capability may offset burden for specific work use cases.",
     ],
-    metrics: [93, 91, 86, 88, 84, 82, 81, 90, 84, 83, 80, 87],
+    metrics: [24, 20, 48, 46, 44, 38, 34, 44, 46, 44, 42, 40],
+  },
+  {
+    id: "coffee-pods",
+    category: "coffee",
+    icon: "CP",
+    name: "Single-serve coffee pods",
+    shortName: "Coffee pods",
+    subtitle:
+      "Single-serve capsule coffee format optimized for convenience and consistency.",
+    color: "#8a5a12",
+    terraScore: 46,
+    retailCost: "$0.65 / cup",
+    trueCost: "$0.85-$1.10 / cup",
+    totalFootprint: "0.29 kg CO2e / cup",
+    confidence: 66,
+    highlights: [
+      "Plastic and aluminum pod packaging dominates the per-cup footprint.",
+      "Portion control can reduce coffee waste compared to over-brewing.",
+      "Pod recycling programs exist but are inconsistently used.",
+    ],
+    metrics: [50, 60, 52, 48, 44, 28, 18, 64, 44, 42, 52, 50],
+  },
+  {
+    id: "coffee-instant",
+    category: "coffee",
+    icon: "CI",
+    name: "Instant coffee",
+    shortName: "Instant coffee",
+    subtitle:
+      "Freeze-dried or spray-dried coffee designed for quick preparation with minimal equipment.",
+    color: "#3b5b2a",
+    terraScore: 61,
+    retailCost: "$0.22 / cup",
+    trueCost: "$0.28-$0.38 / cup",
+    totalFootprint: "0.18 kg CO2e / cup",
+    confidence: 60,
+    highlights: [
+      "Processing (freeze-drying) is energy intensive relative to brewed formats.",
+      "Low packaging mass per cup compared to single-serve pods.",
+      "Long shelf life can reduce spoilage-related waste.",
+    ],
+    metrics: [58, 66, 60, 56, 54, 46, 52, 66, 52, 50, 58, 56],
+  },
+  {
+    id: "coffee-drip",
+    category: "coffee",
+    icon: "CD",
+    name: "Conventional drip coffee",
+    shortName: "Drip coffee",
+    subtitle:
+      "Standard ground coffee brewed with a drip machine using conventional, non-certified sourcing.",
+    color: "#2563eb",
+    terraScore: 66,
+    retailCost: "$0.18 / cup",
+    trueCost: "$0.22-$0.30 / cup",
+    totalFootprint: "0.21 kg CO2e / cup",
+    confidence: 72,
+    highlights: [
+      "Low packaging burden compared to single-serve formats.",
+      "Farming and sourcing practices are not independently verified.",
+      "Paper filter waste is a small but recurring per-cup contributor.",
+    ],
+    metrics: [62, 68, 58, 60, 56, 54, 48, 68, 56, 54, 60, 58],
+  },
+  {
+    id: "coffee-fairtrade",
+    category: "coffee",
+    icon: "FT",
+    name: "Fairtrade drip coffee",
+    shortName: "Fairtrade drip",
+    subtitle:
+      "Ground coffee brewed with a drip machine using Fairtrade-certified sourcing and labor practices.",
+    color: "#0f766e",
+    terraScore: 79,
+    retailCost: "$0.24 / cup",
+    trueCost: "$0.27-$0.34 / cup",
+    totalFootprint: "0.20 kg CO2e / cup",
+    confidence: 68,
+    highlights: [
+      "Certified sourcing improves labor and community impact categories.",
+      "Environmental footprint is comparable to conventional drip coffee.",
+      "Verification and audit trails are less complete than large commercial supply chains.",
+    ],
+    metrics: [66, 70, 62, 64, 60, 58, 54, 72, 86, 84, 72, 78],
   },
 ];
 
-const impactRows = [
-  [
-    "Frame and structural materials",
-    { ebike: 58, bike: 42, "cargo-ebike": 72, "lightweight-bike": 34 },
-    "Bike frames vary by material, weight, reinforcement, and reuse potential.",
+const impactRowsByCategory = {
+  cars: [
+    [
+      "Vehicle production and materials",
+      { "ev-sedan": 62, "hybrid-sedan": 52, "gas-sedan": 40, "diesel-truck": 74 },
+      "Body, chassis, and component manufacturing scale with vehicle size and material complexity.",
+    ],
+    [
+      "Battery and electric drivetrain materials",
+      { "ev-sedan": 88, "hybrid-sedan": 46, "gas-sedan": 3, "diesel-truck": 2 },
+      "Battery cell size is the largest driver of the electrified-vehicle materials gap.",
+    ],
+    [
+      "Manufacturing and assembly",
+      { "ev-sedan": 58, "hybrid-sedan": 52, "gas-sedan": 44, "diesel-truck": 68 },
+      "Larger, heavier vehicles generally require more energy-intensive assembly.",
+    ],
+    [
+      "Use phase energy and emissions",
+      { "ev-sedan": 22, "hybrid-sedan": 46, "gas-sedan": 68, "diesel-truck": 92 },
+      "Tailpipe emissions and fuel or electricity demand dominate the lifetime footprint for most vehicles.",
+    ],
+    [
+      "Maintenance and replacement parts",
+      { "ev-sedan": 30, "hybrid-sedan": 42, "gas-sedan": 48, "diesel-truck": 56 },
+      "Fluid changes, engine components, and tires all factor into in-use maintenance burden.",
+    ],
+    [
+      "End of life and circularity",
+      { "ev-sedan": 54, "hybrid-sedan": 44, "gas-sedan": 36, "diesel-truck": 58 },
+      "Battery recovery and heavy-metal recycling shape end-of-life outcomes across vehicle types.",
+    ],
   ],
-  [
-    "Battery and electronics",
-    { ebike: 86, bike: 4, "cargo-ebike": 92, "lightweight-bike": 3 },
-    "Battery cells, motors, controllers, and wiring create the largest electric-bike contrast.",
+  coffee: [
+    [
+      "Packaging and single-use materials",
+      { "coffee-pods": 78, "coffee-instant": 40, "coffee-drip": 30, "coffee-fairtrade": 32 },
+      "Single-serve formats generally add more packaging mass per cup than bulk-ground coffee.",
+    ],
+    [
+      "Farming and raw material sourcing",
+      { "coffee-pods": 56, "coffee-instant": 52, "coffee-drip": 54, "coffee-fairtrade": 34 },
+      "Certified sourcing practices can reduce land-use and labor-related sourcing impacts.",
+    ],
+    [
+      "Processing and manufacturing",
+      { "coffee-pods": 62, "coffee-instant": 74, "coffee-drip": 40, "coffee-fairtrade": 42 },
+      "Freeze-drying and capsule assembly are more energy- and process-intensive than simple grinding.",
+    ],
+    [
+      "Brewing energy use",
+      { "coffee-pods": 48, "coffee-instant": 30, "coffee-drip": 46, "coffee-fairtrade": 46 },
+      "Water heating method and equipment efficiency drive most of the per-cup brewing energy.",
+    ],
+    [
+      "Waste generation per serving",
+      { "coffee-pods": 82, "coffee-instant": 26, "coffee-drip": 44, "coffee-fairtrade": 44 },
+      "Single-use pods create the most solid waste per cup among common brewing formats.",
+    ],
+    [
+      "Labor and sourcing risk",
+      { "coffee-pods": 58, "coffee-instant": 56, "coffee-drip": 60, "coffee-fairtrade": 18 },
+      "Certification programs are the main lever for reducing labor and sourcing risk in this category.",
+    ],
   ],
-  [
-    "Manufacturing and assembly",
-    { ebike: 66, bike: 38, "cargo-ebike": 74, "lightweight-bike": 34 },
-    "More parts and testing usually increase assembly complexity.",
-  ],
-  [
-    "Use phase energy",
-    { ebike: 18, bike: 0, "cargo-ebike": 24, "lightweight-bike": 0 },
-    "Electric bikes use charging energy; mechanical bicycles have no direct operating energy input.",
-  ],
-  [
-    "Maintenance and replacement parts",
-    { ebike: 34, bike: 26, "cargo-ebike": 42, "lightweight-bike": 24 },
-    "All bicycles need service, while e-bikes add battery and electronics repair risk.",
-  ],
-  [
-    "End of life and circularity",
-    { ebike: 52, bike: 28, "cargo-ebike": 60, "lightweight-bike": 24 },
-    "Battery recovery, electronics recycling, metal recycling, and repair pathways shape end-of-life outcomes.",
-  ],
-];
+};
 
-const lifecycleStages = [
-  [
-    "Raw materials",
-    {
-      ebike: "Aluminum, steel, copper, lithium-ion cell inputs",
-      bike: "Aluminum or steel frame, rubber, small components",
-      "cargo-ebike":
-        "Larger frame, cargo hardware, copper, lithium-ion cell inputs",
-      "lightweight-bike":
-        "Lower-mass frame materials, rubber, compact components",
-    },
+const lifecycleStagesByCategory = {
+  cars: [
+    [
+      "Raw materials",
+      {
+        "ev-sedan": "Steel, aluminum, copper, and lithium-ion battery cell inputs",
+        "hybrid-sedan": "Steel, aluminum, smaller battery cell inputs, engine components",
+        "gas-sedan": "Steel, aluminum, engine and drivetrain components",
+        "diesel-truck": "Heavy-duty steel frame, larger engine block, towing hardware",
+      },
+    ],
+    [
+      "Parts and assemblies",
+      {
+        "ev-sedan": "Battery pack, electric motor, inverter, chassis, body panels",
+        "hybrid-sedan": "Battery pack, electric motor, gasoline engine, chassis, body panels",
+        "gas-sedan": "Gasoline engine, transmission, chassis, body panels",
+        "diesel-truck": "Diesel engine, heavy-duty chassis, bed, towing components",
+      },
+    ],
+    [
+      "Manufacturing",
+      {
+        "ev-sedan": "Battery cell production, electric drivetrain assembly, body assembly",
+        "hybrid-sedan": "Dual drivetrain assembly (engine and electric motor), body assembly",
+        "gas-sedan": "Engine and drivetrain assembly, body assembly",
+        "diesel-truck": "Heavy engine and frame assembly, higher material throughput",
+      },
+    ],
+    [
+      "Use",
+      {
+        "ev-sedan": "Grid electricity for charging; efficiency depends heavily on regional grid mix",
+        "hybrid-sedan": "Gasoline plus limited electric-only driving depending on battery size and use pattern",
+        "gas-sedan": "Gasoline combustion for all propulsion energy",
+        "diesel-truck": "Diesel combustion; higher per-mile fuel use due to weight and drag",
+      },
+    ],
+    [
+      "Maintenance",
+      {
+        "ev-sedan": "Simpler drivetrain maintenance; tire wear and battery health are primary factors",
+        "hybrid-sedan": "Combines engine service needs with electric drivetrain components",
+        "gas-sedan": "Regular engine service, fluids, and standard wear parts",
+        "diesel-truck": "Heavier-duty service intervals and diesel-specific maintenance needs",
+      },
+    ],
+    [
+      "End of life",
+      {
+        "ev-sedan": "Battery recycling and material recovery are central to end-of-life impact",
+        "hybrid-sedan": "Smaller battery recycling plus standard vehicle recycling",
+        "gas-sedan": "Standard vehicle recycling and parts recovery",
+        "diesel-truck": "Heavier material recovery volume due to vehicle size",
+      },
+    ],
   ],
-  [
-    "Parts and assemblies",
-    {
-      ebike: "Frame, battery pack, motor, controller, drivetrain, brakes",
-      bike: "Frame, drivetrain, brakes, wheels, tires",
-      "cargo-ebike":
-        "Reinforced frame, cargo rack, battery pack, motor, controller, wheels",
-      "lightweight-bike": "Light frame, drivetrain, brakes, wheels, tires",
-    },
+  coffee: [
+    [
+      "Raw materials",
+      {
+        "coffee-pods": "Coffee grounds, plastic or aluminum capsule shell, foil seal",
+        "coffee-instant": "Coffee extract, drying agents, packaging jar or sachet",
+        "coffee-drip": "Ground coffee beans, paper filter, packaging bag",
+        "coffee-fairtrade": "Certified ground coffee beans, paper filter, packaging bag",
+      },
+    ],
+    [
+      "Parts and assemblies",
+      {
+        "coffee-pods": "Capsule shell, filter membrane, foil lid, outer packaging",
+        "coffee-instant": "Dried coffee granules, jar or sachet packaging",
+        "coffee-drip": "Bagged ground coffee, disposable paper filter",
+        "coffee-fairtrade": "Bagged certified ground coffee, disposable paper filter",
+      },
+    ],
+    [
+      "Manufacturing",
+      {
+        "coffee-pods": "Roasting, grinding, capsule filling, and sealing",
+        "coffee-instant": "Roasting, brewing, freeze- or spray-drying, packaging",
+        "coffee-drip": "Roasting, grinding, bagging",
+        "coffee-fairtrade": "Roasting, grinding, bagging under certified supply chain audits",
+      },
+    ],
+    [
+      "Use",
+      {
+        "coffee-pods": "Single-serve brewing machine with per-cup water heating",
+        "coffee-instant": "Hot water added directly; no dedicated brewing equipment required",
+        "coffee-drip": "Drip machine brews a full pot, heating water for the batch",
+        "coffee-fairtrade": "Drip machine brews a full pot, heating water for the batch",
+      },
+    ],
+    [
+      "Maintenance",
+      {
+        "coffee-pods": "Machine descaling and pod storage; no filter replacement",
+        "coffee-instant": "No brewing equipment maintenance required",
+        "coffee-drip": "Reusable filter basket cleaning and machine descaling",
+        "coffee-fairtrade": "Reusable filter basket cleaning and machine descaling",
+      },
+    ],
+    [
+      "End of life",
+      {
+        "coffee-pods": "Capsule recycling requires separating plastic/aluminum from grounds and foil",
+        "coffee-instant": "Jar or sachet recycling depends on local packaging programs",
+        "coffee-drip": "Paper filter and grounds are commonly compostable",
+        "coffee-fairtrade": "Paper filter and grounds are commonly compostable",
+      },
+    ],
   ],
-  [
-    "Manufacturing",
-    {
-      ebike: "More assembly steps, electrical testing, battery certification",
-      bike: "Mechanical assembly and quality control",
-      "cargo-ebike":
-        "Heavy assembly, electrical testing, cargo load validation",
-      "lightweight-bike":
-        "Mechanical assembly with lighter parts and finishing",
-    },
-  ],
-  [
-    "Use",
-    {
-      ebike:
-        "Grid electricity for charging; mode shift can dominate real-world value",
-      bike: "Human-powered use with no direct operating emissions",
-      "cargo-ebike":
-        "Charging demand is higher, but car-trip replacement potential is stronger",
-      "lightweight-bike":
-        "Human-powered use with no direct operating emissions",
-    },
-  ],
-  [
-    "Maintenance",
-    {
-      ebike: "Mechanical service plus battery health and electronics repair",
-      bike: "Mechanical service and consumable parts",
-      "cargo-ebike":
-        "Higher tire/brake wear plus battery and electronics service",
-      "lightweight-bike": "Mechanical service and replaceable consumables",
-    },
-  ],
-  [
-    "End of life",
-    {
-      ebike: "Battery recycling, electronics recovery, frame recycling",
-      bike: "Frame and parts recycling, reuse, donation, repair",
-      "cargo-ebike":
-        "Battery recycling, electronics recovery, heavy frame reuse or recycling",
-      "lightweight-bike": "Parts reuse, frame recycling, repair, donation",
-    },
-  ],
-];
+};
 
 const evidenceItems = [
   [
     "Seeded TerraScore product graph",
     "Available",
-    "E-bike product, assemblies, lifecycle stages, and score explainability records already exist in the app.",
+    "Car and coffee product families, assemblies, lifecycle stages, and score explainability records already exist in the app.",
   ],
   [
     "OpenLCA / Federal LCA Commons candidate import",
     "Future",
-    "Useful for battery, aluminum, electricity, and transportation process baselines.",
+    "Useful for battery, fuel, materials, and agricultural process baselines.",
   ],
   [
-    "Conventional bicycle comparison model",
+    "Cross-category comparison model",
     "Mocked",
-    "Needs seeded product data or imported LCA references before the comparison becomes real.",
+    "Needs seeded product data or imported LCA references before comparisons across the full car and coffee sets become fully real.",
   ],
   [
     "Functional-unit review",
     "Required",
-    "Both products must be compared over the same commuting distance, geography, and lifetime assumptions.",
+    "Compared products must share the same functional unit (such as distance driven or cups brewed), geography, and lifetime assumptions.",
   ],
 ];
 
@@ -235,50 +411,96 @@ const infoText = {
     "Total footprint is the absolute impact ledger view: unit-bearing quantities such as kg CO2e, liters of water, or other impact totals.",
 };
 
-const insightRows = [
-  [
-    "Best simple read",
-    {
-      ebike:
-        "More complex, but may replace car trips in a way this product-only view does not yet capture.",
-      bike: "Lower burden choice for the same commuting distance in the base comparison.",
-      "cargo-ebike":
-        "Higher product burden, but potentially strong if used for car-trip replacement.",
-      "lightweight-bike":
-        "Best simple product score, with lower modeled footprint but weaker evidence confidence.",
-    },
+const insightRowsByCategory = {
+  cars: [
+    [
+      "Best simple read",
+      {
+        "ev-sedan":
+          "Lowest use-phase footprint if charged on a clean grid, but battery production adds significant upfront burden.",
+        "hybrid-sedan":
+          "Middle-ground option that lowers fuel use without the full battery production burden of an EV.",
+        "gas-sedan":
+          "Lowest production footprint, but tailpipe emissions dominate over the vehicle's lifetime.",
+        "diesel-truck":
+          "Highest footprint in this set, driven by vehicle size, weight, and fuel use.",
+      },
+    ],
+    [
+      "Why the gap exists",
+      {
+        "ev-sedan":
+          "Large battery pack materials and cell manufacturing add upfront impact that gasoline vehicles do not have.",
+        "hybrid-sedan":
+          "A smaller battery plus a gasoline engine splits the burden between production and use phases.",
+        "gas-sedan":
+          "No battery burden, but all propulsion energy comes from tailpipe combustion.",
+        "diesel-truck":
+          "Larger size, higher weight, and lower fuel efficiency compound both production and use-phase impacts.",
+      },
+    ],
+    [
+      "What could change it",
+      {
+        "ev-sedan":
+          "A cleaner regional grid, longer battery life, and strong battery recycling meaningfully improve the lifetime result.",
+        "hybrid-sedan":
+          "Higher electric-only driving share and battery durability can shift the balance further in its favor.",
+        "gas-sedan":
+          "Improved fuel efficiency and reduced annual mileage narrow the gap versus electrified options.",
+        "diesel-truck":
+          "Payload/towing use cases, route efficiency, and newer emissions controls can offset some of the burden.",
+      },
+    ],
   ],
-  [
-    "Why the gap exists",
-    {
-      ebike:
-        "Battery cells, motor components, electronics, and end-of-life handling add most of the burden.",
-      bike: "Simpler mechanical assemblies avoid battery and electronics impacts.",
-      "cargo-ebike":
-        "The larger battery, reinforced frame, and cargo hardware increase material and end-of-life impacts.",
-      "lightweight-bike":
-        "Lower mass reduces material and manufacturing burden, but product-specific sourcing is less certain.",
-    },
+  coffee: [
+    [
+      "Best simple read",
+      {
+        "coffee-pods":
+          "Most convenient format, but the highest packaging and waste footprint per cup.",
+        "coffee-instant":
+          "Lower packaging mass, but processing energy is high relative to other formats.",
+        "coffee-drip":
+          "Solid environmental baseline, but sourcing practices are not independently verified.",
+        "coffee-fairtrade":
+          "Comparable environmental footprint to conventional drip with meaningfully better labor and sourcing outcomes.",
+      },
+    ],
+    [
+      "Why the gap exists",
+      {
+        "coffee-pods":
+          "Single-serve plastic and aluminum packaging adds material and waste burden that bulk formats avoid.",
+        "coffee-instant":
+          "Freeze-drying or spray-drying requires more processing energy per cup than simple grinding and brewing.",
+        "coffee-drip":
+          "Simple preparation keeps the environmental footprint low, but the supply chain lacks certification.",
+        "coffee-fairtrade":
+          "Certification standards address labor and sourcing risk without changing the core brewing method.",
+      },
+    ],
+    [
+      "What could change it",
+      {
+        "coffee-pods":
+          "Wider pod recycling participation and lower-impact packaging materials would reduce this gap.",
+        "coffee-instant":
+          "More efficient drying processes and renewable process energy could lower this format's footprint.",
+        "coffee-drip":
+          "Adding third-party certification would close most of the gap with the fairtrade option.",
+        "coffee-fairtrade":
+          "Broader certification coverage and audited supply chains would further strengthen confidence in this result.",
+      },
+    ],
   ],
-  [
-    "What could change it",
-    {
-      ebike:
-        "Cleaner electricity, longer lifetime, repairable batteries, and strong recycling improve the result.",
-      bike: "Durability, repair, secondhand use, and local service access preserve the advantage.",
-      "cargo-ebike":
-        "Trip replacement assumptions, battery durability, and repair access can materially change the result.",
-      "lightweight-bike":
-        "Better product-specific data could raise confidence and clarify material tradeoffs.",
-    },
-  ],
-];
+};
 
 const studyTree = [
-  ["Product system", "Commuter e-bike lifecycle", true],
+  ["Product system", "Battery electric sedan lifecycle", true],
   ["Process", "Battery pack assembly", false],
   ["Process", "Motor and controller", false],
-  ["Process", "Aluminum frame fabrication", false],
+  ["Process", "Aluminum body panel fabrication", false],
   ["Process", "Final assembly", false],
   ["Process", "Use phase electricity", false],
   ["Process", "Battery recovery scenario", false],
@@ -287,15 +509,15 @@ const flowRows = [
   [
     "Lithium-ion battery cells",
     "Input",
-    "0.42",
+    "82",
     "kWh capacity",
     "Battery baseline v1.2",
     "Needs review",
   ],
   [
-    "Aluminum frame material",
+    "Aluminum body material",
     "Input",
-    "3.8",
+    "320",
     "kg",
     "USLCI aluminum process",
     "Mapped",
@@ -303,13 +525,13 @@ const flowRows = [
   [
     "Copper wiring and controller",
     "Input",
-    "0.31",
+    "48",
     "kg",
     "OpenLCA import candidate",
     "Needs review",
   ],
   [
-    "E-bike assembly",
+    "Vehicle assembly",
     "Reference output",
     "1",
     "item",
@@ -319,7 +541,7 @@ const flowRows = [
   [
     "Battery recovery credit",
     "Avoided burden",
-    "0.22",
+    "38",
     "kg material recovered",
     "Recycling scenario v0.4",
     "Assumption",
@@ -368,12 +590,12 @@ const reviewItems = [
 ];
 
 let selectedProductId =
-  new URLSearchParams(window.location.search).get("product") || "ebike";
+  new URLSearchParams(window.location.search).get("product") || "ev-sedan";
 let scoreExpanded = true;
 let comparisonTab = "summary";
 let researchTab = "flows";
 let selectedNode = "Battery pack assembly";
-let comparedIds = ["ebike", "bike"];
+let comparedIds = categoryDefaults.cars.slice();
 
 function getProduct(id) {
   return products.find((product) => product.id === id) || products[0];
@@ -451,7 +673,30 @@ function lowerIsBetterBar(value) {
 }
 
 function productSelectHtml(id = "product-select") {
-  return `<select id="${id}" aria-label="Choose product">${products.map((product) => `<option value="${product.id}" ${product.id === selectedProductId ? "selected" : ""}>${product.name}</option>`).join("")}</select>`;
+  const options = Object.keys(categoryDefaults)
+    .map(
+      (category) =>
+        `<optgroup label="${categoryLabels[category]}">${products
+          .filter((product) => product.category === category)
+          .map(
+            (product) =>
+              `<option value="${product.id}" ${product.id === selectedProductId ? "selected" : ""}>${product.name}</option>`,
+          )
+          .join("")}</optgroup>`,
+    )
+    .join("");
+  return `<select id="${id}" aria-label="Choose product">${options}</select>`;
+}
+
+function compareAddSelectHtml(category, comparedIdsList) {
+  const options = products
+    .filter(
+      (product) =>
+        product.category === category && !comparedIdsList.includes(product.id),
+    )
+    .map((product) => `<option value="${product.id}">${product.name}</option>`)
+    .join("");
+  return `<select id="compare-add-select" aria-label="Choose product">${options}</select>`;
 }
 
 function scoreTile(title, value, caption, topic = "") {
@@ -490,8 +735,14 @@ function renderProductView() {
 function wireProductPage() {
   const select = document.querySelector("#product-select");
   if (!select) return;
-  select.innerHTML = products
-    .map((product) => `<option value="${product.id}">${product.name}</option>`)
+  select.innerHTML = Object.keys(categoryDefaults)
+    .map(
+      (category) =>
+        `<optgroup label="${categoryLabels[category]}">${products
+          .filter((product) => product.category === category)
+          .map((product) => `<option value="${product.id}">${product.name}</option>`)
+          .join("")}</optgroup>`,
+    )
     .join("");
   select.value = selectedProductId;
   select.addEventListener("change", (event) => {
@@ -549,6 +800,8 @@ function wireSearch() {
 
 function renderComparison() {
   const comparedProducts = comparedIds.map(getProduct);
+  const category = comparedProducts[0]?.category || "cars";
+  const insightRows = insightRowsByCategory[category];
   const winner = comparedProducts.reduce(
     (best, product) => (product.terraScore > best.terraScore ? product : best),
     comparedProducts[0],
@@ -558,8 +811,14 @@ function renderComparison() {
   const canAdd = comparedProducts.length < 4;
   const row = (label, caption, renderValue) =>
     `<div class="comparison-row"><div><strong>${label}</strong>${caption ? `<p>${caption}</p>` : ""}</div>${comparedProducts.map(renderValue).join("")}${canAdd ? "<div></div>" : ""}</div>`;
-  root.innerHTML = `<div class="comparison-scroll" style="--compare-columns:${comparedProducts.length + (canAdd ? 1 : 0)}">
-    <div class="comparison-columns"><div></div>${comparedProducts.map((product) => `<article class="compare-product-card ${product.id === winner.id ? "winner" : ""}" style="--product-color:${product.color}"><span class="product-icon">${product.icon}</span><div><h2>${product.shortName}</h2>${product.id === winner.id ? '<span class="chip small">lower burden choice</span>' : ""}<p>${product.name}</p>${comparedProducts.length > 2 ? `<button class="text-button" data-remove="${product.id}">Remove</button>` : ""}</div></article>`).join("")}${canAdd ? `<article class="add-card"><span class="add-circle">+</span><strong>Add product</strong>${productSelectHtml("compare-add-select")}<button class="button contained" id="add-compare">Add to compare</button></article>` : ""}</div>
+  root.innerHTML = `<div class="category-switch">${Object.keys(categoryDefaults)
+    .map(
+      (categoryId) =>
+        `<button class="tab ${categoryId === category ? "active" : ""}" data-compare-category="${categoryId}">${categoryLabels[categoryId]}</button>`,
+    )
+    .join("")}</div>
+  <div class="comparison-scroll" style="--compare-columns:${comparedProducts.length + (canAdd ? 1 : 0)}">
+    <div class="comparison-columns"><div></div>${comparedProducts.map((product) => `<article class="compare-product-card ${product.id === winner.id ? "winner" : ""}" style="--product-color:${product.color}"><span class="product-icon">${product.icon}</span><div><h2>${product.shortName}</h2>${product.id === winner.id ? '<span class="chip small">lower burden choice</span>' : ""}<p>${product.name}</p>${comparedProducts.length > 2 ? `<button class="text-button" data-remove="${product.id}">Remove</button>` : ""}</div></article>`).join("")}${canAdd ? `<article class="add-card"><span class="add-circle">+</span><strong>Add product</strong>${compareAddSelectHtml(category, comparedIds)}<button class="button contained" id="add-compare">Add to compare</button></article>` : ""}</div>
     <h2 class="comparison-section-title">Score lenses</h2>
     ${row("TerraScore", "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.terraScore)}">${product.terraScore}</strong></div>`)}
     ${row("Retail / MSRP", "Market purchase price", (product) => `<div><strong>${product.retailCost}</strong></div>`)}
@@ -569,7 +828,7 @@ function renderComparison() {
     <h2 class="comparison-section-title">Practical insights</h2>
     ${insightRows.map(([label, values]) => row(label, "", (product) => `<div><p>${values[product.id]}</p></div>`)).join("")}
     <h2 class="comparison-section-title">Metric snapshot</h2>
-    ${metricCategories.map((category, index) => row(category, "", (product) => `<div class="bar-cell">${metricBar(product.metrics[index])}<span>${product.metrics[index]}</span></div>`)).join("")}
+    ${metricCategories.map((cat, index) => row(cat, "", (product) => `<div class="bar-cell">${metricBar(product.metrics[index])}<span>${product.metrics[index]}</span></div>`)).join("")}
     <div class="tabs">${[
       ["summary", "Impact Drivers"],
       ["lifecycle", "Lifecycle Layers"],
@@ -581,7 +840,7 @@ function renderComparison() {
           `<button class="tab ${comparisonTab === id ? "active" : ""}" data-comp-tab="${id}">${label}</button>`,
       )
       .join("")}</div>
-    <div class="comparison-detail">${renderComparisonDetail(comparedProducts, row)}</div>
+    <div class="comparison-detail">${renderComparisonDetail(comparedProducts, row, category)}</div>
   </div>
   `;
   root.querySelectorAll("[data-remove]").forEach((button) =>
@@ -601,6 +860,12 @@ function renderComparison() {
   root.querySelectorAll("[data-comp-tab]").forEach((button) =>
     button.addEventListener("click", () => {
       comparisonTab = button.dataset.compTab;
+      renderComparison();
+    }),
+  );
+  root.querySelectorAll("[data-compare-category]").forEach((button) =>
+    button.addEventListener("click", () => {
+      comparedIds = categoryDefaults[button.dataset.compareCategory].slice();
       renderComparison();
     }),
   );
@@ -632,9 +897,9 @@ function syncStickyComparisonScroll() {
   window.addEventListener("resize", updateVisibility, { once: true });
 }
 
-function renderComparisonDetail(comparedProducts, row) {
+function renderComparisonDetail(comparedProducts, row, category) {
   if (comparisonTab === "summary")
-    return impactRows
+    return impactRowsByCategory[category]
       .map(([label, values, note]) =>
         row(
           label,
@@ -645,7 +910,7 @@ function renderComparisonDetail(comparedProducts, row) {
       )
       .join("");
   if (comparisonTab === "lifecycle")
-    return lifecycleStages
+    return lifecycleStagesByCategory[category]
       .map(([stage, values]) =>
         row(stage, "", (product) => `<div><p>${values[product.id]}</p></div>`),
       )
