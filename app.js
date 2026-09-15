@@ -34,7 +34,7 @@ const products = [
     subtitle:
       "Mid-size battery electric sedan compared directly against similarly sized hybrid, gasoline, and diesel vehicles.",
     color: "#0f766e",
-    terraScore: 74,
+    impactScore: 74,
     retailCost: "$42,000 MSRP",
     trueCost: "$44,500-$52,000",
     totalFootprint: "3.8 t CO2e / yr (10k mi, grid mix)",
@@ -55,7 +55,7 @@ const products = [
     subtitle:
       "Mid-size hybrid sedan combining a smaller battery with a gasoline engine to reduce fuel use.",
     color: "#3b5b2a",
-    terraScore: 70,
+    impactScore: 70,
     retailCost: "$31,500 MSRP",
     trueCost: "$33,000-$38,000",
     totalFootprint: "5.1 t CO2e / yr (10k mi)",
@@ -76,7 +76,7 @@ const products = [
     subtitle:
       "Mid-size conventional gasoline sedan representing the common baseline vehicle in this size class.",
     color: "#8a5a12",
-    terraScore: 58,
+    impactScore: 58,
     retailCost: "$27,800 MSRP",
     trueCost: "$30,500-$36,000",
     totalFootprint: "6.9 t CO2e / yr (10k mi)",
@@ -97,7 +97,7 @@ const products = [
     subtitle:
       "Full-size diesel pickup truck included to contrast a common heavy-duty use case against sedans.",
     color: "#7c2d12",
-    terraScore: 41,
+    impactScore: 41,
     retailCost: "$58,000 MSRP",
     trueCost: "$62,000-$71,000",
     totalFootprint: "11.4 t CO2e / yr (10k mi)",
@@ -118,7 +118,7 @@ const products = [
     subtitle:
       "Single-serve capsule coffee format optimized for convenience and consistency.",
     color: "#8a5a12",
-    terraScore: 46,
+    impactScore: 46,
     retailCost: "$0.65 / cup",
     trueCost: "$0.85-$1.10 / cup",
     totalFootprint: "0.29 kg CO2e / cup",
@@ -139,7 +139,7 @@ const products = [
     subtitle:
       "Freeze-dried or spray-dried coffee designed for quick preparation with minimal equipment.",
     color: "#3b5b2a",
-    terraScore: 61,
+    impactScore: 61,
     retailCost: "$0.22 / cup",
     trueCost: "$0.28-$0.38 / cup",
     totalFootprint: "0.18 kg CO2e / cup",
@@ -160,7 +160,7 @@ const products = [
     subtitle:
       "Standard ground coffee brewed with a drip machine using conventional, non-certified sourcing.",
     color: "#2563eb",
-    terraScore: 66,
+    impactScore: 66,
     retailCost: "$0.18 / cup",
     trueCost: "$0.22-$0.30 / cup",
     totalFootprint: "0.21 kg CO2e / cup",
@@ -181,7 +181,7 @@ const products = [
     subtitle:
       "Ground coffee brewed with a drip machine using Fairtrade-certified sourcing and labor practices.",
     color: "#0f766e",
-    terraScore: 79,
+    impactScore: 79,
     retailCost: "$0.24 / cup",
     trueCost: "$0.27-$0.34 / cup",
     totalFootprint: "0.20 kg CO2e / cup",
@@ -379,7 +379,7 @@ const lifecycleStagesByCategory = {
 
 const evidenceItems = [
   [
-    "Seeded TerraScore product graph",
+    "Seeded platform product graph",
     "Available",
     "Car and coffee product families, assemblies, lifecycle stages, and score explainability records already exist in the app.",
   ],
@@ -401,8 +401,8 @@ const evidenceItems = [
 ];
 
 const infoText = {
-  terraScore:
-    "The main TerraScore is a 0-100 matrix score derived from the twelve weighted impact categories. It is useful for product comparison inside the same product family and functional unit.",
+  impactScore:
+    "The main Impact Score is a 0-100 matrix score derived from the twelve weighted impact categories. It is useful for product comparison inside the same product family and functional unit.",
   confidence:
     "Confidence summarizes evidence strength and completeness. It should stay separate from the score so users can distinguish a strong claim from an uncertain one.",
   trueCost:
@@ -715,7 +715,7 @@ function renderProductView() {
   root.innerHTML = `
     <section class="product-header paper-card" style="--product-color:${product.color}">
       <div class="product-title-wrap"><div class="product-icon">${product.icon}</div><div><p class="overline">Product profile</p><h1>${product.name}</h1><p>${product.subtitle}</p></div></div>
-      <button class="terra-score-card" type="button" id="score-toggle"><p class="caption uppercase">TerraScore</p><strong>${product.terraScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="terraScore">i</button></button>
+      <button class="impact-score-card" type="button" id="score-toggle"><p class="caption uppercase">Impact Score</p><strong>${product.impactScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
     </section>
     <section class="metrics-panel paper-card" id="metrics-panel"><h2>Twelve impact metrics</h2><p>${scoreExpanded ? "Expanded so the category drivers are visible." : "Click the main score or this panel to expand the metric-based breakdown."}</p>${scoreExpanded ? `<div class="metric-grid">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : '<button class="button outlined">Open metric breakdown</button>'}</section>
     <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price")}${scoreTile("True cost", product.trueCost, "Externality range estimate", "trueCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
@@ -786,7 +786,7 @@ function wireSearch() {
     results.innerHTML = matches
       .map(
         (product) =>
-          `<a class="search-result" href="product.html?product=${product.id}" style="--product-color:${product.color}"><span class="product-icon small">${product.icon}</span><span><strong>${product.name}</strong><small>${product.subtitle}</small></span><b>${product.terraScore}</b></a>`,
+          `<a class="search-result" href="product.html?product=${product.id}" style="--product-color:${product.color}"><span class="product-icon small">${product.icon}</span><span><strong>${product.name}</strong><small>${product.subtitle}</small></span><b>${product.impactScore}</b></a>`,
       )
       .join("");
   }
@@ -803,7 +803,7 @@ function renderComparison() {
   const category = comparedProducts[0]?.category || "cars";
   const insightRows = insightRowsByCategory[category];
   const winner = comparedProducts.reduce(
-    (best, product) => (product.terraScore > best.terraScore ? product : best),
+    (best, product) => (product.impactScore > best.impactScore ? product : best),
     comparedProducts[0],
   );
   const root = document.querySelector("#comparison-view");
@@ -820,7 +820,7 @@ function renderComparison() {
   <div class="comparison-scroll" style="--compare-columns:${comparedProducts.length + (canAdd ? 1 : 0)}">
     <div class="comparison-columns"><div></div>${comparedProducts.map((product) => `<article class="compare-product-card ${product.id === winner.id ? "winner" : ""}" style="--product-color:${product.color}"><span class="product-icon">${product.icon}</span><div><h2>${product.shortName}</h2>${product.id === winner.id ? '<span class="chip small">lower burden choice</span>' : ""}<p>${product.name}</p>${comparedProducts.length > 2 ? `<button class="text-button" data-remove="${product.id}">Remove</button>` : ""}</div></article>`).join("")}${canAdd ? `<article class="add-card"><span class="add-circle">+</span><strong>Add product</strong>${compareAddSelectHtml(category, comparedIds)}<button class="button contained" id="add-compare">Add to compare</button></article>` : ""}</div>
     <h2 class="comparison-section-title">Score lenses</h2>
-    ${row("TerraScore", "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.terraScore)}">${product.terraScore}</strong></div>`)}
+    ${row("Impact Score", "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
     ${row("Retail / MSRP", "Market purchase price", (product) => `<div><strong>${product.retailCost}</strong></div>`)}
     ${row("True cost", "Externality range estimate", (product) => `<div><strong>${product.trueCost}</strong></div>`)}
     ${row("Total footprint", "Absolute impact ledger", (product) => `<div><strong>${product.totalFootprint}</strong></div>`)}
@@ -929,11 +929,11 @@ function renderComparisonDetail(comparedProducts, row, category) {
   const lcaRows = [
     [
       "Import model",
-      "OpenLCA JSON-LD, Federal LCA Commons process datasets, or a TerraScore CSV/XML template.",
+      "OpenLCA JSON-LD, Federal LCA Commons process datasets, or a platform CSV/XML template.",
     ],
     [
       "Map flows",
-      "Match battery, aluminum, electricity, and mechanical part flows to TerraScore taxonomy nodes.",
+      "Match battery, aluminum, electricity, and mechanical part flows to platform taxonomy nodes.",
     ],
     [
       "Review assumptions",

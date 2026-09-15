@@ -1,12 +1,12 @@
-# TerraScore Public Site
+# Public Site
 
-Static informational, feature demo, and fundraising site for TerraScore.
+Static informational, feature demo, and fundraising site for the platform.
 
 ## Purpose
 
-This site presents TerraScore as a public-interest sustainability data project, shows feature demos from the current MVP direction, and provides links for direct personal project contributions.
+This site presents the platform as a public-interest sustainability data project, shows feature demos from the current MVP direction, and provides links for direct personal project contributions.
 
-TerraScore does not currently have 501(c)(3) status. Contributions through this site should be described as direct personal project support, not charitable donations, and should not be represented as tax deductible.
+The platform does not currently have 501(c)(3) status. Contributions through this site should be described as direct personal project support, not charitable donations, and should not be represented as tax deductible.
 
 ## Local Preview
 

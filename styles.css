@@ -110,11 +110,11 @@ select { min-height: 40px; border: 1px solid var(--ts-line); border-radius: var(
 .product-icon { display: grid; place-items: center; flex: 0 0 auto; width: 56px; height: 56px; border-radius: 16px; background: color-mix(in srgb, var(--product-color) 12%, white); color: var(--product-color); font-weight: 900; }
 .product-icon.small { width: 42px; height: 42px; border-radius: 12px; }
 .product-header h1 { margin-bottom: 8px; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; font-weight: 900; }
-.terra-score-card { position: relative; display: grid; justify-items: start; border: 1px solid var(--ts-line); border-radius: var(--ts-radius-md); background: white; padding: 16px; text-align: left; cursor: pointer; }
-.terra-score-card strong, .big-score { display: block; color: var(--product-color); font-size: 3rem; line-height: 1; font-weight: 900; }
-.terra-score-card span { color: var(--ts-ink-soft); font-size: 0.78rem; }
+.impact-score-card { position: relative; display: grid; justify-items: start; border: 1px solid var(--ts-line); border-radius: var(--ts-radius-md); background: white; padding: 16px; text-align: left; cursor: pointer; }
+.impact-score-card strong, .big-score { display: block; color: var(--product-color); font-size: 3rem; line-height: 1; font-weight: 900; }
+.impact-score-card span { color: var(--ts-ink-soft); font-size: 0.78rem; }
 .icon-button { display: inline-grid; place-items: center; width: 30px; height: 30px; border: 0; border-radius: 999px; background: transparent; color: var(--ts-ink-soft); cursor: pointer; }
-.terra-score-card .info { position: absolute; top: 10px; right: 10px; }
+.impact-score-card .info { position: absolute; top: 10px; right: 10px; }
 .metrics-panel { cursor: pointer; }
 .metrics-panel h2 { margin-bottom: 4px; font-size: 1.3rem; font-weight: 900; }
 .metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
