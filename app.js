@@ -1,8 +1,3 @@
-const supportLinks = {
-  paypal: "https://www.paypal.com/paypalme/YOUR-PAYPAL-LINK",
-  venmo: "https://venmo.com/u/YOUR-VENMO-HANDLE",
-};
-
 const metricCategories = [
   "Climate and Energy",
   "Air Quality",
@@ -652,16 +647,6 @@ function wireShell() {
       nav.classList.toggle("open", !expanded);
     });
   }
-  const paypal = document.querySelector("#paypal-link");
-  const venmo = document.querySelector("#venmo-link");
-  if (paypal) {
-    paypal.href = supportLinks.paypal;
-    paypal.target = "_blank";
-  }
-  if (venmo) {
-    venmo.href = supportLinks.venmo;
-    venmo.target = "_blank";
-  }
 }
 
 function metricBar(value) {
@@ -767,6 +752,14 @@ function wireInfoDialog() {
       dialog.showModal();
     });
   });
+  dialog.querySelector(".dialog-close").onclick = () => dialog.close();
+}
+
+function wireLifecycleDialog() {
+  const dialog = document.querySelector("#lifecycle-dialog");
+  const trigger = document.querySelector("#lifecycle-explainer-trigger");
+  if (!dialog || !trigger) return;
+  trigger.addEventListener("click", () => dialog.showModal());
   dialog.querySelector(".dialog-close").onclick = () => dialog.close();
 }
 
@@ -1050,6 +1043,7 @@ function init() {
   if (page === "search") wireSearch();
   if (page === "product") wireProductPage();
   if (page === "comparison") renderComparison();
+  if (page === "comparison") wireLifecycleDialog();
   if (page === "research") renderResearch();
 }
 
