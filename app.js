@@ -1,8 +1,3 @@
-const supportLinks = {
-  paypal: "https://www.paypal.com/paypalme/YOUR-PAYPAL-LINK",
-  venmo: "https://venmo.com/u/YOUR-VENMO-HANDLE",
-};
-
 const metricCategories = [
   "Climate and Energy",
   "Air Quality",
@@ -16,6 +11,14 @@ const metricCategories = [
   "Community and Equity",
   "Economic and Livelihood Effects",
   "Governance and Accountability",
+];
+
+const publicImpactLenses = [
+  { name: "Climate and Energy", indices: [0], description: "Climate, energy demand, and energy sources." },
+  { name: "Resources and Circularity", indices: [5, 6], description: "Materials, resource demand, waste, reuse, and recovery." },
+  { name: "Water, Land and Nature", indices: [2, 3, 4], description: "Water, land, soil, biodiversity, and habitat." },
+  { name: "Health and Safety", indices: [1, 7], description: "Air quality, exposure, human health, and safety." },
+  { name: "People, Equity and Governance", indices: [8, 9, 10, 11], description: "Labor, equity, livelihoods, transparency, and accountability." },
 ];
 
 const categoryLabels = { cars: "Cars", coffee: "Coffee" };
@@ -591,11 +594,12 @@ const reviewItems = [
 
 let selectedProductId =
   new URLSearchParams(window.location.search).get("product") || "ev-sedan";
-let scoreExpanded = true;
+let scoreExpanded = false;
 let comparisonTab = "summary";
 let researchTab = "flows";
 let selectedNode = "Battery pack assembly";
 let comparedIds = categoryDefaults.cars.slice();
+const expandedComparisonLenses = new Set();
 
 function getProduct(id) {
   return products.find((product) => product.id === id) || products[0];
@@ -604,6 +608,102 @@ function getProduct(id) {
 function scoreColor(value) {
   const normalizedValue = Math.max(0, Math.min(100, Number(value) || 0));
   return `hsl(${Math.round(normalizedValue * 1.2)}, 62%, 38%)`;
+}
+
+function getPublicLensScore(product, lens) {
+  const values = lens.indices.map((index) => product.metrics[index]);
+  return Math.round(values.reduce((total, value) => total + value, 0) / values.length);
+}
+
+const publicNavigationSections = [
+  {
+    title: "Explore",
+    items: [
+      { label: "Products", href: "product.html", page: "product" },
+      { label: "Materials", info: "Materials will provide public reference profiles for common inputs, composition data, and the evidence linked to those records." },
+      { label: "Companies", info: "Company profiles will connect organizations, brands, owned products, and reviewable sustainability evidence." },
+      { label: "Processes", info: "Process views will explain the lifecycle activities that connect products, inputs, and measured impacts." },
+      { label: "Maps", info: "Maps will add geographic context for sourcing, manufacturing, use, and end-of-life assumptions." },
+      { label: "Insights", info: "Insights will summarize patterns across reviewed product and lifecycle data as the public dataset grows." },
+      { label: "Research", href: "research.html", page: "research" },
+    ],
+  },
+  {
+    title: "Compare",
+    items: [{ label: "Product comparison", href: "comparison.html", page: "comparison" }],
+  },
+];
+
+function wirePublicNavigationPanel(page) {
+  const main = document.querySelector("main.app-shell, main.research-app");
+  if (!main || document.querySelector(".public-site-layout")) return;
+
+  const layout = document.createElement("div");
+  layout.className = "public-site-layout";
+  document.body.classList.add("has-public-navigation");
+  const panel = document.createElement("aside");
+  panel.className = "public-navigation-panel";
+  panel.setAttribute("aria-label", "Platform navigation");
+  const panelCollapsed = localStorage.getItem("publicNavigationCollapsed") === "true";
+  document.body.classList.toggle("public-navigation-collapsed", panelCollapsed);
+  panel.innerHTML = `<div class="public-navigation-title"><span>Platform tools</span><button class="public-navigation-collapse" type="button" aria-label="${panelCollapsed ? "Expand navigation" : "Collapse navigation"}" aria-expanded="${!panelCollapsed}">${panelCollapsed ? ">>" : "<<"}</button></div>${publicNavigationSections
+    .map(
+      (section) => `<section class="public-navigation-section"><h2>${section.title}</h2>${section.items
+        .map((item) => {
+          const active = item.page === page ? " active" : "";
+          return item.href
+            ? `<a class="public-navigation-item${active}" href="${item.href}">${item.label}</a>`
+            : `<button class="public-navigation-item" type="button" data-public-info="${item.label}">${item.label}</button>`;
+        })
+        .join("")}</section>`,
+    )
+    .join("")}`;
+
+  main.parentNode.insertBefore(layout, main);
+  layout.append(panel, main);
+
+  const mobileNavigation = document.createElement("div");
+  mobileNavigation.className = "mobile-platform-tools";
+  mobileNavigation.innerHTML = `<p>Platform tools</p>${publicNavigationSections
+    .map(
+      (section) => `<div><strong>${section.title}</strong>${section.items
+        .map((item) => {
+          const active = item.page === page ? " active" : "";
+          return item.href
+            ? `<a class="mobile-platform-tool${active}" href="${item.href}">${item.label}</a>`
+            : `<button class="mobile-platform-tool" type="button" data-public-info="${item.label}">${item.label}</button>`;
+        })
+        .join("")}</div>`,
+    )
+    .join("")}`;
+  document.querySelector("#site-nav")?.append(mobileNavigation);
+
+  const collapseButton = panel.querySelector(".public-navigation-collapse");
+  collapseButton.addEventListener("click", () => {
+    const collapsed = !document.body.classList.contains("public-navigation-collapsed");
+    document.body.classList.toggle("public-navigation-collapsed", collapsed);
+    localStorage.setItem("publicNavigationCollapsed", String(collapsed));
+    collapseButton.textContent = collapsed ? ">>" : "<<";
+    collapseButton.setAttribute("aria-label", collapsed ? "Expand navigation" : "Collapse navigation");
+    collapseButton.setAttribute("aria-expanded", String(!collapsed));
+  });
+
+  const dialog = document.createElement("dialog");
+  dialog.className = "info-dialog public-navigation-dialog";
+  dialog.innerHTML = '<button class="dialog-close" type="button" aria-label="Close">x</button><p class="caption uppercase">Coming next</p><h2 id="public-navigation-dialog-title"></h2><p id="public-navigation-dialog-text"></p>';
+  document.body.append(dialog);
+  document.querySelectorAll("[data-public-info]").forEach((item) => {
+    item.addEventListener("click", () => {
+      const label = item.dataset.publicInfo;
+      const entry = publicNavigationSections
+        .flatMap((section) => section.items)
+        .find((navigationItem) => navigationItem.label === label);
+      dialog.querySelector("#public-navigation-dialog-title").textContent = label;
+      dialog.querySelector("#public-navigation-dialog-text").textContent = entry.info;
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector(".dialog-close").onclick = () => dialog.close();
 }
 
 function wireShell() {
@@ -652,16 +752,7 @@ function wireShell() {
       nav.classList.toggle("open", !expanded);
     });
   }
-  const paypal = document.querySelector("#paypal-link");
-  const venmo = document.querySelector("#venmo-link");
-  if (paypal) {
-    paypal.href = supportLinks.paypal;
-    paypal.target = "_blank";
-  }
-  if (venmo) {
-    venmo.href = supportLinks.venmo;
-    venmo.target = "_blank";
-  }
+  wirePublicNavigationPanel(page);
 }
 
 function metricBar(value) {
@@ -717,7 +808,7 @@ function renderProductView() {
       <div class="product-title-wrap"><div class="product-icon">${product.icon}</div><div><p class="overline">Product profile</p><h1>${product.name}</h1><p>${product.subtitle}</p></div></div>
       <button class="impact-score-card" type="button" id="score-toggle"><p class="caption uppercase">Impact Score</p><strong>${product.impactScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
     </section>
-    <section class="metrics-panel paper-card" id="metrics-panel"><h2>Twelve impact metrics</h2><p>${scoreExpanded ? "Expanded so the category drivers are visible." : "Click the main score or this panel to expand the metric-based breakdown."}</p>${scoreExpanded ? `<div class="metric-grid">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : '<button class="button outlined">Open metric breakdown</button>'}</section>
+    <section class="metrics-panel paper-card"><h2>Public impact lenses</h2><p>Five plain-language lenses summarize the twelve governed impact categories.</p><div class="public-lens-grid">${publicImpactLenses.map((lens, lensIndex) => { const value = getPublicLensScore(product, lens); return `<button class="public-lens" type="button" data-lens-index="${lensIndex}" aria-haspopup="dialog"><div><strong>${lens.name}</strong><span>${value}</span></div>${metricBar(value)}<p>${lens.description}</p></button>`; }).join("")}</div><button class="button outlined metric-detail-toggle" type="button" id="metrics-detail-toggle">${scoreExpanded ? "Hide detailed metrics" : "Show detailed metrics"}</button>${scoreExpanded ? `<div class="metric-grid detailed-metrics">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : ""}</section>
     <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price")}${scoreTile("True cost", product.trueCost, "Externality range estimate", "trueCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
     <section class="product-lower-grid"><article class="score-tile" data-info="confidence"><div><p class="caption uppercase">Confidence</p><h3>${product.confidence}%</h3></div><p>Evidence strength and completeness</p>${metricBar(product.confidence)}</article><article class="paper-card highlights"><p class="caption uppercase">Product / impact highlights</p><div>${product.highlights.map((highlight) => `<p>${highlight}</p>`).join("")}</div></article></section>
   `;
@@ -725,10 +816,11 @@ function renderProductView() {
     scoreExpanded = !scoreExpanded;
     renderProductView();
   });
-  document.querySelector("#metrics-panel").addEventListener("click", () => {
+  document.querySelector("#metrics-detail-toggle").addEventListener("click", () => {
     scoreExpanded = !scoreExpanded;
     renderProductView();
   });
+  wireLensDialog(product);
   wireInfoDialog();
 }
 
@@ -767,6 +859,33 @@ function wireInfoDialog() {
       dialog.showModal();
     });
   });
+  dialog.querySelector(".dialog-close").onclick = () => dialog.close();
+}
+
+function wireLensDialog(product) {
+  const dialog = document.querySelector("#lens-dialog");
+  if (!dialog) return;
+  document.querySelectorAll("[data-lens-index]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const lens = publicImpactLenses[Number(card.dataset.lensIndex)];
+      const value = getPublicLensScore(product, lens);
+      document.querySelector("#lens-dialog-title").textContent = lens.name;
+      document.querySelector("#lens-dialog-score").textContent = value;
+      document.querySelector("#lens-dialog-description").textContent = lens.description;
+      document.querySelector("#lens-dialog-categories").innerHTML = lens.indices
+        .map((index) => `<div class="lens-category"><div><strong>${metricCategories[index]}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`)
+        .join("");
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector(".dialog-close").onclick = () => dialog.close();
+}
+
+function wireLifecycleDialog() {
+  const dialog = document.querySelector("#lifecycle-dialog");
+  const trigger = document.querySelector("#lifecycle-explainer-trigger");
+  if (!dialog || !trigger) return;
+  trigger.addEventListener("click", () => dialog.showModal());
   dialog.querySelector(".dialog-close").onclick = () => dialog.close();
 }
 
@@ -809,8 +928,9 @@ function renderComparison() {
   const root = document.querySelector("#comparison-view");
   if (!root) return;
   const canAdd = comparedProducts.length < 4;
-  const row = (label, caption, renderValue) =>
-    `<div class="comparison-row"><div><strong>${label}</strong>${caption ? `<p>${caption}</p>` : ""}</div>${comparedProducts.map(renderValue).join("")}${canAdd ? "<div></div>" : ""}</div>`;
+  const allLensesExpanded = expandedComparisonLenses.size === publicImpactLenses.length;
+  const row = (label, caption, renderValue, className = "", lensIndex = null) =>
+    `<div class="comparison-row ${className}"${lensIndex === null ? "" : ` data-expand-lens="${lensIndex}" role="button" tabindex="0" aria-expanded="${expandedComparisonLenses.has(lensIndex)}"`}><div><strong>${label}</strong>${caption ? `<p>${caption}</p>` : ""}</div>${comparedProducts.map(renderValue).join("")}${canAdd ? "<div></div>" : ""}</div>`;
   root.innerHTML = `<div class="category-switch">${Object.keys(categoryDefaults)
     .map(
       (categoryId) =>
@@ -825,10 +945,10 @@ function renderComparison() {
     ${row("True cost", "Externality range estimate", (product) => `<div><strong>${product.trueCost}</strong></div>`)}
     ${row("Total footprint", "Absolute impact ledger", (product) => `<div><strong>${product.totalFootprint}</strong></div>`)}
     ${row("Confidence", "Evidence strength and completeness", (product) => `<div><strong>${product.confidence}%</strong>${metricBar(product.confidence)}</div>`)}
+    <div class="comparison-section-title lens-section-title"><h2>Public impact lenses</h2><button class="button text" type="button" id="expand-all-lenses">${allLensesExpanded ? "Collapse all" : "Expand all"}</button></div>
+    ${publicImpactLenses.map((lens, lensIndex) => { const expanded = expandedComparisonLenses.has(lensIndex); return row(lens.name, lens.description, (product) => { const value = getPublicLensScore(product, lens); return `<div class="bar-cell">${metricBar(value)}<span>${value}</span></div>`; }, "lens-summary-row", lensIndex) + (expanded ? lens.indices.map((metricIndex) => row(metricCategories[metricIndex], "Included governed category", (product) => `<div class="bar-cell">${metricBar(product.metrics[metricIndex])}<span>${product.metrics[metricIndex]}</span></div>`, "lens-category-row")).join("") : ""); }).join("")}
     <h2 class="comparison-section-title">Practical insights</h2>
     ${insightRows.map(([label, values]) => row(label, "", (product) => `<div><p>${values[product.id]}</p></div>`)).join("")}
-    <h2 class="comparison-section-title">Metric snapshot</h2>
-    ${metricCategories.map((cat, index) => row(cat, "", (product) => `<div class="bar-cell">${metricBar(product.metrics[index])}<span>${product.metrics[index]}</span></div>`)).join("")}
     <div class="tabs">${[
       ["summary", "Impact Drivers"],
       ["lifecycle", "Lifecycle Layers"],
@@ -863,6 +983,25 @@ function renderComparison() {
       renderComparison();
     }),
   );
+  const toggleLens = (lensIndex) => {
+      if (expandedComparisonLenses.has(lensIndex)) expandedComparisonLenses.delete(lensIndex);
+      else expandedComparisonLenses.add(lensIndex);
+      renderComparison();
+  };
+  root.querySelectorAll("[data-expand-lens]").forEach((lens) => {
+    lens.addEventListener("click", () => toggleLens(Number(lens.dataset.expandLens)));
+    lens.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleLens(Number(lens.dataset.expandLens));
+      }
+    });
+  });
+  root.querySelector("#expand-all-lenses").addEventListener("click", () => {
+    if (allLensesExpanded) expandedComparisonLenses.clear();
+    else publicImpactLenses.forEach((lens, lensIndex) => expandedComparisonLenses.add(lensIndex));
+    renderComparison();
+  });
   root.querySelectorAll("[data-compare-category]").forEach((button) =>
     button.addEventListener("click", () => {
       comparedIds = categoryDefaults[button.dataset.compareCategory].slice();
@@ -1050,6 +1189,7 @@ function init() {
   if (page === "search") wireSearch();
   if (page === "product") wireProductPage();
   if (page === "comparison") renderComparison();
+  if (page === "comparison") wireLifecycleDialog();
   if (page === "research") renderResearch();
 }
 

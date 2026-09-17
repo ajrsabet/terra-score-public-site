@@ -21,7 +21,6 @@
       </button>
       <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
         <a href="index.html" data-nav="about">About</a>
-        <a href="index.html#support" data-nav="support">Support</a>
         <div class="nav-group">
           <button
             class="nav-dropdown-trigger"
@@ -38,18 +37,38 @@
             <a href="research.html" data-nav="research">Research</a>
           </div>
         </div>
+        <a href="index.html#support" class="nav-cta" data-nav="support">Support the Project</a>
       </nav>
     </header>
     <main class="app-shell comparison-shell">
       <div class="comparison-title">
-        <h1>Product Comparison</h1>
-        <p>
-          Compare up to four bicycle-family products in strict columns, with
-          deeper lifecycle evidence available below.
-        </p>
+        <div>
+          <h1>Product Comparison</h1>
+          <p>
+            Compare up to four bicycle-family products in strict columns, with
+            deeper lifecycle evidence available below.
+          </p>
+        </div>
+        <button class="button outlined lifecycle-explainer-trigger" type="button" id="lifecycle-explainer-trigger">
+          How this score was built
+        </button>
       </div>
       <section id="comparison-view" class="comparison-card"></section>
     </main>
+    <dialog id="lifecycle-dialog" class="info-dialog lifecycle-dialog">
+      <button class="dialog-close" type="button" aria-label="Close">x</button>
+      <p class="caption uppercase">Lifecycle and score explanation</p>
+      <h2>How TerraScore follows a product</h2>
+      <p>TerraScore connects public product scores to evidence across the full lifecycle. The summary is designed for quick comparison; the research workspace contains the detailed records, sources, assumptions, and review history.</p>
+      <div class="lifecycle-modal-grid">
+        <article><span>1</span><div><strong>Raw materials</strong><p>Extraction and processing of materials, energy, water, and other inputs.</p></div></article>
+        <article><span>2</span><div><strong>Manufacturing</strong><p>Production, assembly, packaging, and process-specific evidence.</p></div></article>
+        <article><span>3</span><div><strong>Use</strong><p>Energy, maintenance, service life, and real-world usage assumptions.</p></div></article>
+        <article><span>4</span><div><strong>End of life</strong><p>Reuse, repair, recycling, recovery, disposal, and remaining uncertainty.</p></div></article>
+      </div>
+      <div class="lifecycle-score-note"><strong>Overall impact score</strong><p>A 0-100 comparison score summarizes the twelve governed impact categories. Confidence, absolute footprint, true-cost ranges, and source evidence remain separate so the summary does not hide tradeoffs.</p></div>
+      <a class="button contained" href="research.html">Dive deeper in Research</a>
+    </dialog>
     <div id="comparison-sticky-scroll" class="sticky-x-scroll" aria-hidden="true">
       <div class="sticky-x-scroll-spacer"></div>
     </div>
