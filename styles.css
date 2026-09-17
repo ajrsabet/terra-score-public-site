@@ -295,7 +295,7 @@ hr { border: 0; border-top: 1px solid var(--ts-line); margin: 20px 0; }
   .research-sidebar, .research-readiness { border: 0; border-bottom: 1px solid var(--ts-line); }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1020px) {
   .public-navigation-panel { grid-template-columns: 1fr; }
   .public-navigation-section { border-bottom: 1px solid var(--ts-line); }
   .public-site-layout .app-shell { width: min(100% - 32px, var(--ts-shell-max)); }
