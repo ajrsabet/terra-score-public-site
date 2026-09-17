@@ -617,20 +617,22 @@ function getPublicLensScore(product, lens) {
 
 const publicNavigationSections = [
   {
-    title: "Explore",
+    title: "Working demos",
     items: [
-      { label: "Products", href: "product.html", page: "product" },
+      { label: "Product page", href: "product.html", page: "product" },
+      { label: "Product comparison", href: "comparison.html", page: "comparison" },
+      { label: "Research workspace", href: "research.html", page: "research" },
+    ],
+  },
+  {
+    title: "Future features",
+    items: [
       { label: "Materials", info: "Materials will provide public reference profiles for common inputs, composition data, and the evidence linked to those records." },
       { label: "Companies", info: "Company profiles will connect organizations, brands, owned products, and reviewable sustainability evidence." },
       { label: "Processes", info: "Process views will explain the lifecycle activities that connect products, inputs, and measured impacts." },
       { label: "Maps", info: "Maps will add geographic context for sourcing, manufacturing, use, and end-of-life assumptions." },
       { label: "Insights", info: "Insights will summarize patterns across reviewed product and lifecycle data as the public dataset grows." },
-      { label: "Research", href: "research.html", page: "research" },
     ],
-  },
-  {
-    title: "Compare",
-    items: [{ label: "Product comparison", href: "comparison.html", page: "comparison" }],
   },
 ];
 
