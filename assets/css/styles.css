@@ -104,7 +104,7 @@ p { color: var(--ts-ink-soft); line-height: 1.5; }
 .problem-card { border: 0; box-shadow: none; background: transparent; text-align: left; padding: 0; }
 .problem-card h3 { font-size: 1.05rem; }
 .problem-callout { max-width: 760px; margin: 40px auto 0; text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--ts-ink); }
-.problem-callout strong { display: block; margin-top: 8px; color: #0f5e56; }
+.problem-callout strong { display: block; margin-top: 8px; color: #0f5e56; font-size: 2rem; }
 
 .idea-section { background: #ffffff; }
 .idea-copy { max-width: 760px; margin: 0 auto 40px; text-align: center; }
@@ -142,7 +142,7 @@ p { color: var(--ts-ink-soft); line-height: 1.5; }
 .funding-total .amount { color: #f4d487; font-size: 2.6rem; font-weight: 900; line-height: 1; }
 
 .story-section { display: grid; grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr); gap: 42px; align-items: center; }
-.story-photo { display: block; width: 100%; aspect-ratio: 4 / 5; border-radius: var(--ts-radius-md); object-fit: cover; }
+.story-photo { display: block; width: 100%; max-width: 360px; margin: 0 auto; aspect-ratio: 4 / 5; border-radius: var(--ts-radius-md); object-fit: cover; }
 .story-copy h2 { margin-bottom: 18px; }
 
 .vision-section { background: #0a1f1b; color: white; text-align: center; padding: 110px 0; }
