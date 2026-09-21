@@ -615,102 +615,9 @@ function getPublicLensScore(product, lens) {
   return Math.round(values.reduce((total, value) => total + value, 0) / values.length);
 }
 
-const publicNavigationSections = [
-  {
-    title: "Working demos",
-    items: [
-      { label: "Product page", href: "product.html", page: "product" },
-      { label: "Product comparison", href: "comparison.html", page: "comparison" },
-      { label: "Research workspace", href: "research.html", page: "research" },
-    ],
-  },
-  {
-    title: "Future features",
-    items: [
-      { label: "Materials", info: "Materials will provide public reference profiles for common inputs, composition data, and the evidence linked to those records." },
-      { label: "Companies", info: "Company profiles will connect organizations, brands, owned products, and reviewable sustainability evidence." },
-      { label: "Processes", info: "Process views will explain the lifecycle activities that connect products, inputs, and measured impacts." },
-      { label: "Maps", info: "Maps will add geographic context for sourcing, manufacturing, use, and end-of-life assumptions." },
-      { label: "Insights", info: "Insights will summarize patterns across reviewed product and lifecycle data as the public dataset grows." },
-    ],
-  },
-];
-
-function wirePublicNavigationPanel(page) {
-  const main = document.querySelector("main.app-shell, main.research-app");
-  if (!main || document.querySelector(".public-site-layout")) return;
-
-  const layout = document.createElement("div");
-  layout.className = "public-site-layout";
-  document.body.classList.add("has-public-navigation");
-  const panel = document.createElement("aside");
-  panel.className = "public-navigation-panel";
-  panel.setAttribute("aria-label", "Platform navigation");
-  const panelCollapsed = localStorage.getItem("publicNavigationCollapsed") === "true";
-  document.body.classList.toggle("public-navigation-collapsed", panelCollapsed);
-  panel.innerHTML = `<div class="public-navigation-title"><span>Platform tools</span><button class="public-navigation-collapse" type="button" aria-label="${panelCollapsed ? "Expand navigation" : "Collapse navigation"}" aria-expanded="${!panelCollapsed}">${panelCollapsed ? ">>" : "<<"}</button></div>${publicNavigationSections
-    .map(
-      (section) => `<section class="public-navigation-section"><h2>${section.title}</h2>${section.items
-        .map((item) => {
-          const active = item.page === page ? " active" : "";
-          return item.href
-            ? `<a class="public-navigation-item${active}" href="${item.href}">${item.label}</a>`
-            : `<button class="public-navigation-item" type="button" data-public-info="${item.label}">${item.label}</button>`;
-        })
-        .join("")}</section>`,
-    )
-    .join("")}`;
-
-  main.parentNode.insertBefore(layout, main);
-  layout.append(panel, main);
-
-  const mobileNavigation = document.createElement("div");
-  mobileNavigation.className = "mobile-platform-tools";
-  mobileNavigation.innerHTML = `<p>Platform tools</p>${publicNavigationSections
-    .map(
-      (section) => `<div><strong>${section.title}</strong>${section.items
-        .map((item) => {
-          const active = item.page === page ? " active" : "";
-          return item.href
-            ? `<a class="mobile-platform-tool${active}" href="${item.href}">${item.label}</a>`
-            : `<button class="mobile-platform-tool" type="button" data-public-info="${item.label}">${item.label}</button>`;
-        })
-        .join("")}</div>`,
-    )
-    .join("")}`;
-  document.querySelector("#site-nav")?.append(mobileNavigation);
-
-  const collapseButton = panel.querySelector(".public-navigation-collapse");
-  collapseButton.addEventListener("click", () => {
-    const collapsed = !document.body.classList.contains("public-navigation-collapsed");
-    document.body.classList.toggle("public-navigation-collapsed", collapsed);
-    localStorage.setItem("publicNavigationCollapsed", String(collapsed));
-    collapseButton.textContent = collapsed ? ">>" : "<<";
-    collapseButton.setAttribute("aria-label", collapsed ? "Expand navigation" : "Collapse navigation");
-    collapseButton.setAttribute("aria-expanded", String(!collapsed));
-  });
-
-  const dialog = document.createElement("dialog");
-  dialog.className = "info-dialog public-navigation-dialog";
-  dialog.innerHTML = '<button class="dialog-close" type="button" aria-label="Close">x</button><p class="caption uppercase">Coming next</p><h2 id="public-navigation-dialog-title"></h2><p id="public-navigation-dialog-text"></p>';
-  document.body.append(dialog);
-  document.querySelectorAll("[data-public-info]").forEach((item) => {
-    item.addEventListener("click", () => {
-      const label = item.dataset.publicInfo;
-      const entry = publicNavigationSections
-        .flatMap((section) => section.items)
-        .find((navigationItem) => navigationItem.label === label);
-      dialog.querySelector("#public-navigation-dialog-title").textContent = label;
-      dialog.querySelector("#public-navigation-dialog-text").textContent = entry.info;
-      dialog.showModal();
-    });
-  });
-  dialog.querySelector(".dialog-close").onclick = () => dialog.close();
-}
-
 function wireShell() {
   const page = document.body.dataset.page;
-  const demoPages = new Set(["product", "comparison", "research"]);
+  const demoPages = new Set(["product", "comparison", "research", "how-it-works"]);
   document
     .querySelectorAll("[data-nav]")
     .forEach((link) => {
@@ -754,7 +661,6 @@ function wireShell() {
       nav.classList.toggle("open", !expanded);
     });
   }
-  wirePublicNavigationPanel(page);
 }
 
 function metricBar(value) {

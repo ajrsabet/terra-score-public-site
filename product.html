@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Platform | Product Page</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body data-page="product">
     <header class="navbar">
@@ -20,7 +20,8 @@
         Menu
       </button>
       <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
-        <a href="index.html" data-nav="about">About</a>
+        <a href="index.html" data-nav="about">Home</a>
+        <a href="index.html#vision" data-nav="vision">The Vision</a>
         <div class="nav-group">
           <button
             class="nav-dropdown-trigger"
@@ -29,12 +30,13 @@
             aria-expanded="false"
             aria-controls="platform-demo-menu"
           >
-            Platform Demo
+            The Prototype
           </button>
           <div id="platform-demo-menu" class="nav-dropdown">
-            <a href="product.html" data-nav="product">Product Page</a>
-            <a href="comparison.html" data-nav="comparison">Product Comparison</a>
-            <a href="research.html" data-nav="research">Research</a>
+            <a href="product.html" data-nav="product">Product Demo</a>
+            <a href="comparison.html" data-nav="comparison">Comparison Demo</a>
+            <a href="research.html" data-nav="research">Research Demo</a>
+            <a href="how-it-works.html" data-nav="how-it-works">How It Works</a>
           </div>
         </div>
         <a href="index.html#support" class="nav-cta" data-nav="support">Support the Project</a>
@@ -63,6 +65,6 @@
       <p class="caption uppercase">Included governed categories</p>
       <div id="lens-dialog-categories" class="lens-dialog-categories"></div>
     </dialog>
-    <script src="app.js"></script>
+    <script src="assets/js/app.js"></script>
   </body>
 </html>
