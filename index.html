@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Platform project overview, purpose, and direct personal project contribution links."
+      content="A better way to understand our impact on the planet. Support an open, transparent platform for tracing products back to their real environmental and social consequences."
     />
-    <meta property="og:title" content="Platform | About" />
+    <meta property="og:title" content="Platform | A better way to understand our impact" />
     <meta
       property="og:description"
-      content="Evidence-linked sustainability data for research, reporting, and public trust."
+      content="An open, transparent platform for understanding the environmental and social consequences of the things we make, use, and depend on."
     />
     <meta
       property="og:image"
-      content="https://ajrsabet.github.io/terra-score-public-site/Terrascore%20fundraising%20image%2016-9.png"
+      content="https://ajrsabet.github.io/terra-score-public-site/assets/images/Terrascore%20fundraising%20image%2016-9.png"
     />
     <meta property="og:type" content="website" />
     <meta
@@ -22,17 +22,17 @@
       content="https://ajrsabet.github.io/terra-score-public-site/index.html"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Platform | About" />
+    <meta name="twitter:title" content="Platform | A better way to understand our impact" />
     <meta
       name="twitter:description"
-      content="Evidence-linked sustainability data for research, reporting, and public trust."
+      content="An open, transparent platform for understanding the environmental and social consequences of the things we make, use, and depend on."
     />
     <meta
       name="twitter:image"
-      content="https://ajrsabet.github.io/terra-score-public-site/Terrascore%20fundraising%20image%2016-9.png"
+      content="https://ajrsabet.github.io/terra-score-public-site/assets/images/Terrascore%20fundraising%20image%2016-9.png"
     />
-    <title>Platform | About</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Platform | A better way to understand our impact</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body data-page="about">
     <header class="navbar">
@@ -48,7 +48,8 @@
         Menu
       </button>
       <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
-        <a href="index.html" data-nav="about">About</a>
+        <a href="index.html" data-nav="about">Home</a>
+        <a href="#vision" data-nav="vision">The Vision</a>
         <div class="nav-group">
           <button
             class="nav-dropdown-trigger"
@@ -57,12 +58,13 @@
             aria-expanded="false"
             aria-controls="platform-demo-menu"
           >
-            Platform Demo
+            The Prototype
           </button>
           <div id="platform-demo-menu" class="nav-dropdown">
-            <a href="product.html" data-nav="product">Product Page</a>
-            <a href="comparison.html" data-nav="comparison">Product Comparison</a>
-            <a href="research.html" data-nav="research">Research</a>
+            <a href="product.html" data-nav="product">Product Demo</a>
+            <a href="comparison.html" data-nav="comparison">Comparison Demo</a>
+            <a href="research.html" data-nav="research">Research Demo</a>
+            <a href="how-it-works.html" data-nav="how-it-works">How It Works</a>
           </div>
         </div>
         <a href="#support" class="nav-cta" data-nav="support">Support the Project</a>
@@ -70,177 +72,218 @@
     </header>
 
     <main class="app-shell">
+      <!-- 1. Hero: answer "what is this and why should I care" in 5-10 seconds -->
       <section class="hero-panel home-hero">
         <div class="hero-copy">
-          <div class="chip-row">
-            <span class="chip hero-chip">Working public-interest platform</span
-            ><span class="chip hero-chip">Institutional pilot phase</span>
-          </div>
-          <h1>
-            Evidence-linked sustainability data for research, reporting, and
-            public trust.
-          </h1>
+          <h1>A better way to understand our impact on the planet.</h1>
           <p class="lead">
-            This platform is being built as global public-interest
-            infrastructure for collecting, reviewing, and explaining
-            sustainability evidence across product lifecycles. We are actively
-            raising our initial $20K foundation round to launch our first
-            research pilots.
+            I'm building an open, transparent platform to help us understand
+            the environmental and social consequences of the things we make,
+            use, and depend on.
+          </p>
+          <p class="lead">
+            I've already built the first working prototype. I'm raising
+            $20,000 to turn it into a public version people can actually use.
           </p>
           <div class="button-row">
-            <a class="button contained gold" href="#support"
-              >Back the Fundraiser</a
+            <a class="button contained gold" href="#support">Support the Project</a
             ><a class="button outlined light" href="product.html"
-              >Explore the Demo</a
+              >Explore the Prototype</a
             >
           </div>
         </div>
-        <aside class="why-card">
-          <p class="overline">Why this matters now</p>
-          <p>
-            Sustainability claims are fragmented across vendors, studies,
-            certifications, and inconsistent reporting systems.
-          </p>
-          <p>
-            The platform connects measurements, sources, lifecycle stages, and
-            explainable scoring into a reviewable system instead of a black-box
-            rating.
-          </p>
-          <p>
-            Early institutional adoption helps build the dataset required for
-            later public trust and consumer usefulness.
-          </p>
-          <img
-            class="hero-visual"
-            src="comparison-hero.png"
-            alt="Product comparison interface showing electric and gasoline sedan impact scores"
-          />
-        </aside>
+        <img
+          class="hero-visual"
+          src="assets/images/comparison-hero.png"
+          alt="Working prototype showing electric and gasoline sedan impact scores compared side by side"
+        />
       </section>
 
-      <section class="section-block pale">
+      <!-- 2. The problem: why this needs to exist -->
+      <section id="problem" class="section-block pale problem-section">
         <div class="section-heading centered">
-          <h2>Who is this for</h2>
-          <p>
-            The first users should be the ones who strengthen data quality, test
-            the evidence model, and improve the credibility of the mission.
+          <h2>We have more information than ever.</h2>
+          <h2>But seeing the bigger picture is still incredibly difficult.</h2>
+        </div>
+        <div class="mui-grid three problem-grid">
+          <article class="paper-card problem-card">
+            <h3>Scientific research</h3>
+            <p>Thousands of studies contain pieces of the puzzle.</p>
+          </article>
+          <article class="paper-card problem-card">
+            <h3>Government data</h3>
+            <p>Agencies collect enormous amounts of environmental information.</p>
+          </article>
+          <article class="paper-card problem-card">
+            <h3>Corporate reporting</h3>
+            <p>Companies publish increasingly detailed sustainability information.</p>
+          </article>
+        </div>
+        <p class="problem-callout">
+          But it's fragmented. Different sources measure different things, use
+          different assumptions, and cover different parts of a product's
+          lifecycle.
+          <strong>The information exists. We need a better way to connect it.</strong>
+        </p>
+      </section>
+
+      <!-- 3. The big idea: what is actually being built, kept conceptual not technical -->
+      <section id="vision" class="section-block idea-section">
+        <div class="idea-copy">
+          <h2>I'm building a way to see the whole picture.</h2>
+          <p class="lead">
+            What if we could connect information about materials, products,
+            companies, resources, processes, ecosystems, and people—and trace
+            the relationships between them?
           </p>
         </div>
-        <div class="mui-grid three">
-          <article class="paper-card">
-            <h3>Research Institutions</h3>
+        <div class="lifecycle-flow">
+          <span class="lifecycle-step">Raw materials</span
+          ><span class="lifecycle-arrow">&rarr;</span
+          ><span class="lifecycle-step">Production</span
+          ><span class="lifecycle-arrow">&rarr;</span
+          ><span class="lifecycle-step">Transportation</span
+          ><span class="lifecycle-arrow">&rarr;</span
+          ><span class="lifecycle-step">Use</span
+          ><span class="lifecycle-arrow">&rarr;</span
+          ><span class="lifecycle-step">End of life</span>
+        </div>
+        <div class="chip-row centered dimension-row">
+          <span class="chip">Climate</span><span class="chip">Water</span
+          ><span class="chip">Energy</span><span class="chip">Biodiversity</span
+          ><span class="chip">Pollution</span><span class="chip">Resources</span
+          ><span class="chip">Communities</span>
+        </div>
+      </section>
+
+      <!-- 4. Philosophy: differentiate from "another green score site" -->
+      <section class="philosophy-section">
+        <h2>I don't think we need more guilt. We need better information.</h2>
+        <div class="philosophy-quote">
+          <p>An electric vehicle requires minerals.</p>
+          <p>A gasoline vehicle requires fossil fuels.</p>
+          <p>Solar panels require energy and materials.</p>
+          <p>
+            Food production affects land, water, climate, and biodiversity.
+          </p>
+          <p>
+            It's easy to look at any one of these tradeoffs and conclude that
+            there is no good answer. But the answer isn't to stop asking
+            questions.
+          </p>
+          <p class="punch">
+            The answer is to understand the system well enough to find better
+            ones.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5. Proof: answers "what would my money be supporting" -->
+      <section class="section-block prototype-section">
+        <div class="section-heading centered">
+          <h2>I've already started building it.</h2>
+        </div>
+        <div class="prototype-grid">
+          <article class="screenshot-card">
+            <img
+              src="assets/images/comparison-hero.png"
+              alt="Prototype screen comparing the environmental impact of two vehicles"
+            />
+            <h3>Understand the tradeoffs</h3>
             <p>
-              Use structured lifecycle evidence, linked sources, and explainable
-              scoring to support comparative studies, internal tools, and shared
-              sustainability datasets.
+              Explore impacts across the lifecycle rather than reducing
+              everything to one number.
             </p>
           </article>
-          <article class="paper-card">
-            <h3>ESG and Reporting Teams</h3>
-            <p>
-              Build auditable evidence trails for sustainability claims and
-              reporting workflows without depending on opaque scoring systems.
-            </p>
+          <article class="screenshot-card">
+            <div class="screenshot-placeholder">Screenshot coming soon</div>
+            <h3>Explore information</h3>
+            <p>Connect products, resources, companies, and processes.</p>
           </article>
-          <article class="paper-card">
-            <h3>Public-Interest Partners</h3>
-            <p>
-              Collaborate on open data infrastructure, governance, and
-              verification systems that improve sustainability transparency
-              globally.
-            </p>
+          <article class="screenshot-card">
+            <div class="screenshot-placeholder">Screenshot coming soon</div>
+            <h3>Follow the evidence</h3>
+            <p>See where information comes from and how it was evaluated.</p>
           </article>
-          <article class="paper-card">
-            <h3>General Public</h3>
-            <p>
-              Explore the platform demo, compare products in plain language, and
-              support the mission with a clear view of how sustainability data
-              can become more transparent and useful for everyone.
-            </p>
+        </div>
+        <a class="button contained gold" href="product.html"
+          >Explore the working prototype &rarr;</a
+        >
+      </section>
+
+      <!-- 6. Path forward: shows a credible plan, not just a big ask -->
+      <section class="section-block roadmap-section">
+        <div class="section-heading centered">
+          <h2>I'm starting small. The vision is big.</h2>
+        </div>
+        <div class="roadmap-steps">
+          <article class="roadmap-step">
+            <span class="roadmap-index">01</span>
+            <h3>Build the foundation</h3>
+            <ul>
+              <li>Working prototype &rarr; public version</li>
+              <li>Technical infrastructure</li>
+              <li>Research framework</li>
+              <li>Nonprofit / fiscal sponsorship</li>
+            </ul>
+          </article>
+          <article class="roadmap-step">
+            <span class="roadmap-index">02</span>
+            <h3>Work with researchers</h3>
+            <ul>
+              <li>Pilot projects</li>
+              <li>Research partnerships</li>
+              <li>Data contributions</li>
+              <li>Testing and refinement</li>
+            </ul>
+          </article>
+          <article class="roadmap-step">
+            <span class="roadmap-index">03</span>
+            <h3>Build the knowledge base</h3>
+            <ul>
+              <li>More products</li>
+              <li>More processes</li>
+              <li>More evidence</li>
+              <li>More environmental data</li>
+            </ul>
+          </article>
+          <article class="roadmap-step">
+            <span class="roadmap-index">04</span>
+            <h3>Make it useful to everyone</h3>
+            <ul>
+              <li>Researchers</li>
+              <li>Organizations</li>
+              <li>Businesses</li>
+              <li>Governments and individuals</li>
+            </ul>
           </article>
         </div>
       </section>
 
-      <section class="cta-banner">
-        <div class="cta-banner-content">
-          <p class="overline" style="color: #cbe7df">Join as an early supporter</p>
-          <h2>Help us fund the foundation of open impact data</h2>
-          <p>
-            The prototype and architecture are ready. Your contribution directly funds essential technology, fiscal sponsorship, and institutional pilot integration.
-          </p>
-        </div>
-        <div class="cta-banner-actions">
-          <a class="button contained gold" href="#support">Contribute to the Seed Round</a>
-        </div>
-      </section>
-
-      <section class="section-block split-section">
-        <div>
-          <h2>What already exists in the MVP</h2>
-          <p>
-            Development has moved beyond a placeholder info page. The current
-            product includes core contribution, review, and scoring
-            infrastructure that can support early pilots and data collaboration.
-          </p>
-          <p>
-            The live site should communicate that clearly: this is not yet a
-            consumer comparison destination, but it is already an operating
-            system for evidence-driven sustainability data.
-          </p>
-        </div>
-        <div class="mui-grid two">
-          <article class="paper-card compact">
-            <h3>Evidence Collection</h3>
-            <p>
-              Capture measurements, methods, lifecycle stages, and supporting
-              sources in structured product-linked records.
-            </p>
-          </article>
-          <article class="paper-card compact">
-            <h3>Review Workflow</h3>
-            <p>
-              Moderation and revision history preserve provenance so published
-              data remains reviewable and auditable.
-            </p>
-          </article>
-          <article class="paper-card compact">
-            <h3>Explainable Scores</h3>
-            <p>
-              Model-versioned scores include confidence, completeness, category
-              views, and improvement opportunities.
-            </p>
-          </article>
-          <article class="paper-card compact">
-            <h3>Open Data Foundation</h3>
-            <p>
-              The platform is being built as durable public-interest
-              infrastructure rather than a black-box ratings site.
-            </p>
-          </article>
-        </div>
-      </section>
-
+      <!-- 7 + funding mechanics: first fundraising goal -->
       <section id="support" class="support-band">
         <div>
-          <h2>Support the mission while the platform matures</h2>
+          <p class="overline" style="color: #cbe7df">Help me build the foundation</p>
+          <div class="funding-total">
+            <span class="amount">$20,000</span>
+          </div>
+          <div class="funding-breakdown">
+            <div class="funding-line"><strong>Software development</strong><span>Turn the prototype into a version the public can use</span></div>
+            <div class="funding-line"><strong>Research &amp; data</strong><span>Build the initial research infrastructure</span></div>
+            <div class="funding-line"><strong>Technology</strong><span>Hosting, APIs, tools, and essential services</span></div>
+            <div class="funding-line"><strong>Outreach</strong><span>Begin building institutional relationships</span></div>
+            <div class="funding-line"><strong>Nonprofit development</strong><span>Fiscal sponsorship and organizational foundation</span></div>
+          </div>
           <p>
-            Support now helps fund evidence tooling, data partnerships,
-            moderation workflows, and the operational work required to turn a
-            credible pilot system into a durable global platform.
+            I'm intentionally starting small. I don't want to build a large
+            organization before I know the system works. I want to build,
+            test, learn, and grow from there.
           </p>
           <div class="gfm-embed" data-url="https://www.gofundme.com/f/help-build-the-future-of-environmental-impact-research/widget/medium?attribution_id=sl%3Aa9a9b38c-a22a-42bc-9dc0-5612a9fe35e0"></div>
           <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
           <div class="support-milestones">
-            <h3>Milestone funding goals</h3>
+            <h3>What comes after the foundation</h3>
             <div class="milestone-list">
-              <article class="milestone-card">
-                <div class="milestone-meta">
-                  <span class="milestone-stage">Stage 1</span>
-                  <span class="milestone-goal">$20K</span>
-                </div>
-                <h4>Build the Foundation</h4>
-                <p>Strengthen the MVP, cover essential technology, domain/IP, and fiscal sponsorship setup.</p>
-              </article>
               <article class="milestone-card">
                 <div class="milestone-meta">
                   <span class="milestone-stage">Stage 2</span>
@@ -257,26 +300,13 @@
                 <h4>Launch the Research Pilot</h4>
                 <p>Bring on senior programming support, develop the beta platform, integrate initial research/data sources, and begin working with external users.</p>
               </article>
-              <!-- <article class="milestone-card">
-                <div class="milestone-meta">
-                  <span class="milestone-stage">Stage 4</span>
-                  <span class="milestone-goal">$400–450K</span>
-                </div>
-                <h4>Expand the Platform</h4>
-                <p>Continue development, expand research/data capabilities, support partners, and establish a sustainable first-year operating foundation.</p>
-              </article> -->
             </div>
           </div>
           <p>
-            We will track how funds are used and report our progress toward each
-            development milestone. As the organization grows, we intend to make
-            our operations and environmental impacts increasingly transparent as
-            well.
-          </p>
-          <p>
-            Our goal is not simply to raise money and build a large organization.
-            Our goal is to turn funding into useful environmental information as
-            quickly, responsibly, and transparently as possible.
+            I will track how funds are used and report progress toward each
+            milestone. My goal is not simply to raise money and build a large
+            organization — it's to turn funding into useful environmental
+            information as quickly, responsibly, and transparently as possible.
           </p>
           <p class="disclosure">
             <strong>Disclosure:</strong> The platform does not currently have
@@ -287,15 +317,66 @@
         </div>
         <div class="support-actions-card">
           <span class="chip small">Primary funding link</span>
-          <a class="button contained gold full" href="https://gofund.me/32fd09c5f" target="_blank" rel="noreferrer">Support via GoFundMe</a>
+          <a class="button contained gold full" href="https://gofund.me/32fd09c5f" target="_blank" rel="noreferrer">Help fund the first $20,000 &rarr;</a>
+        </div>
+      </section>
+
+      <!-- 8. Personal story: makes the project personal without making it only about you -->
+      <section class="section-block story-section">
+        <img
+          class="story-photo"
+          src="assets/images/Founder photo Adam Sabet.JPG"
+          alt="Adam Sabet, founder of the platform"
+        />
+        <div class="story-copy">
+          <h2>Why I'm doing this</h2>
+          <p>
+            I've spent much of my career working with complicated
+            systems—designing buildings, managing construction projects,
+            solving problems, and figuring out how different pieces fit
+            together.
+          </p>
+          <p>
+            As I've studied environmental science and software development,
+            I've become increasingly interested in a different kind of
+            problem: how do we make sense of the enormous amount of
+            information we already have about our impact on the planet?
+          </p>
+        </div>
+      </section>
+
+      <!-- 9. The bigger vision: let it breathe before the final ask -->
+      <section id="imagine" class="vision-section">
+        <div class="vision-lines">
+          <p>Imagine being able to trace a product back to the resources it came from.</p>
+          <p>Understand what happened along the way.</p>
+          <p>See the environmental and social consequences.</p>
+          <p>Compare different pathways.</p>
+          <p>Understand what we know—and what we don't.</p>
+        </div>
+        <h2>And then ask: what could we do better?</h2>
+        <p class="vision-signoff">That's the kind of resource I'm trying to build.</p>
+      </section>
+
+      <!-- 10. Final CTA -->
+      <section class="final-cta">
+        <h2>Help build something useful.</h2>
+        <p>
+          I'm starting with a working prototype and a $20,000 goal. If you
+          believe we need better ways to understand our impact on the world,
+          I'd love your support.
+        </p>
+        <div class="button-row" style="justify-content: center">
+          <a class="button contained gold" href="#support">Support the Project</a
+          ><a class="button outlined" href="product.html">Explore the Prototype</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      Platform | Evidence-linked sustainability data for research, reporting,
-      and public trust.
+      Platform | A better way to understand our impact on the planet. ·
+      <a href="how-it-works.html">How It Works (technical details)</a>
     </footer>
-    <script src="app.js"></script>
+    <script src="assets/js/app.js"></script>
   </body>
 </html>
