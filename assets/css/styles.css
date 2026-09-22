@@ -97,6 +97,7 @@ p { color: var(--ts-ink-soft); line-height: 1.5; }
 .disclosure { border: 1px solid rgba(255,255,255,0.2); border-radius: var(--ts-radius-md); padding: 14px; }
 .support-actions-card { display: grid; gap: 14px; border-radius: var(--ts-radius-md); background: rgba(255,255,255,0.1); padding: 18px; }
 .footer { padding: 24px 16px 40px; text-align: center; color: var(--ts-ink-soft); }
+.footer .copyright { margin: 8px 0 0; font-size: 0.8rem; }
 
 /* Story-driven homepage sections (fundraising rework) */
 .problem-section { text-align: center; }
