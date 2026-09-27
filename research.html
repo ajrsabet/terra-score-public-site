@@ -33,6 +33,7 @@
             The Prototype
           </button>
           <div id="platform-demo-menu" class="nav-dropdown">
+            <a href="my-stuff.html" data-nav="my-stuff">My Stuff</a>
             <a href="product.html" data-nav="product">Product Demo</a>
             <a href="comparison.html" data-nav="comparison">Comparison Demo</a>
             <a href="research.html" data-nav="research">Research Demo</a>
@@ -85,7 +86,7 @@
           <div id="research-panel" class="research-panel"></div>
         </section>
         <aside class="research-readiness">
-          <h2>Study readiness</h2>
+          <h2>Study readiness <button class="icon-button info" type="button" data-info="studyReadiness" aria-label="What does this mean?" aria-haspopup="dialog">i</button></h2>
           <div id="readiness-list"></div>
           <hr />
           <h3>Review queue</h3>
@@ -100,6 +101,11 @@
       Platform | A better way to understand our impact on the planet.
       <p class="copyright">© 2026 Adam Sabet. All rights reserved.</p>
     </footer>
+    <dialog id="info-dialog" class="info-dialog">
+      <button class="dialog-close" type="button" aria-label="Close">x</button>
+      <h2 id="dialog-title"></h2>
+      <p id="dialog-text"></p>
+    </dialog>
     <script src="assets/js/app.js"></script>
   </body>
 </html>

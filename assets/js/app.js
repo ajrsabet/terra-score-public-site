@@ -39,7 +39,7 @@ const products = [
     color: "#0f766e",
     impactScore: 74,
     retailCost: "$42,000 MSRP",
-    trueCost: "$44,500-$52,000",
+    extendedImpactCost: "$2,500-$10,000",
     totalFootprint: "3.8 t CO2e / yr (10k mi, grid mix)",
     confidence: 68,
     highlights: [
@@ -60,7 +60,7 @@ const products = [
     color: "#3b5b2a",
     impactScore: 70,
     retailCost: "$31,500 MSRP",
-    trueCost: "$33,000-$38,000",
+    extendedImpactCost: "$1,500-$6,500",
     totalFootprint: "5.1 t CO2e / yr (10k mi)",
     confidence: 74,
     highlights: [
@@ -81,7 +81,7 @@ const products = [
     color: "#8a5a12",
     impactScore: 58,
     retailCost: "$27,800 MSRP",
-    trueCost: "$30,500-$36,000",
+    extendedImpactCost: "$2,700-$8,200",
     totalFootprint: "6.9 t CO2e / yr (10k mi)",
     confidence: 80,
     highlights: [
@@ -102,7 +102,7 @@ const products = [
     color: "#7c2d12",
     impactScore: 41,
     retailCost: "$58,000 MSRP",
-    trueCost: "$62,000-$71,000",
+    extendedImpactCost: "$4,000-$13,000",
     totalFootprint: "11.4 t CO2e / yr (10k mi)",
     confidence: 62,
     highlights: [
@@ -123,7 +123,7 @@ const products = [
     color: "#8a5a12",
     impactScore: 46,
     retailCost: "$0.65 / cup",
-    trueCost: "$0.85-$1.10 / cup",
+    extendedImpactCost: "$0.20-$0.45 / cup",
     totalFootprint: "0.29 kg CO2e / cup",
     confidence: 66,
     highlights: [
@@ -144,7 +144,7 @@ const products = [
     color: "#3b5b2a",
     impactScore: 61,
     retailCost: "$0.22 / cup",
-    trueCost: "$0.28-$0.38 / cup",
+    extendedImpactCost: "$0.06-$0.16 / cup",
     totalFootprint: "0.18 kg CO2e / cup",
     confidence: 60,
     highlights: [
@@ -165,7 +165,7 @@ const products = [
     color: "#2563eb",
     impactScore: 66,
     retailCost: "$0.18 / cup",
-    trueCost: "$0.22-$0.30 / cup",
+    extendedImpactCost: "$0.04-$0.12 / cup",
     totalFootprint: "0.21 kg CO2e / cup",
     confidence: 72,
     highlights: [
@@ -186,7 +186,7 @@ const products = [
     color: "#0f766e",
     impactScore: 79,
     retailCost: "$0.24 / cup",
-    trueCost: "$0.27-$0.34 / cup",
+    extendedImpactCost: "$0.03-$0.10 / cup",
     totalFootprint: "0.20 kg CO2e / cup",
     confidence: 68,
     highlights: [
@@ -403,15 +403,68 @@ const evidenceItems = [
   ],
 ];
 
+// Each entry may be a plain string or { title, text } when the auto-derived title reads poorly.
 const infoText = {
-  impactScore:
-    "The main Impact Score is a 0-100 matrix score derived from the twelve weighted impact categories. It is useful for product comparison inside the same product family and functional unit.",
-  confidence:
-    "Confidence summarizes evidence strength and completeness. It should stay separate from the score so users can distinguish a strong claim from an uncertain one.",
-  trueCost:
-    "True cost is a combination of direct product costs and the extended cost of impacts associated with the product lifecycle.",
-  footprint:
-    "Total footprint is the absolute impact ledger view: unit-bearing quantities such as kg CO2e, liters of water, or other impact totals.",
+  impactScore: {
+    title: "Impact Score",
+    text: "A 0-100 summary of how this product performs across twelve impact categories, where higher is better. It is designed for comparing similar products doing the same job — not for comparing a car to a cup of coffee. Think of it as a starting point that tells you where to look closer, not a final verdict.",
+  },
+  confidence: {
+    title: "Confidence",
+    text: "How much evidence sits behind the score, and how complete and current that evidence is. A high score with low confidence means the product may look good, but we do not yet have enough verified data to be sure. We keep this separate from the score on purpose, so a strong claim is never confused with a certain one.",
+  },
+  retailCost: {
+    title: "Retail / MSRP",
+    text: "The everyday market price you would actually pay for this product. It is shown next to the impact figures so you can see price and environmental cost side by side, rather than only one or the other.",
+  },
+  extendedImpactCost: {
+    title: "Extended impact cost",
+    text: "An estimate of the costs created by this product that are not included in its price — things like climate damage, pollution, water use, and health effects that end up being paid by society rather than the buyer. It is shown as a range because these estimates involve real uncertainty. This figure is in addition to the retail price, not a total.",
+  },
+  footprint: {
+    title: "Total footprint",
+    text: "The absolute, physical quantities behind the product — for example kilograms of CO2 equivalent per year, or per cup. Unlike the 0-100 score, these are real units you can add up, which makes them useful for understanding total scale rather than relative ranking.",
+  },
+  publicLenses: {
+    title: "Public impact lenses",
+    text: "Five plain-language groupings that bundle the twelve detailed impact categories into themes most people care about. Each lens is an average of the categories it covers. Click any lens to see exactly which categories are inside it and how the product scored on each.",
+  },
+  highlights: {
+    title: "Product / impact highlights",
+    text: "The handful of findings that matter most for this product — usually the biggest driver of its footprint and the factors that would most change the result. These are meant to give context that a single number cannot.",
+  },
+  impactDrivers: {
+    title: "Impact drivers",
+    text: "The specific stages and activities that contribute most to a product's total impact. Shorter bars mean lower impact. This view answers the question a single score cannot: where is the damage actually coming from?",
+  },
+  lifecycleStages: {
+    title: "Lifecycle stages",
+    text: "A product's impact is spread across its whole life: raw materials, production, transportation, use, and end of life. Two products can have similar totals but very different profiles — one heavy upfront, another heavy in daily use. That difference often matters more than the total.",
+  },
+  evidenceTrail: {
+    title: "Evidence trail",
+    text: "The underlying sources behind these numbers, including what kind of source it is, how recent it is, and whether it has been reviewed. Being able to check where a number came from is the whole point of this project.",
+  },
+  comparisonScore: {
+    title: "Comparing products",
+    text: "Products are only compared within the same family and the same functional unit — for example, sedans driven 10,000 miles a year, or a single cup of coffee. Comparing across different categories would be misleading, so the tool does not offer it.",
+  },
+  householdFootprint: {
+    title: "Your estimated footprint",
+    text: "A rough estimate of the annual impact of a typical household, built by adding up the categories below. It is meant to show relative scale — which parts of daily life matter most — rather than to give you a precise personal number.",
+  },
+  categoryShare: {
+    title: "Share of total",
+    text: "How much this category contributes to the overall estimated footprint. Categories are ranked so the areas with the biggest potential for change appear first.",
+  },
+  studyReadiness: {
+    title: "Study readiness",
+    text: "How close this study is to being complete enough to publish a public score. Each line tracks a different requirement — whether the required flows are mapped, whether sources are documented, and whether a reviewer has checked the data. A score is only published once these are strong enough.",
+  },
+  contributionAnalysis: {
+    title: "Contribution analysis",
+    text: "Which parts of the modeled system contribute most to the result. This is what turns a single number back into something explainable: it shows which processes are driving the outcome and where better data would matter most.",
+  },
 };
 
 const insightRowsByCategory = {
@@ -592,6 +645,115 @@ const reviewItems = [
   "Review battery recovery assumption",
 ];
 
+// Illustrative household profile for the My Stuff demo. Values are rough
+// annual estimates for a typical two-person U.S. household, not user data.
+const myStuffProfile = {
+  totalFootprint: "14.2 t CO2e / yr",
+  totalExtendedCost: "$3,400-$8,900 / yr",
+  comparisonNote: "Roughly 12% below the U.S. household average",
+  categories: [
+    {
+      id: "home",
+      name: "Home and energy",
+      icon: "HM",
+      color: "#0f766e",
+      footprint: "4.6 t CO2e / yr",
+      share: 32,
+      summary:
+        "Heating, cooling, and electricity usually make up the largest single share of a household footprint.",
+      items: [
+        ["Electricity use", "Grid mix matters more than total usage in many regions."],
+        ["Natural gas heating", "Often the largest single driver in colder climates."],
+        ["Water heating", "A steady year-round load that is easy to overlook."],
+        ["Appliances and electronics", "Long-lived items where production impact matters."],
+        ["Home materials and renovations", "Concrete, steel, and insulation carry heavy upfront impact."],
+      ],
+    },
+    {
+      id: "travel",
+      name: "Travel and transportation",
+      icon: "TR",
+      color: "#8a5a12",
+      footprint: "3.9 t CO2e / yr",
+      share: 27,
+      summary:
+        "Daily driving and occasional flights can rival each other, which surprises most people.",
+      items: [
+        ["Personal vehicle", "Fuel type and annual mileage dominate the result."],
+        ["Air travel", "A few long flights can outweigh a year of commuting."],
+        ["Public transit", "Shared trips spread impact across many riders."],
+        ["Rideshare and delivery trips", "Short trips add up in dense areas."],
+        ["Vehicle manufacturing", "Spread across the vehicle's service life."],
+      ],
+    },
+    {
+      id: "food",
+      name: "Food and drink",
+      icon: "FD",
+      color: "#3b5b2a",
+      footprint: "2.8 t CO2e / yr",
+      share: 20,
+      summary:
+        "What you eat generally matters more than how far it traveled to reach you.",
+      items: [
+        ["Meat and dairy", "Typically the largest driver within food."],
+        ["Produce", "Seasonality and growing method shape the result."],
+        ["Packaged and processed foods", "Processing and packaging both contribute."],
+        ["Coffee and beverages", "Small per serving, meaningful over a year."],
+        ["Food waste", "Wasted food carries the full impact of producing it."],
+      ],
+    },
+    {
+      id: "goods",
+      name: "Goods and shopping",
+      icon: "GS",
+      color: "#2563eb",
+      footprint: "1.6 t CO2e / yr",
+      share: 11,
+      summary:
+        "Impact is concentrated in manufacturing, so how long you keep something matters.",
+      items: [
+        ["Clothing and textiles", "Fast fashion cycles raise impact per wear."],
+        ["Electronics and devices", "High upfront impact, extended by longer use."],
+        ["Furniture and household goods", "Durability is the main lever."],
+        ["Online orders and packaging", "Shipping speed changes the result."],
+      ],
+    },
+    {
+      id: "work",
+      name: "Work",
+      icon: "WK",
+      color: "#7c2d12",
+      footprint: "0.8 t CO2e / yr",
+      share: 6,
+      summary:
+        "Commuting and workplace energy use, counted as the share attributable to one person.",
+      items: [
+        ["Commuting", "Distance and mode drive most of this category."],
+        ["Workplace energy", "Shared across everyone in the building."],
+        ["Work equipment", "Laptops and peripherals, spread over their lifespan."],
+        ["Business travel", "Concentrated in a small number of trips."],
+      ],
+    },
+    {
+      id: "entertainment",
+      name: "Entertainment and leisure",
+      icon: "EN",
+      color: "#6d28d9",
+      footprint: "0.5 t CO2e / yr",
+      share: 4,
+      summary:
+        "Usually a small share, though travel-heavy hobbies can change that quickly.",
+      items: [
+        ["Streaming and devices", "Data center energy per hour is small but constant."],
+        ["Events and venues", "Travel to the venue often outweighs the event itself."],
+        ["Hobbies and equipment", "Depends heavily on the specific activity."],
+        ["Pets", "Mostly driven by pet food production."],
+      ],
+    },
+  ],
+};
+
 let selectedProductId =
   new URLSearchParams(window.location.search).get("product") || "ev-sedan";
 let scoreExpanded = false;
@@ -617,7 +779,7 @@ function getPublicLensScore(product, lens) {
 
 function wireShell() {
   const page = document.body.dataset.page;
-  const demoPages = new Set(["product", "comparison", "research", "how-it-works"]);
+  const demoPages = new Set(["my-stuff", "product", "comparison", "research", "how-it-works"]);
   document
     .querySelectorAll("[data-nav]")
     .forEach((link) => {
@@ -698,13 +860,12 @@ function compareAddSelectHtml(category, comparedIdsList) {
   return `<select id="compare-add-select" aria-label="Choose product">${options}</select>`;
 }
 
+function infoButton(topic) {
+  return `<button class="icon-button info" type="button" data-info="${topic}" aria-label="What does this mean?" aria-haspopup="dialog">i</button>`;
+}
+
 function scoreTile(title, value, caption, topic = "") {
-  const infoButton = topic
-    ? '<button class="icon-button info" type="button" data-info="' +
-      topic +
-      '">i</button>'
-    : "";
-  return `<article class="score-tile" ${topic ? `data-info="${topic}"` : ""}><div><p class="caption uppercase">${title}</p><h3>${value}</h3></div>${caption ? `<p>${caption}</p>` : ""}${infoButton}</article>`;
+  return `<article class="score-tile" ${topic ? `data-info="${topic}"` : ""}><div><p class="caption uppercase">${title}</p><h3>${value}</h3></div>${caption ? `<p>${caption}</p>` : ""}${topic ? infoButton(topic) : ""}</article>`;
 }
 
 function renderProductView() {
@@ -716,9 +877,9 @@ function renderProductView() {
       <div class="product-title-wrap"><div class="product-icon">${product.icon}</div><div><p class="overline">Product profile</p><h1>${product.name}</h1><p>${product.subtitle}</p></div></div>
       <button class="impact-score-card" type="button" id="score-toggle"><p class="caption uppercase">Impact Score</p><strong>${product.impactScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
     </section>
-    <section class="metrics-panel paper-card"><h2>Public impact lenses</h2><p>Five plain-language lenses summarize the twelve governed impact categories.</p><div class="public-lens-grid">${publicImpactLenses.map((lens, lensIndex) => { const value = getPublicLensScore(product, lens); return `<button class="public-lens" type="button" data-lens-index="${lensIndex}" aria-haspopup="dialog"><div><strong>${lens.name}</strong><span>${value}</span></div>${metricBar(value)}<p>${lens.description}</p></button>`; }).join("")}</div><button class="button outlined metric-detail-toggle" type="button" id="metrics-detail-toggle">${scoreExpanded ? "Hide detailed metrics" : "Show detailed metrics"}</button>${scoreExpanded ? `<div class="metric-grid detailed-metrics">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : ""}</section>
-    <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price")}${scoreTile("True cost", product.trueCost, "Externality range estimate", "trueCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
-    <section class="product-lower-grid"><article class="score-tile" data-info="confidence"><div><p class="caption uppercase">Confidence</p><h3>${product.confidence}%</h3></div><p>Evidence strength and completeness</p>${metricBar(product.confidence)}</article><article class="paper-card highlights"><p class="caption uppercase">Product / impact highlights</p><div>${product.highlights.map((highlight) => `<p>${highlight}</p>`).join("")}</div></article></section>
+    <section class="metrics-panel paper-card"><h2>Public impact lenses ${infoButton("publicLenses")}</h2><p>Five plain-language lenses summarize the twelve governed impact categories.</p><div class="public-lens-grid">${publicImpactLenses.map((lens, lensIndex) => { const value = getPublicLensScore(product, lens); return `<button class="public-lens" type="button" data-lens-index="${lensIndex}" aria-haspopup="dialog"><div><strong>${lens.name}</strong><span>${value}</span></div>${metricBar(value)}<p>${lens.description}</p></button>`; }).join("")}</div><button class="button outlined metric-detail-toggle" type="button" id="metrics-detail-toggle">${scoreExpanded ? "Hide detailed metrics" : "Show detailed metrics"}</button>${scoreExpanded ? `<div class="metric-grid detailed-metrics">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : ""}</section>
+    <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price", "retailCost")}${scoreTile("Extended impact cost", product.extendedImpactCost, "Costs not included in the price", "extendedImpactCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
+    <section class="product-lower-grid"><article class="score-tile" data-info="confidence"><div><p class="caption uppercase">Confidence</p><h3>${product.confidence}%</h3></div><p>Evidence strength and completeness</p>${metricBar(product.confidence)}${infoButton("confidence")}</article><article class="paper-card highlights"><p class="caption uppercase">Product / impact highlights ${infoButton("highlights")}</p><div>${product.highlights.map((highlight) => `<p>${highlight}</p>`).join("")}</div></article></section>
   `;
   document.querySelector("#score-toggle").addEventListener("click", () => {
     scoreExpanded = !scoreExpanded;
@@ -758,12 +919,14 @@ function wireInfoDialog() {
   document.querySelectorAll("[data-info]").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.stopPropagation();
-      const topic = button.dataset.info;
-      document.querySelector("#dialog-title").textContent = topic
+      const entry = infoText[button.dataset.info];
+      if (!entry) return;
+      const fallbackTitle = button.dataset.info
         .replace(/([A-Z])/g, " $1")
         .replace(/^./, (char) => char.toUpperCase());
-      document.querySelector("#dialog-text").textContent =
-        infoText[topic] || "";
+      document.querySelector("#dialog-title").textContent =
+        entry.title || fallbackTitle;
+      document.querySelector("#dialog-text").textContent = entry.text || entry;
       dialog.showModal();
     });
   });
@@ -825,6 +988,12 @@ function wireSearch() {
   );
 }
 
+const comparisonDetailTopics = {
+  summary: "impactDrivers",
+  lifecycle: "lifecycleStages",
+  evidence: "evidenceTrail",
+};
+
 function renderComparison() {
   const comparedProducts = comparedIds.map(getProduct);
   const category = comparedProducts[0]?.category || "cars";
@@ -847,13 +1016,13 @@ function renderComparison() {
     .join("")}</div>
   <div class="comparison-scroll" style="--compare-columns:${comparedProducts.length + (canAdd ? 1 : 0)}">
     <div class="comparison-columns"><div></div>${comparedProducts.map((product) => `<article class="compare-product-card ${product.id === winner.id ? "winner" : ""}" style="--product-color:${product.color}"><span class="product-icon">${product.icon}</span><div><h2>${product.shortName}</h2>${product.id === winner.id ? '<span class="chip small">lower burden choice</span>' : ""}<p>${product.name}</p>${comparedProducts.length > 2 ? `<button class="text-button" data-remove="${product.id}">Remove</button>` : ""}</div></article>`).join("")}${canAdd ? `<article class="add-card"><span class="add-circle">+</span><strong>Add product</strong>${compareAddSelectHtml(category, comparedIds)}<button class="button contained" id="add-compare">Add to compare</button></article>` : ""}</div>
-    <h2 class="comparison-section-title">Score lenses</h2>
-    ${row("Impact Score", "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
-    ${row("Retail / MSRP", "Market purchase price", (product) => `<div><strong>${product.retailCost}</strong></div>`)}
-    ${row("True cost", "Externality range estimate", (product) => `<div><strong>${product.trueCost}</strong></div>`)}
-    ${row("Total footprint", "Absolute impact ledger", (product) => `<div><strong>${product.totalFootprint}</strong></div>`)}
-    ${row("Confidence", "Evidence strength and completeness", (product) => `<div><strong>${product.confidence}%</strong>${metricBar(product.confidence)}</div>`)}
-    <div class="comparison-section-title lens-section-title"><h2>Public impact lenses</h2><button class="button text" type="button" id="expand-all-lenses">${allLensesExpanded ? "Collapse all" : "Expand all"}</button></div>
+    <h2 class="comparison-section-title">Score lenses ${infoButton("comparisonScore")}</h2>
+    ${row(`Impact Score ${infoButton("impactScore")}`, "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
+    ${row(`Retail / MSRP ${infoButton("retailCost")}`, "Market purchase price", (product) => `<div><strong>${product.retailCost}</strong></div>`)}
+    ${row(`Extended impact cost ${infoButton("extendedImpactCost")}`, "Costs not included in the price", (product) => `<div><strong>${product.extendedImpactCost}</strong></div>`)}
+    ${row(`Total footprint ${infoButton("footprint")}`, "Absolute impact ledger", (product) => `<div><strong>${product.totalFootprint}</strong></div>`)}
+    ${row(`Confidence ${infoButton("confidence")}`, "Evidence strength and completeness", (product) => `<div><strong>${product.confidence}%</strong>${metricBar(product.confidence)}</div>`)}
+    <div class="comparison-section-title lens-section-title"><h2>Public impact lenses ${infoButton("publicLenses")}</h2><button class="button text" type="button" id="expand-all-lenses">${allLensesExpanded ? "Collapse all" : "Expand all"}</button></div>
     ${publicImpactLenses.map((lens, lensIndex) => { const expanded = expandedComparisonLenses.has(lensIndex); return row(lens.name, lens.description, (product) => { const value = getPublicLensScore(product, lens); return `<div class="bar-cell">${metricBar(value)}<span>${value}</span></div>`; }, "lens-summary-row", lensIndex) + (expanded ? lens.indices.map((metricIndex) => row(metricCategories[metricIndex], "Included governed category", (product) => `<div class="bar-cell">${metricBar(product.metrics[metricIndex])}<span>${product.metrics[metricIndex]}</span></div>`, "lens-category-row")).join("") : ""); }).join("")}
     <h2 class="comparison-section-title">Practical insights</h2>
     ${insightRows.map(([label, values]) => row(label, "", (product) => `<div><p>${values[product.id]}</p></div>`)).join("")}
@@ -867,7 +1036,7 @@ function renderComparison() {
         ([id, label]) =>
           `<button class="tab ${comparisonTab === id ? "active" : ""}" data-comp-tab="${id}">${label}</button>`,
       )
-      .join("")}</div>
+      .join("")}${comparisonDetailTopics[comparisonTab] ? infoButton(comparisonDetailTopics[comparisonTab]) : ""}</div>
     <div class="comparison-detail">${renderComparisonDetail(comparedProducts, row, category)}</div>
   </div>
   `;
@@ -917,6 +1086,7 @@ function renderComparison() {
     }),
   );
   syncStickyComparisonScroll();
+  wireInfoDialog();
 }
 
 function syncStickyComparisonScroll() {
@@ -1055,6 +1225,7 @@ function renderResearch() {
     )
     .join("");
   renderResearchPanel();
+  wireInfoDialog();
 }
 
 function renderResearchPanel() {
@@ -1088,7 +1259,52 @@ function renderResearchPanel() {
     return;
   }
   const rows = researchTab === "quality" ? qualityRows : researchImpacts;
-  panel.innerHTML = `${researchTab === "analysis" ? '<div class="panel-toolbar"><div><h2>Contribution analysis</h2><p>Current study result, suitable for review before a public product score is updated.</p></div><span class="chip small">Provisional</span></div>' : '<div class="panel-toolbar"><div><h2>Evidence quality and review</h2><p>Each flow keeps source provenance, data quality attributes, uncertainty notes, and reviewer decisions separate from the underlying quantity.</p></div></div>'}${rows.map(([label, value, detail = ""]) => `<div class="research-metric"><div><strong>${label}</strong><span>${value}%</span></div>${metricBar(value)}${detail ? `<p>${detail}</p>` : ""}</div>`).join("")}`;
+  panel.innerHTML = `${researchTab === "analysis" ? `<div class="panel-toolbar"><div><h2>Contribution analysis ${infoButton("contributionAnalysis")}</h2><p>Current study result, suitable for review before a public product score is updated.</p></div><span class="chip small">Provisional</span></div>` : '<div class="panel-toolbar"><div><h2>Evidence quality and review</h2><p>Each flow keeps source provenance, data quality attributes, uncertainty notes, and reviewer decisions separate from the underlying quantity.</p></div></div>'}${rows.map(([label, value, detail = ""]) => `<div class="research-metric"><div><strong>${label}</strong><span>${value}%</span></div>${metricBar(value)}${detail ? `<p>${detail}</p>` : ""}</div>`).join("")}`;
+  wireInfoDialog();
+}
+
+function renderMyStuff() {
+  const root = document.querySelector("#my-stuff-view");
+  if (!root) return;
+  const { totalFootprint, totalExtendedCost, comparisonNote, categories } =
+    myStuffProfile;
+  root.innerHTML = `
+    <section class="mui-grid three">
+      ${scoreTile("Estimated annual footprint", totalFootprint, comparisonNote, "householdFootprint")}
+      ${scoreTile("Extended impact cost", totalExtendedCost, "Costs not included in what you paid", "extendedImpactCost")}
+      ${scoreTile("Categories tracked", String(categories.length), "Areas of everyday life covered below")}
+    </section>
+    <section class="my-stuff-categories">
+      ${categories
+        .map(
+          (category) => `
+        <article class="paper-card my-stuff-category" style="--product-color:${category.color}">
+          <div class="my-stuff-category-header">
+            <div class="product-icon small">${category.icon}</div>
+            <div>
+              <h2>${category.name}</h2>
+              <p>${category.summary}</p>
+            </div>
+            <div class="my-stuff-category-figures">
+              <strong>${category.footprint}</strong>
+              <span>${category.share}% of total ${infoButton("categoryShare")}</span>
+            </div>
+          </div>
+          ${metricBar(category.share)}
+          <ul class="my-stuff-item-list">
+            ${category.items
+              .map(
+                ([label, note]) =>
+                  `<li><strong>${label}</strong><p>${note}</p></li>`,
+              )
+              .join("")}
+          </ul>
+        </article>`,
+        )
+        .join("")}
+    </section>
+  `;
+  wireInfoDialog();
 }
 
 function init() {
@@ -1099,6 +1315,7 @@ function init() {
   if (page === "comparison") renderComparison();
   if (page === "comparison") wireLifecycleDialog();
   if (page === "research") renderResearch();
+  if (page === "my-stuff") renderMyStuff();
 }
 
 document.addEventListener("DOMContentLoaded", init);
