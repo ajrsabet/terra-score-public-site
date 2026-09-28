@@ -3,10 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Platform | Product Page</title>
+    <meta
+      name="description"
+      content="Sign up for occasional updates about the Terra Score project, new features, and progress."
+    />
+    <title>Platform | Stay in touch</title>
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body data-page="product">
+  <body data-page="stay-in-touch">
     <header class="navbar">
       <a class="brand" href="index.html"
         ><span class="brand-mark">PL</span><span>Platform</span></a
@@ -43,33 +47,37 @@
         <a href="index.html#support" class="nav-cta" data-nav="support">Support the Project</a>
       </nav>
     </header>
-    <main class="app-shell product-page-shell">
-      <div class="top-controls">
-        <select id="product-select" aria-label="Choose product"></select
-        ><a class="button contained compare-link" href="comparison.html"
-          >Compare products</a
-        >
-      </div>
-      <section id="product-view" class="stack"></section>
+
+    <main class="app-shell">
+      <section id="updates" class="section-block updates-section">
+        <div class="section-heading centered">
+          <h1>Stay in touch</h1>
+          <p>
+            Not ready to contribute, or just want to see where this goes? Sign
+            up for occasional updates on progress, new features, and what I'm
+            learning along the way.
+          </p>
+        </div>
+        <div class="updates-form">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSd2vKIgNCl2qnh5aZ3xaLdp4qp8r8w6XRUr3RieLgrBzZ0UHw/viewform?embedded=true"
+            width="640"
+            height="1698"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            loading="lazy"
+            title="Sign up for project updates"
+            >Loading…</iframe
+          >
+        </div>
+      </section>
     </main>
+
     <footer class="footer">
       Platform | A better way to understand our impact on the planet.
       <p class="copyright">© 2026 Adam Sabet. All rights reserved.</p>
     </footer>
-    <dialog id="info-dialog" class="info-dialog">
-      <button class="dialog-close" type="button" aria-label="Close">x</button>
-      <h2 id="dialog-title"></h2>
-      <p id="dialog-text"></p>
-    </dialog>
-    <dialog id="lens-dialog" class="info-dialog lens-dialog">
-      <button class="dialog-close" type="button" aria-label="Close">x</button>
-      <p class="caption uppercase">Public impact lens</p>
-      <h2 id="lens-dialog-title"></h2>
-      <p id="lens-dialog-description"></p>
-      <strong id="lens-dialog-score" class="lens-dialog-score"></strong>
-      <p class="caption uppercase">Included governed categories</p>
-      <div id="lens-dialog-categories" class="lens-dialog-categories"></div>
-    </dialog>
     <script src="assets/js/app.js"></script>
   </body>
 </html>
