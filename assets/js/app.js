@@ -419,7 +419,7 @@ const infoText = {
   },
   extendedImpactCost: {
     title: "Extended impact cost",
-    text: "An estimate of the costs created by this product that are not included in its price — things like climate damage, pollution, water use, and health effects that end up being paid by society rather than the buyer. It is shown as a range because these estimates involve real uncertainty. This figure is in addition to the retail price, not a total.",
+    text: "An estimate of costs created by a product that are not included in its price. Current prototype ranges are partial and should not be read as the full cost. A fuller view would need evidence-backed estimates for lost income, stronger storms and damage, crop failures, wildfires, gaps between actual and living wages, and the costs of preventing and repairing harm: shifting to regenerative practices, restoring forests and water systems, rebuilding ecosystems, climate mitigation, and sequestering carbon. Those categories are not yet consistently quantified here. Any future estimates need sources, assumptions, boundaries, and uncertainty shown; this figure is not a comprehensive social or ecological cost.",
   },
   footprint: {
     title: "Total footprint",
@@ -451,11 +451,15 @@ const infoText = {
   },
   householdFootprint: {
     title: "Your estimated footprint",
-    text: "A rough estimate of the annual impact of a typical household, built by adding up the categories below. It is meant to show relative scale — which parts of daily life matter most — rather than to give you a precise personal number.",
+    text: "This is an illustrative per-person figure derived by dividing a sample two-person household estimate in half; it is not a measurement of your own life. The US and global reference bars use Our World in Data's 2023 national greenhouse-gas emissions per-capita dataset, including land-use change. Those are territorial national averages, not personal consumption footprints, so the chart gives broad context rather than a like-for-like ranking.",
   },
   categoryShare: {
     title: "Share of total",
-    text: "How much this category contributes to the overall estimated footprint. Categories are ranked so the areas with the biggest potential for change appear first.",
+    text: "The pie slices show each category's share of the illustrative profile's total. The US and Global percentile sliders are fictional placeholders, not measured or sourced percentiles. In a real version, a lower percentile would mean a smaller estimated footprint than more people in that comparison group; green indicates lower and red higher. Do not interpret the displayed mock percentiles as facts.",
+  },
+  sampleExtendedImpactScenario: {
+    title: "Fictional extended-impact scenario",
+    text: "$27,400 per person per year is an invented demo value, not a verified fact or estimate. It is intentionally dramatic to demonstrate how a future total-impact view might make costs beyond a product's price visible, including climate damages, unequal wages, ecosystem loss, and repair or restoration. No cited evidence, attribution model, or calculation supports this specific number. It should not be used to make decisions, describe actual communities or workers, or claim that a particular lifestyle causes this exact amount of harm. Real public estimates must be built from reviewed sources, defined boundaries, transparent methods, and uncertainty ranges.",
   },
   studyReadiness: {
     title: "Study readiness",
@@ -645,19 +649,23 @@ const reviewItems = [
   "Review battery recovery assumption",
 ];
 
-// Illustrative household profile for the My Stuff demo. Values are rough
-// annual estimates for a typical two-person U.S. household, not user data.
+// Illustrative annual profile for one person, derived from the two-person sample.
 const myStuffProfile = {
-  totalFootprint: "14.2 t CO2e / yr",
-  totalExtendedCost: "$3,400-$8,900 / yr",
-  comparisonNote: "Roughly 12% below the U.S. household average",
+  totalFootprint: 7.1,
+  fictionalExtendedImpact: 27400,
+  benchmarks: [
+    { label: "Example person", value: 7.1, color: "#0f766e" },
+    { label: "Global average (2023)", value: 6.7, color: "#d97706" },
+    { label: "Average American (2023)", value: 17.7, color: "#b45309" },
+  ],
   categories: [
     {
       id: "home",
       name: "Home and energy",
       icon: "HM",
       color: "#0f766e",
-      footprint: "4.6 t CO2e / yr",
+      footprint: 2.3,
+      mockPercentiles: { us: 71, global: 94 },
       share: 32,
       summary:
         "Heating, cooling, and electricity usually make up the largest single share of a household footprint.",
@@ -674,7 +682,8 @@ const myStuffProfile = {
       name: "Travel and transportation",
       icon: "TR",
       color: "#8a5a12",
-      footprint: "3.9 t CO2e / yr",
+      footprint: 1.95,
+      mockPercentiles: { us: 69, global: 96 },
       share: 27,
       summary:
         "Daily driving and occasional flights can rival each other, which surprises most people.",
@@ -691,7 +700,8 @@ const myStuffProfile = {
       name: "Food and drink",
       icon: "FD",
       color: "#3b5b2a",
-      footprint: "2.8 t CO2e / yr",
+      footprint: 1.4,
+      mockPercentiles: { us: 77, global: 87 },
       share: 20,
       summary:
         "What you eat generally matters more than how far it traveled to reach you.",
@@ -708,7 +718,8 @@ const myStuffProfile = {
       name: "Goods and shopping",
       icon: "GS",
       color: "#2563eb",
-      footprint: "1.6 t CO2e / yr",
+      footprint: 0.8,
+      mockPercentiles: { us: 63, global: 91 },
       share: 11,
       summary:
         "Impact is concentrated in manufacturing, so how long you keep something matters.",
@@ -724,7 +735,8 @@ const myStuffProfile = {
       name: "Work",
       icon: "WK",
       color: "#7c2d12",
-      footprint: "0.8 t CO2e / yr",
+      footprint: 0.4,
+      mockPercentiles: { us: 60, global: 88 },
       share: 6,
       summary:
         "Commuting and workplace energy use, counted as the share attributable to one person.",
@@ -740,7 +752,8 @@ const myStuffProfile = {
       name: "Entertainment and leisure",
       icon: "EN",
       color: "#6d28d9",
-      footprint: "0.5 t CO2e / yr",
+      footprint: 0.25,
+      mockPercentiles: { us: 57, global: 82 },
       share: 4,
       summary:
         "Usually a small share, though travel-heavy hobbies can change that quickly.",
@@ -878,7 +891,7 @@ function renderProductView() {
       <button class="impact-score-card" type="button" id="score-toggle"><p class="caption uppercase">Impact Score</p><strong>${product.impactScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
     </section>
     <section class="metrics-panel paper-card"><h2>Public impact lenses ${infoButton("publicLenses")}</h2><p>Five plain-language lenses summarize the twelve governed impact categories.</p><div class="public-lens-grid">${publicImpactLenses.map((lens, lensIndex) => { const value = getPublicLensScore(product, lens); return `<button class="public-lens" type="button" data-lens-index="${lensIndex}" aria-haspopup="dialog"><div><strong>${lens.name}</strong><span>${value}</span></div>${metricBar(value)}<p>${lens.description}</p></button>`; }).join("")}</div><button class="button outlined metric-detail-toggle" type="button" id="metrics-detail-toggle">${scoreExpanded ? "Hide detailed metrics" : "Show detailed metrics"}</button>${scoreExpanded ? `<div class="metric-grid detailed-metrics">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : ""}</section>
-    <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price", "retailCost")}${scoreTile("Extended impact cost", product.extendedImpactCost, "Costs not included in the price", "extendedImpactCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
+    <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price", "retailCost")}${scoreTile("Extended impact cost", product.extendedImpactCost, "Partial estimate; wider costs not yet included", "extendedImpactCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
     <section class="product-lower-grid"><article class="score-tile" data-info="confidence"><div><p class="caption uppercase">Confidence</p><h3>${product.confidence}%</h3></div><p>Evidence strength and completeness</p>${metricBar(product.confidence)}${infoButton("confidence")}</article><article class="paper-card highlights"><p class="caption uppercase">Product / impact highlights ${infoButton("highlights")}</p><div>${product.highlights.map((highlight) => `<p>${highlight}</p>`).join("")}</div></article></section>
   `;
   document.querySelector("#score-toggle").addEventListener("click", () => {
@@ -1019,7 +1032,7 @@ function renderComparison() {
     <h2 class="comparison-section-title">Score lenses ${infoButton("comparisonScore")}</h2>
     ${row(`Impact Score ${infoButton("impactScore")}`, "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
     ${row(`Retail / MSRP ${infoButton("retailCost")}`, "Market purchase price", (product) => `<div><strong>${product.retailCost}</strong></div>`)}
-    ${row(`Extended impact cost ${infoButton("extendedImpactCost")}`, "Costs not included in the price", (product) => `<div><strong>${product.extendedImpactCost}</strong></div>`)}
+    ${row(`Extended impact cost ${infoButton("extendedImpactCost")}`, "Partial estimate; wider costs not yet included", (product) => `<div><strong>${product.extendedImpactCost}</strong></div>`)}
     ${row(`Total footprint ${infoButton("footprint")}`, "Absolute impact ledger", (product) => `<div><strong>${product.totalFootprint}</strong></div>`)}
     ${row(`Confidence ${infoButton("confidence")}`, "Evidence strength and completeness", (product) => `<div><strong>${product.confidence}%</strong>${metricBar(product.confidence)}</div>`)}
     <div class="comparison-section-title lens-section-title"><h2>Public impact lenses ${infoButton("publicLenses")}</h2><button class="button text" type="button" id="expand-all-lenses">${allLensesExpanded ? "Collapse all" : "Expand all"}</button></div>
@@ -1266,14 +1279,40 @@ function renderResearchPanel() {
 function renderMyStuff() {
   const root = document.querySelector("#my-stuff-view");
   if (!root) return;
-  const { totalFootprint, totalExtendedCost, comparisonNote, categories } =
+  const { totalFootprint, fictionalExtendedImpact, benchmarks, categories } =
     myStuffProfile;
+  let accumulatedShare = 0;
+  const pieGradient = categories
+    .map((category, index) => {
+      const start = accumulatedShare;
+      accumulatedShare += category.share;
+      return `${category.color} ${start}% ${accumulatedShare}%`;
+    })
+    .join(", ");
+  const benchmarkMax = Math.max(...benchmarks.map((benchmark) => benchmark.value));
   root.innerHTML = `
-    <section class="mui-grid three">
-      ${scoreTile("Estimated annual footprint", totalFootprint, comparisonNote, "householdFootprint")}
-      ${scoreTile("Extended impact cost", totalExtendedCost, "Costs not included in what you paid", "extendedImpactCost")}
-      ${scoreTile("Categories tracked", String(categories.length), "Areas of everyday life covered below")}
+    <section class="my-stuff-summary">
+      <article class="score-tile footprint-summary">
+        <div><p class="caption uppercase">Estimated annual footprint ${infoButton("householdFootprint")}</p><h2>${totalFootprint.toFixed(1)} t CO2e / person / year</h2></div>
+        <div class="footprint-benchmark-list">
+          ${benchmarks.map((benchmark) => `<div class="footprint-benchmark-row"><div><strong>${benchmark.label}</strong><span>${benchmark.value.toFixed(1)} t</span></div><div class="footprint-benchmark-track" role="img" aria-label="${benchmark.label}: ${benchmark.value.toFixed(1)} tonnes CO2e per person per year"><span style="width:${(benchmark.value / benchmarkMax) * 100}%;background:${benchmark.color}"></span></div></div>`).join("")}
+        </div>
+        <p class="benchmark-source">2023 territorial greenhouse-gas emissions per person, including land use. <a href="https://ourworldindata.org/grapher/per-capita-ghg-emissions?tab=table&time=2023" target="_blank" rel="noreferrer">Source: Our World in Data</a>. The sample is illustrative and uses a different accounting basis.</p>
+      </article>
+      ${scoreTile("Illustrative extended impact", `$${fictionalExtendedImpact.toLocaleString()} / person / year`, "Fictional demo value · not verified", "sampleExtendedImpactScenario")}
+      <article class="paper-card my-stuff-pie-card">
+        <h2>Footprint mix ${infoButton("categoryShare")}</h2>
+        <div class="my-stuff-pie-layout">
+          <div class="my-stuff-pie" role="img" aria-label="Sample footprint breakdown: ${categories.map((category) => `${category.name} ${category.share}%`).join(", ")}." style="background: conic-gradient(${pieGradient})">
+            <span>${totalFootprint.toFixed(1)}<small>t CO2e</small></span>
+          </div>
+          <ul class="my-stuff-pie-legend">
+            ${categories.map((category) => `<li><span class="pie-swatch" style="--pie-color:${category.color}"></span><span>${category.name}</span><strong>${category.share}%</strong></li>`).join("")}
+          </ul>
+        </div>
+      </article>
     </section>
+    <p class="category-benchmark-note"><strong>FICTIONAL DEMO DATA:</strong> All category percentiles below are invented to demonstrate the comparison controls. They are not measured, verified, or sourced population percentiles.</p>
     <section class="my-stuff-categories">
       ${categories
         .map(
@@ -1286,11 +1325,22 @@ function renderMyStuff() {
               <p>${category.summary}</p>
             </div>
             <div class="my-stuff-category-figures">
-              <strong>${category.footprint}</strong>
-              <span>${category.share}% of total ${infoButton("categoryShare")}</span>
+              <strong>${category.footprint.toFixed(2).replace(/0$/, "").replace(/\.0$/, "")} t CO2e / person / yr</strong>
+              <span>${category.share}% of sample ${infoButton("categoryShare")}</span>
             </div>
           </div>
-          ${metricBar(category.share)}
+          <div class="my-stuff-percentile-comparisons">
+            ${[
+              ["us", "US sample percentile"],
+              ["global", "Global sample percentile"],
+            ]
+              .map(([group, label]) => {
+                const percentile = category.mockPercentiles[group];
+                const hue = Math.round(120 - percentile * 1.2);
+                return `<div class="my-stuff-percentile-row"><div class="my-stuff-percentile-label"><span>${label} <small>MOCK</small></span><strong>P${percentile}</strong></div><div class="my-stuff-percentile-track" role="img" aria-label="Fictional ${label.toLowerCase()}: percentile ${percentile}, not a verified statistic"><span style="width:${percentile}%;background:hsl(${hue}, 58%, 38%)"></span></div></div>`;
+              })
+              .join("")}
+          </div>
           <ul class="my-stuff-item-list">
             ${category.items
               .map(
