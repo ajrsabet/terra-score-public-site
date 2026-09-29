@@ -3,10 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Platform | Product Page</title>
+    <meta
+      name="description"
+      content="See how the everyday parts of life — home, travel, food, goods, work, and leisure — add up, and where change matters most."
+    />
+    <title>Platform | My Stuff</title>
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body data-page="product">
+  <body data-page="my-stuff">
     <header class="navbar">
       <a class="brand" href="index.html"
         ><span class="brand-mark">PL</span><span>Platform</span></a
@@ -43,15 +47,46 @@
         <a href="index.html#support" class="nav-cta" data-nav="support">Support the Project</a>
       </nav>
     </header>
-    <main class="app-shell product-page-shell">
-      <div class="top-controls">
-        <select id="product-select" aria-label="Choose product"></select
-        ><a class="button contained compare-link" href="comparison.html"
-          >Compare products</a
-        >
+
+    <main class="app-shell">
+      <div class="comparison-title">
+        <div>
+          <h1>My Stuff</h1>
+          <p>
+            A look at how everyday activities add up — and which ones
+            contribute most. This is an illustrative sample profile, not your
+            personal footprint.
+          </p>
+        </div>
+        <span class="chip">Example profile · mock impact data</span>
       </div>
-      <section id="product-view" class="stack"></section>
+      <section id="my-stuff-view" class="stack"></section>
+
+      <section class="my-stuff-note paper-card">
+        <h2>What these comparisons can and cannot tell you</h2>
+        <p>
+          The sample profile is illustrative. The US and global aggregate
+          greenhouse-gas references are sourced 2023 territorial averages from
+          Our World in Data, including land-use change; the example profile uses
+          a different accounting basis, so that chart is broad context rather
+          than a like-for-like ranking.
+        </p>
+        <p>
+          The category percentile sliders are fictional placeholders invented
+          to demonstrate a future comparison. They do not represent actual
+          people, population distributions, or verified research.
+        </p>
+        <p>
+          The $27,400 figure is a fictional design example, not a verified
+          estimate, bill, or claim about actual harm caused by a person or
+          community. No calculation supports it. Real estimates would require
+          reviewed evidence, transparent methods, defined boundaries, and
+          uncertainty ranges across climate damages, labor and wage gaps,
+          ecosystem loss, restoration, and other impacts.
+        </p>
+      </section>
     </main>
+
     <footer class="footer">
       Platform | A better way to understand our impact on the planet.
       <p class="copyright">© 2026 Adam Sabet. All rights reserved.</p>
@@ -60,15 +95,6 @@
       <button class="dialog-close" type="button" aria-label="Close">x</button>
       <h2 id="dialog-title"></h2>
       <p id="dialog-text"></p>
-    </dialog>
-    <dialog id="lens-dialog" class="info-dialog lens-dialog">
-      <button class="dialog-close" type="button" aria-label="Close">x</button>
-      <p class="caption uppercase">Public impact lens</p>
-      <h2 id="lens-dialog-title"></h2>
-      <p id="lens-dialog-description"></p>
-      <strong id="lens-dialog-score" class="lens-dialog-score"></strong>
-      <p class="caption uppercase">Included governed categories</p>
-      <div id="lens-dialog-categories" class="lens-dialog-categories"></div>
     </dialog>
     <script src="assets/js/app.js"></script>
   </body>
