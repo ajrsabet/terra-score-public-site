@@ -209,6 +209,13 @@ p { color: var(--ts-ink-soft); line-height: 1.5; }
 .final-cta h2 { max-width: 600px; margin: 0 auto 16px; }
 .final-cta p { max-width: 560px; margin: 0 auto 28px; }
 
+.share-section { border-top: 1px solid var(--ts-line); padding: 48px 0 72px; text-align: center; }
+.share-section h2 { margin-bottom: 10px; font-size: 1.7rem; }
+.share-section > p { max-width: 560px; margin: 0 auto 22px; }
+.share-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.share-actions .button { min-height: 36px; padding: 7px 12px; font-size: 0.82rem; }
+.share-status { min-height: 1.4em; margin: 14px 0 0 !important; font-size: 0.82rem; }
+
 .updates-form { max-width: 640px; margin: 0 auto; }
 .updates-form iframe { display: block; width: 100%; max-width: 100%; border: 0; }
 

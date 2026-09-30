@@ -1357,8 +1357,66 @@ function renderMyStuff() {
   wireInfoDialog();
 }
 
+function wireShareLinks() {
+  const shareSection = document.querySelector(".share-section");
+  if (!shareSection) return;
+  const canonicalUrl = document.querySelector('meta[property="og:url"]')?.content;
+  const pageUrl = canonicalUrl || window.location.href.split("#")[0];
+  const title = "A better way to understand our impact on the planet";
+  const text = "Explore Terra Score, an open platform for understanding the environmental and social consequences of the things we make, use, and depend on.";
+  const encodedUrl = encodeURIComponent(pageUrl);
+  const encodedTitle = encodeURIComponent(title);
+  const encodedText = encodeURIComponent(text);
+  const shareUrls = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    reddit: `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
+    bluesky: `https://bsky.app/intent/compose?text=${encodedText}%20${encodedUrl}`,
+    whatsapp: `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`,
+    email: `mailto:?subject=${encodedTitle}&body=${encodedText}%0A%0A${encodedUrl}`,
+  };
+  shareSection.querySelectorAll("[data-share]").forEach((link) => {
+    link.href = shareUrls[link.dataset.share];
+  });
+  const nativeButton = shareSection.querySelector(".share-native");
+  if (navigator.share) {
+    nativeButton.hidden = false;
+    nativeButton.addEventListener("click", async () => {
+      try {
+        await navigator.share({ title, text, url: pageUrl });
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          shareSection.querySelector(".share-status").textContent = "Sharing was unavailable. Choose a platform below.";
+        }
+      }
+    });
+  }
+  shareSection.querySelector(".share-copy").addEventListener("click", async () => {
+    const status = shareSection.querySelector(".share-status");
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+      status.textContent = "Link copied.";
+    } catch (error) {
+      const input = document.createElement("textarea");
+      input.value = pageUrl;
+      input.setAttribute("readonly", "");
+      input.style.position = "fixed";
+      input.style.opacity = "0";
+      document.body.append(input);
+      input.select();
+      const copied = document.execCommand("copy");
+      input.remove();
+      status.textContent = copied
+        ? "Link copied."
+        : "Copy was unavailable. You can copy the page address from your browser.";
+    }
+  });
+}
+
 function init() {
   wireShell();
+  wireShareLinks();
   const page = document.body.dataset.page;
   if (page === "search") wireSearch();
   if (page === "product") wireProductPage();
