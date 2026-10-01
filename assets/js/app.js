@@ -1363,14 +1363,14 @@ function wireShareLinks() {
   const canonicalUrl = document.querySelector('meta[property="og:url"]')?.content;
   const pageUrl = canonicalUrl || window.location.href.split("#")[0];
   const title = "A better way to understand our impact on the planet";
-  const text = "Explore Terra Score, an open platform for understanding the environmental and social consequences of the things we make, use, and depend on.";
+  const text = "I'm supporting a project to make it easier to understand our real impact on the planet. Take a look:";
   const encodedUrl = encodeURIComponent(pageUrl);
   const encodedTitle = encodeURIComponent(title);
   const encodedText = encodeURIComponent(text);
   const shareUrls = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-    x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`,
     reddit: `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
     bluesky: `https://bsky.app/intent/compose?text=${encodedText}%20${encodedUrl}`,
     whatsapp: `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`,
