@@ -33,7 +33,7 @@ Architect, Backend Engineer, Frontend Engineer, UI/UX Designer, Database Enginee
 - Treat the user's request as the scope boundary. Do not search for, propose, or implement adjacent improvements unless they are required to make the requested behavior work or prevent a concrete regression.
 - Before editing, state one local hypothesis, the cheapest check that could disprove it, and the smallest edit that tests it. Once those are clear, act instead of broadening exploration.
 - Prefer one focused validation over repeated builds, repeated full test suites, or exploratory browser automation. Widen validation only when the focused check fails or the change has a clearly larger blast radius.
-- Do not create seed data, documentation, refactors, compatibility routes, commits, pushes, or follow-up features unless the request requires them. Ask before destructive data changes or remote operations.
+- Do not create seed data, unrelated documentation/refactors, compatibility routes, or follow-up features unless required by the request. Routine Git work follows section 8; PR merges still require explicit user approval.
 - Stop when the requested behavior is implemented and verified. Report remaining uncertainty rather than trying to eliminate every hypothetical risk.
 - If the existing solution is adequate, say so and defend it briefly. Do not change it merely because an alternative is possible; wait for the user to explain what is still unsatisfactory.
 
@@ -76,9 +76,14 @@ Summarize completed work, risks, and the recommended next step.
 7. User preference:
 The user prefers efficient, evidence-based work. Defend an adequate solution before proposing changes, avoid unsolicited fixes, and ask for clarification when the request is genuinely ambiguous rather than inventing requirements.
 
-8. Credit-efficiency workflow:
+8. Git and credit-efficiency workflow:
 - After implementing a change, run the smallest check that proves it works (lint/type diagnostics, or one focused test). Do not run a full production build, the full test suite, or browser automation unless that focused check fails, the change is high-risk/cross-cutting, or the user asks for it.
-- Do not run `git add`/`commit`/`push` automatically. Tell the user what changed and suggest a commit message; let the user run git themselves unless they explicitly ask the agent to commit/push.
+- For feature/fix work, the agent owns Git setup and delivery: inspect status, fetch `origin`, fast-forward local `main`, create a dedicated branch, stage only task files, commit verified work, push the branch, and create a PR targeting `main`. Do not ask the user to run these routine commands.
+- Respect each repository's branch-prefix and commit-hook rules. If a hook rejects a branch name or commit, correct it and retry; never disable hooks or use `--no-verify` to bypass them.
+- If another slice or user change is present, preserve it and isolate work in a separate worktree. Never use `reset --hard`, `clean`, force-push, rebase shared history, or overwrite user changes as a shortcut.
+- If local `main` cannot fast-forward, a merge has conflicts, credentials are unavailable, or protection blocks an operation, stop before destructive work and report the exact blocker and partial state.
+- For multi-repository work, use the same task branch name per affected repo and create separate commits/PRs; report any partial failure explicitly.
+- Merge a PR only after the user explicitly approves. Never bypass required checks or protections. After an approved merge, sync local `main` and create a fresh branch for the next feature rather than stacking.
 - Do not restart dev servers, kill processes, or hunt down ports on the user's behalf by default. Tell the user a restart is needed and let them do it, unless they ask the agent to handle it.
 - Do not repeat a check that already passed unless the code changed again or there is a concrete reason to doubt the earlier result.
 - Batch related edits into one verification/commit-worthy checkpoint instead of verifying or suggesting a commit after every micro-change.
