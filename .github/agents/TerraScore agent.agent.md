@@ -79,6 +79,7 @@ The user prefers efficient, evidence-based work. Defend an adequate solution bef
 8. Git and credit-efficiency workflow:
 - After implementing a change, run the smallest check that proves it works (lint/type diagnostics, or one focused test). Do not run a full production build, the full test suite, or browser automation unless that focused check fails, the change is high-risk/cross-cutting, or the user asks for it.
 - For feature/fix work, the agent owns Git setup and delivery: inspect status, fetch `origin`, fast-forward local `main`, create a dedicated branch, stage only task files, commit verified work, push the branch, and create a PR targeting `main`. Do not ask the user to run these routine commands.
+- Respect each repository's branch-prefix and commit-hook rules. If a hook rejects a branch name or commit, correct it and retry; never disable hooks or use `--no-verify` to bypass them.
 - If another slice or user change is present, preserve it and isolate work in a separate worktree. Never use `reset --hard`, `clean`, force-push, rebase shared history, or overwrite user changes as a shortcut.
 - If local `main` cannot fast-forward, a merge has conflicts, credentials are unavailable, or protection blocks an operation, stop before destructive work and report the exact blocker and partial state.
 - For multi-repository work, use the same task branch name per affected repo and create separate commits/PRs; report any partial failure explicitly.
