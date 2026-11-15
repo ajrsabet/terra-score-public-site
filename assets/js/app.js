@@ -32,10 +32,10 @@ const products = [
     id: "ev-sedan",
     category: "cars",
     icon: "EV",
-    name: "Battery electric sedan",
+    name: "Electric sedan",
     shortName: "Electric sedan",
     subtitle:
-      "Mid-size battery electric sedan compared directly against similarly sized hybrid, gasoline, and diesel vehicles.",
+      "Mid-size Electric sedan compared directly against similarly sized hybrid, gasoline, and diesel vehicles.",
     color: "#0f766e",
     impactScore: 74,
     retailCost: "$42,000 MSRP",
@@ -406,7 +406,7 @@ const evidenceItems = [
 // Each entry may be a plain string or { title, text } when the auto-derived title reads poorly.
 const infoText = {
   impactScore: {
-    title: "Impact Score",
+    title: "Impact score",
     text: "A 0-100 summary of how this product performs across twelve impact categories, where higher is better. It is designed for comparing similar products doing the same job — not for comparing a car to a cup of coffee. Think of it as a starting point that tells you where to look closer, not a final verdict.",
   },
   confidence: {
@@ -557,7 +557,7 @@ const insightRowsByCategory = {
 };
 
 const studyTree = [
-  ["Product system", "Battery electric sedan lifecycle", true],
+  ["Product system", "Electric sedan lifecycle", true],
   ["Process", "Battery pack assembly", false],
   ["Process", "Motor and controller", false],
   ["Process", "Aluminum body panel fabrication", false],
@@ -888,7 +888,7 @@ function renderProductView() {
   root.innerHTML = `
     <section class="product-header paper-card" style="--product-color:${product.color}">
       <div class="product-title-wrap"><div class="product-icon">${product.icon}</div><div><p class="overline">Product profile</p><h1>${product.name}</h1><p>${product.subtitle}</p></div></div>
-      <button class="impact-score-card" type="button" id="score-toggle"><p class="caption uppercase">Impact Score</p><strong>${product.impactScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
+      <button class="impact-score-card" type="button" id="score-toggle"><p class="caption">Impact score</p><strong>${product.impactScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
     </section>
     <section class="metrics-panel paper-card"><h2>Public impact lenses ${infoButton("publicLenses")}</h2><p>Five plain-language lenses summarize the twelve governed impact categories.</p><div class="public-lens-grid">${publicImpactLenses.map((lens, lensIndex) => { const value = getPublicLensScore(product, lens); return `<button class="public-lens" type="button" data-lens-index="${lensIndex}" aria-haspopup="dialog"><div><strong>${lens.name}</strong><span>${value}</span></div>${metricBar(value)}<p>${lens.description}</p></button>`; }).join("")}</div><button class="button outlined metric-detail-toggle" type="button" id="metrics-detail-toggle">${scoreExpanded ? "Hide detailed metrics" : "Show detailed metrics"}</button>${scoreExpanded ? `<div class="metric-grid detailed-metrics">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : ""}</section>
     <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price", "retailCost")}${scoreTile("Extended impact cost", product.extendedImpactCost, "Partial estimate; wider costs not yet included", "extendedImpactCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
@@ -1030,7 +1030,7 @@ function renderComparison() {
   <div class="comparison-scroll" style="--compare-columns:${comparedProducts.length + (canAdd ? 1 : 0)}">
     <div class="comparison-columns"><div></div>${comparedProducts.map((product) => `<article class="compare-product-card ${product.id === winner.id ? "winner" : ""}" style="--product-color:${product.color}"><span class="product-icon">${product.icon}</span><div><h2>${product.shortName}</h2>${product.id === winner.id ? '<span class="chip small">lower burden choice</span>' : ""}<p>${product.name}</p>${comparedProducts.length > 2 ? `<button class="text-button" data-remove="${product.id}">Remove</button>` : ""}</div></article>`).join("")}${canAdd ? `<article class="add-card"><span class="add-circle">+</span><strong>Add product</strong>${compareAddSelectHtml(category, comparedIds)}<button class="button contained" id="add-compare">Add to compare</button></article>` : ""}</div>
     <h2 class="comparison-section-title">Score lenses ${infoButton("comparisonScore")}</h2>
-    ${row(`Impact Score ${infoButton("impactScore")}`, "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
+    ${row(`Impact score ${infoButton("impactScore")}`, "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
     ${row(`Retail / MSRP ${infoButton("retailCost")}`, "Market purchase price", (product) => `<div><strong>${product.retailCost}</strong></div>`)}
     ${row(`Extended impact cost ${infoButton("extendedImpactCost")}`, "Partial estimate; wider costs not yet included", (product) => `<div><strong>${product.extendedImpactCost}</strong></div>`)}
     ${row(`Total footprint ${infoButton("footprint")}`, "Absolute impact ledger", (product) => `<div><strong>${product.totalFootprint}</strong></div>`)}
@@ -1040,10 +1040,10 @@ function renderComparison() {
     <h2 class="comparison-section-title">Practical insights</h2>
     ${insightRows.map(([label, values]) => row(label, "", (product) => `<div><p>${values[product.id]}</p></div>`)).join("")}
     <div class="tabs">${[
-      ["summary", "Impact Drivers"],
-      ["lifecycle", "Lifecycle Layers"],
-      ["evidence", "Evidence Trail"],
-      ["lca", "LCA Handoff"],
+      ["summary", "Impact drivers"],
+      ["lifecycle", "Lifecycle layers"],
+      ["evidence", "Evidence trail"],
+      ["lca", "LCA handoff"],
     ]
       .map(
         ([id, label]) =>
