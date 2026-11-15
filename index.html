@@ -55,7 +55,7 @@
         Menu
       </button>
       <nav id="site-nav" class="nav-links" aria-label="Primary navigation">
-        <a href="index.html" data-nav="about">The Vision</a>
+        <a href="index.html" data-nav="about">The vision</a>
         <div class="nav-group">
           <button
             class="nav-dropdown-trigger"
@@ -64,18 +64,18 @@
             aria-expanded="false"
             aria-controls="platform-demo-menu"
           >
-            The Prototype
+            The prototype
           </button>
           <div id="platform-demo-menu" class="nav-dropdown">
-            <a href="my-stuff.html" data-nav="my-stuff">My Stuff</a>
-            <a href="product.html" data-nav="product">Product Demo</a>
-            <a href="comparison.html" data-nav="comparison">Comparison Demo</a>
-            <a href="research.html" data-nav="research">Research Demo</a>
-            <a href="how-it-works.html" data-nav="how-it-works">How It Works</a>
+            <a href="my-stuff.html" data-nav="my-stuff">My stuff</a>
+            <a href="product.html" data-nav="product">Product demo</a>
+            <a href="comparison.html" data-nav="comparison">Comparison demo</a>
+            <a href="research.html" data-nav="research">Research demo</a>
+            <a href="how-it-works.html" data-nav="how-it-works">How it works</a>
           </div>
         </div>
         <a href="stay-in-touch.html" data-nav="stay-in-touch">Stay in touch</a>
-        <a href="#support" class="nav-cta" data-nav="support">Support the Project</a>
+        <a href="#support" class="nav-cta" data-nav="support">Support the project</a>
       </nav>
     </header>
 
@@ -83,247 +83,126 @@
       <!-- 1. Hero: answer "what is this and why should I care" in 5-10 seconds -->
       <section class="hero-panel home-hero">
         <div class="hero-copy">
-          <h1>A better way to understand our impact on the planet.</h1>
+          <h2>What is Shared Footprint?</h2>
+          <!-- <h2>A better way to understand our impact on the planet.</h2> -->
           <p class="lead">
-            I'm building an open, transparent platform to help us understand
-            the environmental and social consequences of the things we make,
-            use, and depend on.
+            I am building an environmental impact assessment tool to identify
+            the environmental and social consequences of the products we make,
+            use, and depend on. This platform provides a framework where the
+            footprint of products and companies are scored. 
           </p>
-          <p class="lead">
-            I've already built the first working prototype. I'm raising
-            $20,000 to turn it into a public version that anyone can depend on to make well-informed decisions
-            .
-          </p>
-          <div class="button-row">
-            <a class="button contained gold" href="#support">Support the Project</a
-            ><a class="button outlined light" href="product.html"
-              >Explore the Prototype</a>
-          </div>
         </div>
-        <img
-          class="hero-visual"
-          src="assets/images/comparison-hero.png"
-          alt="Working prototype showing electric and gasoline sedan impact scores compared side by side"
-        />
       </section>
 
       <!-- 2. The problem: why this needs to exist -->
       <section id="problem" class="section-block pale problem-section">
         <div class="section-heading">
-          <h2>We have more information than ever.</h2>
-          <h2>But seeing the bigger picture is still incredibly difficult.</h2>
+          <h2>Why do we need Shared Footprint?</h2>
         </div>
-        <div class="mui-grid three problem-grid">
-          <article class="paper-card problem-card">
-            <h3>Scientific research</h3>
-            <p>Thousands of studies contain pieces of the puzzle.</p>
-          </article>
-          <article class="paper-card problem-card">
-            <h3>Government data</h3>
-            <p>Agencies collect enormous amounts of environmental information.</p>
-          </article>
-          <article class="paper-card problem-card">
-            <h3>Corporate reporting</h3>
-            <p>Companies publish increasingly detailed sustainability information.</p>
-          </article>
-        </div>
-        <p class="problem-callout">
-          But it's fragmented. Different sources measure different things, use
-          different assumptions, and cover different parts of a product's
-          lifecycle.
-          <strong>The information exists. We need a better way to connect it.</strong>
-        </p>
+          <p style="margin-bottom: 0">We have more information than ever...</p>
+            <ol style="padding-left: 15px; margin-left: 0; margin-top: 0">
+            <li>Scientific research: Thousands of studies contain pieces of the puzzle.</li>
+            <li>Government data: Agencies collect enormous amounts of environmental information.</li>
+            <li> Corporate reporting: Companies publish increasingly detailed sustainability information.</li>
+          </ol>
+            <p>
+              Seeing the bigger picture is still difficult. Different sources measure different things, use
+              different assumptions, and cover different parts of a product's
+              lifecycle. The information exists; however, we need a better way to connect it.</p>
       </section>
 
       <!-- 3. The big idea: what is actually being built, kept conceptual not technical -->
       <section id="vision" class="section-block idea-section">
         <div class="idea-copy">
-          <h2>I'm building a way to see the whole picture.</h2>
+          <h2>How will Shared Footprint work?</h2>
           <p class="lead">
-            What if we could connect information about materials, products,
-            companies, resources, processes, ecosystems, and people—and trace
-            the relationships between them?
+            Shared Footprint maps the entire lifecycle of products and companies, 
+            connecting information about materials, 
+            production, transportation, use, and disposal – and traces
+            how each stage impacts the environment and society. 
+            It will accomplish this by crowdsourcing information from researchers, 
+            companies, and individuals, and by providing a framework for evaluating 
+            the quality of that information.
           </p>
         </div>
-        <div class="lifecycle-flow">
-          <span class="lifecycle-step">Raw materials</span
-          ><span class="lifecycle-arrow">&rarr;</span
-          ><span class="lifecycle-step">Production</span
-          ><span class="lifecycle-arrow">&rarr;</span
-          ><span class="lifecycle-step">Transportation</span
-          ><span class="lifecycle-arrow">&rarr;</span
-          ><span class="lifecycle-step">Use</span
-          ><span class="lifecycle-arrow">&rarr;</span
-          ><span class="lifecycle-step">End of life</span>
-        </div>
-        <div class="chip-row dimension-row">
-          <span class="chip">Climate</span><span class="chip">Water</span
-          ><span class="chip">Energy</span><span class="chip">Biodiversity</span
-          ><span class="chip">Pollution</span><span class="chip">Resources</span
-          ><span class="chip">Communities</span>
-        </div>
-      </section>
-
-      <!-- 4. Philosophy: differentiate from "another green score site" -->
-      <section class="philosophy-section">
-        <h2>I don't think we need more guilt. We need better information.</h2>
-        <div class="philosophy-quote">
-          <p>An electric vehicle requires rare minerals.</p>
-          <p>A gasoline vehicle requires fossil fuels.</p>
-          <p>Solar panels require energy and materials.</p>
-          <p>
-            Food production affects land, water, climate, and biodiversity.
-          </p>
-          <p>
-            It's tempting to look at tradeoffs like these and give up.
-          </p>
-          <p class="punch">
-            The answer isn't to stop asking questions — it's to
-            understand the full picture well enough to make better choices.
-          </p>
-        </div>
-      </section>
-
-      <!-- 5. Proof: answers "what would my money be supporting" -->
-      <section class="section-block prototype-section">
-        <div class="section-heading">
-          <h2>I've already started building it.</h2>
-        </div>
-        <div class="prototype-grid">
-          <article class="screenshot-card">
-            <img
-              src="assets/images/comparison-hero.png"
-              alt="Prototype screen comparing the environmental impact of two vehicles"
-            />
-            <h3>Understand the tradeoffs</h3>
-            <p>
-              Explore impacts across the lifecycle rather than reducing
-              everything to one number.
-            </p>
-          </article>
-          <article class="screenshot-card">
-            <div class="screenshot-placeholder">Screenshot coming soon</div>
-            <h3>Explore information</h3>
-            <p>Connect products, resources, companies, and processes.</p>
-          </article>
-          <article class="screenshot-card">
-            <div class="screenshot-placeholder">Screenshot coming soon</div>
-            <h3>Follow the evidence</h3>
-            <p>See where information comes from and how it was evaluated.</p>
-          </article>
-        </div>
-        <a class="button contained gold" href="product.html"
-          >Explore the working prototype &rarr;</a
-        >
       </section>
 
       <!-- 6. Path forward: shows a credible plan, not just a big ask -->
       <section class="section-block roadmap-section">
         <div class="section-heading">
-          <h2>I'm starting small. The vision is big.</h2>
+          <h2>Five-year development plan</h2>
         </div>
         <div class="roadmap-steps">
           <article class="roadmap-step">
-            <span class="roadmap-index">01</span>
-            <h3>Build the foundation</h3>
+            <span class="roadmap-index">2027</span>
+            <h3>Foundation &amp; platform development</h3>
             <ul>
-              <li>Working prototype &rarr; public version</li>
-              <li>Technical infrastructure</li>
-              <li>Research framework</li>
-              <li>Nonprofit / fiscal sponsorship</li>
+              <li>Establish the nonprofit</li>
+              <li>Complete the core platform</li>
+              <li>Seed initial data</li>
+              <li>Pilot research partnerships</li>
+              <li>Validate the methodology</li>
             </ul>
+            <p class="roadmap-budget">$350,000</p>
           </article>
           <article class="roadmap-step">
-            <span class="roadmap-index">02</span>
-            <h3>Work with researchers</h3>
+            <span class="roadmap-index">2028</span>
+            <h3>Research partnerships &amp; validation</h3>
             <ul>
-              <li>Pilot projects</li>
-              <li>Research partnerships</li>
-              <li>Data contributions</li>
-              <li>Testing and refinement</li>
+              <li>Expand academic and technical partnerships</li>
+              <li>Recruit contributors</li>
+              <li>Improve data quality</li>
+              <li>Establish scientific credibility</li>
             </ul>
+            <p class="roadmap-budget">$475,000</p>
           </article>
           <article class="roadmap-step">
-            <span class="roadmap-index">03</span>
-            <h3>Build the knowledge base</h3>
+            <span class="roadmap-index">2029</span>
+            <h3>Institutional tools &amp; adoption</h3>
             <ul>
-              <li>More products</li>
-              <li>More processes</li>
-              <li>More evidence</li>
-              <li>More environmental data</li>
+              <li>Develop specialized tools for businesses and government organizations</li>
+              <li>Pilot corporate partnerships</li>
+              <li>Demonstrate practical applications</li>
             </ul>
+            <p class="roadmap-budget">$700,000</p>
           </article>
           <article class="roadmap-step">
-            <span class="roadmap-index">04</span>
-            <h3>Make it useful to everyone</h3>
+            <span class="roadmap-index">2030</span>
+            <h3>Platform expansion &amp; integration</h3>
             <ul>
-              <li>Researchers</li>
-              <li>Organizations and Governments</li>
-              <li>Businesses</li>
-              <li>Individuals</li>
+              <li>Expand corporate and governmental partnerships</li>
+              <li>Develop integrations with industry systems</li>
+              <li>Strengthen the research and contributor ecosystem</li>
             </ul>
+            <p class="roadmap-budget">$950,000</p>
+          </article>
+          <article class="roadmap-step">
+            <span class="roadmap-index">2031</span>
+            <h3>Public launch &amp; global participation</h3>
+            <ul>
+              <li>Bring the platform to broader public use</li>
+              <li>Expand public engagement</li>
+              <li>Establish Shared Footprint as an accessible resource for environmental and social impact information</li>
+            </ul>
+            <p class="roadmap-budget">$1,200,000</p>
           </article>
         </div>
       </section>
 
       <!-- 7 + funding mechanics: first fundraising goal -->
       <section id="support" class="support-band">
-        <div>
-          <p class="overline" style="color: #cbe7df">Help me build the foundation</p>
-          <div class="funding-total">
-            <span class="amount">$20,000</span>
-          </div>
-          <div class="funding-breakdown">
-            <div class="funding-line"><strong>Software development</strong><span>Turn the prototype into a version the public can use</span></div>
-            <div class="funding-line"><strong>Research &amp; data</strong><span>Build the initial research infrastructure</span></div>
-            <div class="funding-line"><strong>Technology</strong><span>Hosting, APIs, tools, and essential services</span></div>
-            <div class="funding-line"><strong>Outreach</strong><span>Begin building institutional relationships</span></div>
-            <div class="funding-line"><strong>Nonprofit development</strong><span>Fiscal sponsorship and organizational foundation</span></div>
-          </div>
-          <p>
-            I'm intentionally starting small. I don't want to build a large
-            organization before I know that the system works. I want to build,
-            test, learn, and grow from there.
-          </p>
+        <!-- <div class="section-heading"> -->
+          <h2>Help me build the foundation</h2>
+        <!-- </div> -->
+         <div>
           <div class="gfm-embed" data-url="https://www.gofundme.com/f/help-build-the-future-of-environmental-impact-research/widget/medium?attribution_id=sl%3Aa9a9b38c-a22a-42bc-9dc0-5612a9fe35e0"></div>
           <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
-          <div class="support-milestones">
-            <h3>What comes after the foundation</h3>
-            <div class="milestone-list">
-              <article class="milestone-card">
-                <div class="milestone-meta">
-                  <span class="milestone-stage">Stage 2</span>
-                  <span class="milestone-goal">$100K</span>
-                </div>
-                <h4>Build Partnerships</h4>
-                <p>Add fundraising capacity, connect with research institutions, demonstrate the platform, and develop pilot partnerships.</p>
-              </article>
-              <article class="milestone-card">
-                <div class="milestone-meta">
-                  <span class="milestone-stage">Stage 3</span>
-                  <span class="milestone-goal">$250K</span>
-                </div>
-                <h4>Launch the Research Pilot</h4>
-                <p>Bring on senior programming support, develop the beta platform, integrate initial research/data sources, and begin working with external users.</p>
-              </article>
-            </div>
-          </div>
-          <p>
-            I will track how funds are used and report progress toward each
-            milestone. My goal is not simply to raise money and build a large
-            organization — it's to turn funding into useful environmental
-            information as quickly, responsibly, and transparently as possible.
-          </p>
           <p class="disclosure">
-            <strong>Disclosure:</strong> The platform does not currently have
+            Disclosure: The platform does not currently have
             501(c)(3) status. Contributions through these links are direct
             personal project contributions, not charitable donations, and should
             not be treated as tax deductible.
           </p>
-        </div>
-        <div class="support-actions-card">
-          <span class="chip small">Primary funding link</span>
-          <a class="button contained gold full" href="https://gofund.me/32fd09c5f" target="_blank" rel="noreferrer">Help fund the first $20,000 &rarr;</a>
         </div>
       </section>
 
@@ -352,59 +231,12 @@
         </div>
       </section>
 
-      <!-- 9. The bigger vision: let it breathe before the final ask -->
-      <section id="imagine" class="vision-section">
-        <div class="vision-lines">
-          <p>Imagine being able to trace a product back to the resources it came from.</p>
-          <p>Understand what happened along the way.</p>
-          <p>See the environmental and social consequences.</p>
-          <p>Compare different pathways.</p>
-          <p>Understand what we know—and what we don't.</p>
-        </div>
-        <h2>And then ask: what could we do better?</h2>
-        <p class="vision-signoff">That's the kind of resource I'm trying to build.</p>
-      </section>
-
-      <!-- 10. Final CTA -->
-      <section class="final-cta">
-        <h2>Help me build a better world.</h2>
-        <p>
-          I'm starting with a working prototype and a $20,000 goal. If you
-          believe we need better ways to understand our impact on the world,
-          I'd love your support.
-        </p>
-        <div class="button-row">
-          <a class="button contained gold" href="#support">Support the Project</a
-          ><a class="button outlined" href="product.html">Explore the Prototype</a>
-        </div>
-      </section>
-
-      <section class="share-section" aria-labelledby="share-title">
-        <h2 id="share-title">Share the project</h2>
-        <p>
-          Know someone who cares about better information for the planet? Pass
-          it along.
-        </p>
-        <div class="share-actions">
-          <button class="button contained share-native" type="button" hidden>
-            Share from your device
-          </button>
-          <a class="button outlined" data-share="facebook" href="#" target="_blank" rel="noreferrer">Facebook</a>
-          <a class="button outlined" data-share="linkedin" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="button outlined" data-share="x" href="#" target="_blank" rel="noreferrer">X</a>
-          <a class="button outlined" data-share="reddit" href="#" target="_blank" rel="noreferrer">Reddit</a>
-          <a class="button outlined" data-share="bluesky" href="#" target="_blank" rel="noreferrer">Bluesky</a>
-          <a class="button outlined" data-share="whatsapp" href="#" target="_blank" rel="noreferrer">WhatsApp</a>
-          <a class="button outlined" data-share="email" href="#">Email</a>
-          <button class="button outlined share-copy" type="button">Copy link</button>
-        </div>
-        <p class="share-status" role="status" aria-live="polite"></p>
-      </section>
+      
     </main>
 
     <footer class="footer">
       Shared Footprint | A better way to understand our impact on the planet. ·
-      <a href="how-it-works.html">How It Works (technical details)</a>
+      <a href="how-it-works.html">How it works (technical details)</a>
       <p class="copyright">© 2026 Adam Sabet. All rights reserved.</p>
     </footer>
     <script src="assets/js/app.js"></script>
