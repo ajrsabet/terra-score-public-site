@@ -100,7 +100,7 @@ p, li { color: var(--ts-ink-soft); font-size: var(--ts-font-size-body); font-wei
 .cta-banner-content { flex: 1; }
 .cta-banner-actions { flex-shrink: 0; }
 
-.support-band { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 32px; align-items: start; padding: 48px; border-radius: 0; background: #19384e; color: white; }
+.support-band { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; padding: 48px; border-radius: 0; background: #19384e; color: white; }
 .support-band p, .support-band li { color: rgba(255,255,255,0.82); }
 .support-band h3 { margin: 24px 0 12px; color: white; }
 .support-milestones { margin: 8px 0 18px; }
