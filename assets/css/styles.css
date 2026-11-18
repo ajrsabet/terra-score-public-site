@@ -39,8 +39,6 @@ button, input, select, textarea { font: inherit; }
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-links a, .nav-dropdown-trigger, .mobile-menu { border: 0; border-radius: var(--ts-radius-md); background: transparent; padding: 8px 14px; color: var(--ts-ink); text-decoration: none; font-weight: 600; }
 .nav-links a.active, .nav-links a:hover, .nav-dropdown-trigger.active, .nav-dropdown-trigger:hover, .mobile-menu:hover { background: var(--ts-surface-strong); }
-.nav-links a.nav-cta { background: var(--ts-accent); color: var(--ts-ink); font-weight: 800; padding: 8px 16px; margin-left: 6px; }
-.nav-links a.nav-cta:hover { background: var(--ts-accent-hover); }
 .nav-group { position: relative; }
 .nav-dropdown { position: absolute; top: calc(100% + 1px); left: 0; display: none; min-width: 220px; flex-direction: column; gap: 4px; padding: 8px; border: 1px solid var(--ts-line); border-radius: var(--ts-radius-md); background: rgba(255,255,255,0.98); box-shadow: 0 8px 16px rgba(8, 37, 34, 0.08); }
 .nav-group:hover .nav-dropdown, .nav-group:focus-within .nav-dropdown, .nav-group.open .nav-dropdown { display: flex; }
