@@ -71,17 +71,15 @@
             <a href="product.html" data-nav="product">Product demo</a>
             <a href="comparison.html" data-nav="comparison">Comparison demo</a>
             <a href="research.html" data-nav="research">Research demo</a>
-            <a href="how-it-works.html" data-nav="how-it-works">How it works</a>
           </div>
         </div>
         <a href="stay-in-touch.html" data-nav="stay-in-touch">Stay in touch</a>
-        <a href="#support" class="nav-cta" data-nav="support">Support the project</a>
       </nav>
     </header>
 
     <main class="app-shell">
       <!-- 1. Hero: answer "what is this and why should I care" in 5-10 seconds -->
-      <section class="hero-panel home-hero">
+      <section class="hero-panel home-hero home-hero-text">
         <div class="hero-copy">
           <h2>What is Shared Footprint?</h2>
           <!-- <h2>A better way to understand our impact on the planet.</h2> -->
@@ -99,31 +97,56 @@
         <div class="section-heading">
           <h2>Why do we need Shared Footprint?</h2>
         </div>
-          <p style="margin-bottom: 0">We have more information than ever...</p>
-            <ol style="padding-left: 15px; margin-left: 0; margin-top: 0">
-            <li>Scientific research: Thousands of studies contain pieces of the puzzle.</li>
-            <li>Government data: Agencies collect enormous amounts of environmental information.</li>
-            <li> Corporate reporting: Companies publish increasingly detailed sustainability information.</li>
-          </ol>
-            <p>
-              Seeing the bigger picture is still difficult. Different sources measure different things, use
-              different assumptions, and cover different parts of a product's
-              lifecycle. The information exists; however, we need a better way to connect it.</p>
+        <p style="margin-bottom: 0">
+          Information about our impact is spread across scientific studies,
+          government databases, company records, and organizations around the
+          world.
+        </p>
+        <ul style="padding-left: 15px; margin-left: 0; margin-top: 0">
+          <li>
+            <strong>Research</strong> examines materials, processes, and impacts
+            – often in separate studies across different disciplines.
+          </li>
+          <li>
+            <strong>Government agencies</strong> collect data at national,
+            regional, and local levels, across agencies and departments that may
+            use different systems and standards.
+          </li>
+          <li>
+            <strong>Companies</strong> hold internal data about their materials,
+            operations, and resource use – and, where available, their suppliers.
+          </li>
+        </ul>
+        <p>
+          Each source offers a piece of the picture, but differences in scope,
+          assumptions, and data quality make the pieces difficult to bring
+          together.
+        </p>
+        <p>
+          Connecting them could help reveal where impacts occur across a product’s
+          lifecycle, what drives them, and where better decisions could make a
+          difference – while showing what is known and what remains uncertain.
+        </p>
       </section>
 
       <!-- 3. The big idea: what is actually being built, kept conceptual not technical -->
-      <section id="vision" class="section-block idea-section">
-        <div class="idea-copy">
+      <section class="section-block big-idea-section">
+        <div>
           <h2>How will Shared Footprint work?</h2>
+        </div>
+        <div>
           <p class="lead">
-            Shared Footprint maps the entire lifecycle of products and companies, 
-            connecting information about materials, 
-            production, transportation, use, and disposal – and traces
-            how each stage impacts the environment and society. 
-            It will accomplish this by crowdsourcing information from researchers, 
-            companies, and individuals, and by providing a framework for evaluating 
-            the quality of that information.
+            Shared Footprint will map the lifecycle of products and companies,
+            connecting information about materials, production, transportation,
+            use, and end of life.
           </p>
+          <p>
+            Researchers, companies, and individuals will be able to contribute
+            information and sources. The platform will provide a way to review
+            that evidence and assess its quality, so impact assessments can show
+            what they’re based on and where gaps remain.
+          </p>
+          <a class="button contained" href="how-it-works.html">Learn how it works</a>
         </div>
       </section>
 
@@ -131,6 +154,7 @@
       <section class="section-block roadmap-section">
         <div class="section-heading">
           <h2>Five-year development plan</h2>
+          <p>Figures shown are estimated annual budgets.</p>
         </div>
         <div class="roadmap-steps">
           <article class="roadmap-step">
@@ -143,7 +167,7 @@
               <li>Pilot research partnerships</li>
               <li>Validate the methodology</li>
             </ul>
-            <p class="roadmap-budget">$350,000</p>
+            <p class="roadmap-budget">$355,000</p>
           </article>
           <article class="roadmap-step">
             <span class="roadmap-index">2028</span>
@@ -154,7 +178,7 @@
               <li>Improve data quality</li>
               <li>Establish scientific credibility</li>
             </ul>
-            <p class="roadmap-budget">$475,000</p>
+            <p class="roadmap-budget">$480,000</p>
           </article>
           <article class="roadmap-step">
             <span class="roadmap-index">2029</span>
@@ -164,7 +188,7 @@
               <li>Pilot corporate partnerships</li>
               <li>Demonstrate practical applications</li>
             </ul>
-            <p class="roadmap-budget">$700,000</p>
+            <p class="roadmap-budget">$725,000</p>
           </article>
           <article class="roadmap-step">
             <span class="roadmap-index">2030</span>
@@ -174,7 +198,7 @@
               <li>Develop integrations with industry systems</li>
               <li>Strengthen the research and contributor ecosystem</li>
             </ul>
-            <p class="roadmap-budget">$950,000</p>
+            <p class="roadmap-budget">$980,000</p>
           </article>
           <article class="roadmap-step">
             <span class="roadmap-index">2031</span>
@@ -184,24 +208,38 @@
               <li>Expand public engagement</li>
               <li>Establish Shared Footprint as an accessible resource for environmental and social impact information</li>
             </ul>
-            <p class="roadmap-budget">$1,200,000</p>
+            <p class="roadmap-budget">$1,240,000</p>
           </article>
         </div>
       </section>
 
       <!-- 7 + funding mechanics: first fundraising goal -->
       <section id="support" class="support-band">
-        <!-- <div class="section-heading"> -->
+        <div class="section-heading">
           <h2>Help me build the foundation</h2>
-        <!-- </div> -->
-         <div>
+        </div>
+        <div>
+          <p>
+            Your support will help me continue developing the platform, connect
+            with potential partners, and cover fundraising materials,
+            conferences, and travel.
+          </p>  
+        </div>
+        <div>
           <div class="gfm-embed" data-url="https://www.gofundme.com/f/help-build-the-future-of-environmental-impact-research/widget/medium?attribution_id=sl%3Aa9a9b38c-a22a-42bc-9dc0-5612a9fe35e0"></div>
           <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+          <div id="gfm-fallback">
+            <a
+              class="button contained gold"
+              href="https://www.gofundme.com/f/help-build-the-future-of-environmental-impact-research"
+              >Donate on GoFundMe</a
+            >
+          </div>
           <p class="disclosure">
-            Disclosure: The platform does not currently have
-            501(c)(3) status. Contributions through these links are direct
-            personal project contributions, not charitable donations, and should
-            not be treated as tax deductible.
+            Disclosure: The platform does not currently have 501(c)(3) status.
+            Contributions through these links are direct personal project
+            contributions, not charitable donations, and should not be treated
+            as tax deductible.
           </p>
         </div>
       </section>

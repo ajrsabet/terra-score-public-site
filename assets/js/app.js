@@ -792,7 +792,7 @@ function getPublicLensScore(product, lens) {
 
 function wireShell() {
   const page = document.body.dataset.page;
-  const demoPages = new Set(["my-stuff", "product", "comparison", "research", "how-it-works"]);
+  const demoPages = new Set(["my-stuff", "product", "comparison", "research"]);
   document
     .querySelectorAll("[data-nav]")
     .forEach((link) => {
@@ -1414,9 +1414,31 @@ function wireShareLinks() {
   });
 }
 
+function wireGoFundMeFallback() {
+  const embed = document.querySelector(".gfm-embed");
+  const fallback = document.getElementById("gfm-fallback");
+  if (!embed || !fallback) return;
+
+  window.addEventListener("message", (event) => {
+    const iframe = embed.querySelector(".gfm-embed-iframe");
+    if (
+      event.origin === "https://www.gofundme.com" &&
+      iframe &&
+      event.source === iframe.contentWindow &&
+      event.data?.type === "gfm-embed-widget-resize" &&
+      Number.isFinite(event.data.offsetHeight) &&
+      event.data.offsetHeight > 0
+    ) {
+      embed.classList.add("is-ready");
+      fallback.hidden = true;
+    }
+  });
+}
+
 function init() {
   wireShell();
   wireShareLinks();
+  wireGoFundMeFallback();
   const page = document.body.dataset.page;
   if (page === "search") wireSearch();
   if (page === "product") wireProductPage();
