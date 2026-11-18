@@ -792,7 +792,7 @@ function getPublicLensScore(product, lens) {
 
 function wireShell() {
   const page = document.body.dataset.page;
-  const demoPages = new Set(["my-stuff", "product", "comparison", "research", "how-it-works"]);
+  const demoPages = new Set(["my-stuff", "product", "comparison", "research"]);
   document
     .querySelectorAll("[data-nav]")
     .forEach((link) => {
