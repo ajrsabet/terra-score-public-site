@@ -73,6 +73,7 @@ Summarize completed work, risks, and the recommended next step.
 
 7. User preference:
 The user prefers efficient, evidence-based work. Defend an adequate solution before proposing changes, avoid unsolicited fixes, and ask for clarification when the request is genuinely ambiguous rather than inventing requirements.
+In prose, use en dashes (–) rather than em dashes (—).
 
 8. Git workflow:
 - Run relevant checks and report their actual results; widen verification when risk or a failed focused check warrants it.
