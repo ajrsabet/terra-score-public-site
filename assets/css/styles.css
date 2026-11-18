@@ -113,6 +113,9 @@ p, li { color: var(--ts-ink-soft); font-size: var(--ts-font-size-body); font-wei
 .milestone-card h4 { margin: 0 0 8px; color: white; }
 .milestone-card p { margin: 0; }
 .gfm-embed { margin: 18px 0 12px; }
+/* Keep the unconfirmed iframe loading without reserving blank space. */
+.gfm-embed:not(.is-ready) { height: 0; overflow: hidden; margin: 0; }
+#gfm-fallback { margin-bottom: 12px; }
 .disclosure { border: 1px solid rgba(255,255,255,0.2); border-radius: var(--ts-radius-md); padding: 14px; }
 .support-actions-card { display: grid; gap: 14px; border-radius: var(--ts-radius-md); background: rgba(255,255,255,0.1); padding: 18px; }
 .footer { padding: 24px 16px 40px; text-align: left; color: var(--ts-ink-soft); }
