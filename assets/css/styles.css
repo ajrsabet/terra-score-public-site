@@ -71,6 +71,7 @@ h1, h2, h3, h4, h5, h6 { color: inherit; font-weight: var(--ts-font-weight-headi
 h1 { font-size: var(--ts-font-size-h1); }
 h2 { font-size: var(--ts-font-size-h2); }
 h3 { font-size: var(--ts-font-size-h3); }
+body[data-page="how-it-works"] h3 { margin-bottom: 4px; }
 h4 { font-size: var(--ts-font-size-h4); }
 h5 { font-size: var(--ts-font-size-h5); }
 h6 { font-size: var(--ts-font-size-h6); }
