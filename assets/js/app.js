@@ -1,5 +1,5 @@
 const metricCategories = [
-  "Climate and Energy",
+  "Climate",
   "Air Quality",
   "Water",
   "Land and Soil",
@@ -13,12 +13,43 @@ const metricCategories = [
   "Governance and Accountability",
 ];
 
-const publicImpactLenses = [
-  { name: "Climate and Energy", indices: [0], description: "Climate, energy demand, and energy sources." },
-  { name: "Resources and Circularity", indices: [5, 6], description: "Materials, resource demand, waste, reuse, and recovery." },
-  { name: "Water, Land and Nature", indices: [2, 3, 4], description: "Water, land, soil, biodiversity, and habitat." },
-  { name: "Health and Safety", indices: [1, 7], description: "Air quality, exposure, human health, and safety." },
-  { name: "People, Equity and Governance", indices: [8, 9, 10, 11], description: "Labor, equity, livelihoods, transparency, and accountability." },
+const assessmentCategories = [
+  {
+    name: "Climate",
+    metricIndices: [0],
+    description:
+      "Climate effects associated with greenhouse gas emissions across a product's lifecycle. Energy use is considered where it drives climate impacts, not as a separate category.",
+  },
+  {
+    name: "Water, Land, and Nature",
+    metricIndices: [2, 3, 4],
+    description:
+      "Water impacts, land and soil, biodiversity, and ecosystem condition.",
+  },
+  {
+    name: "Equity",
+    metricIndices: [8, 9, 10],
+    description:
+      "Social and economic impacts on people, including worker pay, rights, and livelihoods.",
+  },
+  {
+    name: "Resources and Circularity",
+    metricIndices: [5, 6],
+    description:
+      "Material and resource use, resource scarcity, waste, and circularity.",
+  },
+  {
+    name: "Health and Safety",
+    metricIndices: [1, 7],
+    description:
+      "Effects of products and processes on human health and safety.",
+  },
+  {
+    name: "Governance",
+    metricIndices: [11],
+    description:
+      "How organizations make decisions, engage stakeholders, and demonstrate accountability. Assessed separately from physical impacts.",
+  },
 ];
 
 const categoryLabels = { cars: "Cars", coffee: "Coffee" };
@@ -406,8 +437,8 @@ const evidenceItems = [
 // Each entry may be a plain string or { title, text } when the auto-derived title reads poorly.
 const infoText = {
   impactScore: {
-    title: "Impact score",
-    text: "A 0-100 summary of how this product performs across twelve impact categories, where higher is better. It is designed for comparing similar products doing the same job — not for comparing a car to a cup of coffee. Think of it as a starting point that tells you where to look closer, not a final verdict.",
+    title: "Prototype comparison score",
+    text: "This 0-100 value is illustrative demo data, not an evidence-backed product assessment or output of a current approved scoring model. It is included to demonstrate the prototype interface and should not be used for real-world product decisions.",
   },
   confidence: {
     title: "Confidence",
@@ -425,9 +456,9 @@ const infoText = {
     title: "Total footprint",
     text: "The absolute, physical quantities behind the product — for example kilograms of CO2 equivalent per year, or per cup. Unlike the 0-100 score, these are real units you can add up, which makes them useful for understanding total scale rather than relative ranking.",
   },
-  publicLenses: {
-    title: "Public impact lenses",
-    text: "Five plain-language groupings that bundle the twelve detailed impact categories into themes most people care about. Each lens is an average of the categories it covers. Click any lens to see exactly which categories are inside it and how the product scored on each.",
+  assessmentCategories: {
+    title: "Assessment categories",
+    text: "The six assessment roots are Climate; Water, Land, and Nature; Equity; Resources and Circularity; Health and Safety; and Governance. The displayed category values are illustrative averages of legacy demo metrics; their groupings are display examples, not final taxonomy rules or approved assessment results. Governance is separate from the five impact accounts.",
   },
   highlights: {
     title: "Product / impact highlights",
@@ -447,7 +478,7 @@ const infoText = {
   },
   comparisonScore: {
     title: "Comparing products",
-    text: "Products are only compared within the same family and the same functional unit — for example, sedans driven 10,000 miles a year, or a single cup of coffee. Comparing across different categories would be misleading, so the tool does not offer it.",
+    text: "Products are only compared within the same family and the same functional unit — for example, sedans driven 10,000 miles a year, or a single cup of coffee. The scores displayed here are illustrative prototype values, not governed product assessments.",
   },
   householdFootprint: {
     title: "Your estimated footprint",
@@ -774,7 +805,7 @@ let comparisonTab = "summary";
 let researchTab = "flows";
 let selectedNode = "Battery pack assembly";
 let comparedIds = categoryDefaults.cars.slice();
-const expandedComparisonLenses = new Set();
+const expandedComparisonCategories = new Set();
 
 function getProduct(id) {
   return products.find((product) => product.id === id) || products[0];
@@ -785,14 +816,14 @@ function scoreColor(value) {
   return `hsl(${Math.round(normalizedValue * 1.2)}, 62%, 38%)`;
 }
 
-function getPublicLensScore(product, lens) {
-  const values = lens.indices.map((index) => product.metrics[index]);
+function getAssessmentCategoryScore(product, category) {
+  const values = category.metricIndices.map((index) => product.metrics[index]);
   return Math.round(values.reduce((total, value) => total + value, 0) / values.length);
 }
 
 function wireShell() {
   const page = document.body.dataset.page;
-  const demoPages = new Set(["my-stuff", "product", "comparison", "research", "how-it-works"]);
+  const demoPages = new Set(["my-stuff", "product", "comparison", "research"]);
   document
     .querySelectorAll("[data-nav]")
     .forEach((link) => {
@@ -888,9 +919,9 @@ function renderProductView() {
   root.innerHTML = `
     <section class="product-header paper-card" style="--product-color:${product.color}">
       <div class="product-title-wrap"><div class="product-icon">${product.icon}</div><div><p class="overline">Product profile</p><h1>${product.name}</h1><p>${product.subtitle}</p></div></div>
-      <button class="impact-score-card" type="button" id="score-toggle"><p class="caption">Impact score</p><strong>${product.impactScore}</strong><span>Metric-based 0-100 score</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
+      <button class="impact-score-card" type="button" id="score-toggle"><p class="caption">Prototype score</p><strong>${product.impactScore}</strong><span>Illustrative 0-100 demo value</span><button class="icon-button info" type="button" data-info="impactScore">i</button></button>
     </section>
-    <section class="metrics-panel paper-card"><h2>Public impact lenses ${infoButton("publicLenses")}</h2><p>Five plain-language lenses summarize the twelve governed impact categories.</p><div class="public-lens-grid">${publicImpactLenses.map((lens, lensIndex) => { const value = getPublicLensScore(product, lens); return `<button class="public-lens" type="button" data-lens-index="${lensIndex}" aria-haspopup="dialog"><div><strong>${lens.name}</strong><span>${value}</span></div>${metricBar(value)}<p>${lens.description}</p></button>`; }).join("")}</div><button class="button outlined metric-detail-toggle" type="button" id="metrics-detail-toggle">${scoreExpanded ? "Hide detailed metrics" : "Show detailed metrics"}</button>${scoreExpanded ? `<div class="metric-grid detailed-metrics">${metricCategories.map((category, index) => `<div class="metric-mini"><div><strong>${category}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div>` : ""}</section>
+    <section class="metrics-panel paper-card"><h2>Assessment categories ${infoButton("assessmentCategories")}</h2><p class="category-score-note">Illustrative demo values only. Legacy detail-metric groupings are display examples, not final taxonomy rules or approved assessment results. Governance is shown separately from the five impact accounts.</p><div class="assessment-category-grid">${assessmentCategories.map((category, categoryIndex) => { const value = getAssessmentCategoryScore(product, category); return `<button class="assessment-category" type="button" data-category-index="${categoryIndex}" aria-haspopup="dialog"><div><strong>${category.name}</strong><span>${value}</span></div>${metricBar(value)}<p>${category.description}</p></button>`; }).join("")}</div><button class="button outlined metric-detail-toggle" type="button" id="metrics-detail-toggle">${scoreExpanded ? "Hide detail metrics" : "Show detail metrics"}</button>${scoreExpanded ? `<div class="assessment-detail-groups">${assessmentCategories.map((category) => `<section class="category-metric-group"><h3>${category.name}</h3><div class="metric-grid detailed-metrics">${category.metricIndices.map((index) => `<div class="metric-mini"><div><strong>${metricCategories[index]}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`).join("")}</div></section>`).join("")}</div>` : ""}</section>
     <section class="mui-grid three">${scoreTile("Retail / MSRP", product.retailCost, "Market purchase price", "retailCost")}${scoreTile("Extended impact cost", product.extendedImpactCost, "Partial estimate; wider costs not yet included", "extendedImpactCost")}${scoreTile("Total footprint", product.totalFootprint, "Absolute impact ledger", "footprint")}</section>
     <section class="product-lower-grid"><article class="score-tile" data-info="confidence"><div><p class="caption uppercase">Confidence</p><h3>${product.confidence}%</h3></div><p>Evidence strength and completeness</p>${metricBar(product.confidence)}${infoButton("confidence")}</article><article class="paper-card highlights"><p class="caption uppercase">Product / impact highlights ${infoButton("highlights")}</p><div>${product.highlights.map((highlight) => `<p>${highlight}</p>`).join("")}</div></article></section>
   `;
@@ -902,7 +933,7 @@ function renderProductView() {
     scoreExpanded = !scoreExpanded;
     renderProductView();
   });
-  wireLensDialog(product);
+  wireCategoryDialog(product);
   wireInfoDialog();
 }
 
@@ -946,19 +977,22 @@ function wireInfoDialog() {
   dialog.querySelector(".dialog-close").onclick = () => dialog.close();
 }
 
-function wireLensDialog(product) {
-  const dialog = document.querySelector("#lens-dialog");
+function wireCategoryDialog(product) {
+  const dialog = document.querySelector("#category-dialog");
   if (!dialog) return;
-  document.querySelectorAll("[data-lens-index]").forEach((card) => {
+  document.querySelectorAll("[data-category-index]").forEach((card) => {
     card.addEventListener("click", () => {
-      const lens = publicImpactLenses[Number(card.dataset.lensIndex)];
-      const value = getPublicLensScore(product, lens);
-      document.querySelector("#lens-dialog-title").textContent = lens.name;
-      document.querySelector("#lens-dialog-score").textContent = value;
-      document.querySelector("#lens-dialog-description").textContent = lens.description;
-      document.querySelector("#lens-dialog-categories").innerHTML = lens.indices
-        .map((index) => `<div class="lens-category"><div><strong>${metricCategories[index]}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`)
-        .join("");
+      const category = assessmentCategories[Number(card.dataset.categoryIndex)];
+      const value = getAssessmentCategoryScore(product, category);
+      document.querySelector("#category-dialog-title").textContent =
+        category.name;
+      document.querySelector("#category-dialog-score").textContent = value;
+      document.querySelector("#category-dialog-description").textContent =
+        category.description;
+      document.querySelector("#category-dialog-metrics").innerHTML =
+        category.metricIndices
+          .map((index) => `<div class="category-detail"><div><strong>${metricCategories[index]}</strong><span>${product.metrics[index]}</span></div>${metricBar(product.metrics[index])}</div>`)
+          .join("");
       dialog.showModal();
     });
   });
@@ -1018,9 +1052,10 @@ function renderComparison() {
   const root = document.querySelector("#comparison-view");
   if (!root) return;
   const canAdd = comparedProducts.length < 4;
-  const allLensesExpanded = expandedComparisonLenses.size === publicImpactLenses.length;
-  const row = (label, caption, renderValue, className = "", lensIndex = null) =>
-    `<div class="comparison-row ${className}"${lensIndex === null ? "" : ` data-expand-lens="${lensIndex}" role="button" tabindex="0" aria-expanded="${expandedComparisonLenses.has(lensIndex)}"`}><div><strong>${label}</strong>${caption ? `<p>${caption}</p>` : ""}</div>${comparedProducts.map(renderValue).join("")}${canAdd ? "<div></div>" : ""}</div>`;
+  const allCategoriesExpanded =
+    expandedComparisonCategories.size === assessmentCategories.length;
+  const row = (label, caption, renderValue, className = "", categoryIndex = null) =>
+    `<div class="comparison-row ${className}"${categoryIndex === null ? "" : ` data-expand-category="${categoryIndex}" role="button" tabindex="0" aria-expanded="${expandedComparisonCategories.has(categoryIndex)}"`}><div><strong>${label}</strong>${caption ? `<p>${caption}</p>` : ""}</div>${comparedProducts.map(renderValue).join("")}${canAdd ? "<div></div>" : ""}</div>`;
   root.innerHTML = `<div class="category-switch">${Object.keys(categoryDefaults)
     .map(
       (categoryId) =>
@@ -1028,15 +1063,16 @@ function renderComparison() {
     )
     .join("")}</div>
   <div class="comparison-scroll" style="--compare-columns:${comparedProducts.length + (canAdd ? 1 : 0)}">
-    <div class="comparison-columns"><div></div>${comparedProducts.map((product) => `<article class="compare-product-card ${product.id === winner.id ? "winner" : ""}" style="--product-color:${product.color}"><span class="product-icon">${product.icon}</span><div><h2>${product.shortName}</h2>${product.id === winner.id ? '<span class="chip small">lower burden choice</span>' : ""}<p>${product.name}</p>${comparedProducts.length > 2 ? `<button class="text-button" data-remove="${product.id}">Remove</button>` : ""}</div></article>`).join("")}${canAdd ? `<article class="add-card"><span class="add-circle">+</span><strong>Add product</strong>${compareAddSelectHtml(category, comparedIds)}<button class="button contained" id="add-compare">Add to compare</button></article>` : ""}</div>
-    <h2 class="comparison-section-title">Score lenses ${infoButton("comparisonScore")}</h2>
-    ${row(`Impact score ${infoButton("impactScore")}`, "Metric-based 0-100 score", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
+    <div class="comparison-columns"><div></div>${comparedProducts.map((product) => `<article class="compare-product-card ${product.id === winner.id ? "winner" : ""}" style="--product-color:${product.color}"><span class="product-icon">${product.icon}</span><div><h2>${product.shortName}</h2>${product.id === winner.id ? '<span class="chip small">Highest prototype score</span>' : ""}<p>${product.name}</p>${comparedProducts.length > 2 ? `<button class="text-button" data-remove="${product.id}">Remove</button>` : ""}</div></article>`).join("")}${canAdd ? `<article class="add-card"><span class="add-circle">+</span><strong>Add product</strong>${compareAddSelectHtml(category, comparedIds)}<button class="button contained" id="add-compare">Add to compare</button></article>` : ""}</div>
+    <h2 class="comparison-section-title">Prototype comparison ${infoButton("comparisonScore")}</h2>
+    ${row(`Prototype score ${infoButton("impactScore")}`, "Illustrative 0-100 demo value", (product) => `<div><strong class="big-score" style="color:${scoreColor(product.impactScore)}">${product.impactScore}</strong></div>`)}
     ${row(`Retail / MSRP ${infoButton("retailCost")}`, "Market purchase price", (product) => `<div><strong>${product.retailCost}</strong></div>`)}
     ${row(`Extended impact cost ${infoButton("extendedImpactCost")}`, "Partial estimate; wider costs not yet included", (product) => `<div><strong>${product.extendedImpactCost}</strong></div>`)}
     ${row(`Total footprint ${infoButton("footprint")}`, "Absolute impact ledger", (product) => `<div><strong>${product.totalFootprint}</strong></div>`)}
     ${row(`Confidence ${infoButton("confidence")}`, "Evidence strength and completeness", (product) => `<div><strong>${product.confidence}%</strong>${metricBar(product.confidence)}</div>`)}
-    <div class="comparison-section-title lens-section-title"><h2>Public impact lenses ${infoButton("publicLenses")}</h2><button class="button text" type="button" id="expand-all-lenses">${allLensesExpanded ? "Collapse all" : "Expand all"}</button></div>
-    ${publicImpactLenses.map((lens, lensIndex) => { const expanded = expandedComparisonLenses.has(lensIndex); return row(lens.name, lens.description, (product) => { const value = getPublicLensScore(product, lens); return `<div class="bar-cell">${metricBar(value)}<span>${value}</span></div>`; }, "lens-summary-row", lensIndex) + (expanded ? lens.indices.map((metricIndex) => row(metricCategories[metricIndex], "Included governed category", (product) => `<div class="bar-cell">${metricBar(product.metrics[metricIndex])}<span>${product.metrics[metricIndex]}</span></div>`, "lens-category-row")).join("") : ""); }).join("")}
+    <div class="comparison-section-title category-section-title"><h2>Assessment categories ${infoButton("assessmentCategories")}</h2><button class="button text" type="button" id="expand-all-categories">${allCategoriesExpanded ? "Collapse all" : "Expand all"}</button></div>
+    <p class="category-score-note">Illustrative demo values only. Legacy detail-metric groupings are display examples, not final taxonomy rules or approved assessment results. Governance is shown separately from the five impact accounts.</p>
+    ${assessmentCategories.map((category, categoryIndex) => { const expanded = expandedComparisonCategories.has(categoryIndex); return row(category.name, category.description, (product) => { const value = getAssessmentCategoryScore(product, category); return `<div class="bar-cell">${metricBar(value)}<span>${value}</span></div>`; }, "assessment-category-summary-row", categoryIndex) + (expanded ? category.metricIndices.map((metricIndex) => row(metricCategories[metricIndex], "Illustrative detail metric", (product) => `<div class="bar-cell">${metricBar(product.metrics[metricIndex])}<span>${product.metrics[metricIndex]}</span></div>`, "assessment-category-detail-row")).join("") : ""); }).join("")}
     <h2 class="comparison-section-title">Practical insights</h2>
     ${insightRows.map(([label, values]) => row(label, "", (product) => `<div><p>${values[product.id]}</p></div>`)).join("")}
     <div class="tabs">${[
@@ -1073,23 +1109,28 @@ function renderComparison() {
       renderComparison();
     }),
   );
-  const toggleLens = (lensIndex) => {
-      if (expandedComparisonLenses.has(lensIndex)) expandedComparisonLenses.delete(lensIndex);
-      else expandedComparisonLenses.add(lensIndex);
+  const toggleCategory = (categoryIndex) => {
+      if (expandedComparisonCategories.has(categoryIndex))
+        expandedComparisonCategories.delete(categoryIndex);
+      else expandedComparisonCategories.add(categoryIndex);
       renderComparison();
   };
-  root.querySelectorAll("[data-expand-lens]").forEach((lens) => {
-    lens.addEventListener("click", () => toggleLens(Number(lens.dataset.expandLens)));
-    lens.addEventListener("keydown", (event) => {
+  root.querySelectorAll("[data-expand-category]").forEach((categoryRow) => {
+    categoryRow.addEventListener("click", () =>
+      toggleCategory(Number(categoryRow.dataset.expandCategory)),
+    );
+    categoryRow.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        toggleLens(Number(lens.dataset.expandLens));
+        toggleCategory(Number(categoryRow.dataset.expandCategory));
       }
     });
   });
-  root.querySelector("#expand-all-lenses").addEventListener("click", () => {
-    if (allLensesExpanded) expandedComparisonLenses.clear();
-    else publicImpactLenses.forEach((lens, lensIndex) => expandedComparisonLenses.add(lensIndex));
+  root.querySelector("#expand-all-categories").addEventListener("click", () => {
+    if (allCategoriesExpanded) expandedComparisonCategories.clear();
+    else assessmentCategories.forEach((category, categoryIndex) =>
+      expandedComparisonCategories.add(categoryIndex),
+    );
     renderComparison();
   });
   root.querySelectorAll("[data-compare-category]").forEach((button) =>
@@ -1414,9 +1455,31 @@ function wireShareLinks() {
   });
 }
 
+function wireGoFundMeFallback() {
+  const embed = document.querySelector(".gfm-embed");
+  const fallback = document.getElementById("gfm-fallback");
+  if (!embed || !fallback) return;
+
+  window.addEventListener("message", (event) => {
+    const iframe = embed.querySelector(".gfm-embed-iframe");
+    if (
+      event.origin === "https://www.gofundme.com" &&
+      iframe &&
+      event.source === iframe.contentWindow &&
+      event.data?.type === "gfm-embed-widget-resize" &&
+      Number.isFinite(event.data.offsetHeight) &&
+      event.data.offsetHeight > 0
+    ) {
+      embed.classList.add("is-ready");
+      fallback.hidden = true;
+    }
+  });
+}
+
 function init() {
   wireShell();
   wireShareLinks();
+  wireGoFundMeFallback();
   const page = document.body.dataset.page;
   if (page === "search") wireSearch();
   if (page === "product") wireProductPage();
